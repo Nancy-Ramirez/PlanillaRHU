@@ -1,5 +1,5 @@
-import { Aside } from "./Componentes/Aside"
-import { Navbar } from "./Componentes/NavBar"
+import { Aside } from "../Componentes/Aside"
+import { Navbar } from "../Componentes/NavBar"
 
 
 export const Dashboard = () =>{
