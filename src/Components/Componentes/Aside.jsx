@@ -36,25 +36,6 @@ export const Aside = () => {
         </div>
       </div>
       <div class="mt-4 flex flex-col gap-4 relative">
-        <div class="mt-5">
-          <Link
-            to="/dashboard"
-            class="flex items-center text-sm gap-3.5 font-medium p-1.5 hover:bg-gray-800 rounded"
-          >
-            <div>
-              <span>
-                <HiHome class="ml-0 w-5 h-5 icon icon-tabler icon-tabler-users" />
-              </span>
-            </div>
-            <h2
-              className={`whitespace-pre duration-500 ${
-                open && "opacity-0 translate-x-28 overflow-hidden"
-              }`}
-            >
-              Inicio
-            </h2>
-          </Link>
-        </div>
         <div class="mt-2">
           <Link
             to="/institucion"
@@ -70,7 +51,7 @@ export const Aside = () => {
                 open && "opacity-0 translate-x-28 overflow-hidden"
               }`}
             >
-              Institución
+              Empleados
             </h2>
           </Link>
           <Link
@@ -109,21 +90,17 @@ export const Aside = () => {
           </Link>
 
           <Link
-            to="/materia"
             class="my-1 flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-gray-800 rounded"
           >
-            <div>
+            <select>
               <span>
                 <HiOutlineBookOpen class="w-5 h-5 icon icon-tabler icon-tabler-users" />
               </span>
-            </div>
-            <h2
-              className={`whitespace-pre duration-500 ${
-                open && "opacity-0 translate-x-28 overflow-hidden"
-              }`}
-            >
               Materias
-            </h2>
+              <option value="">
+                Opcion 1
+              </option>
+            </select>
           </Link>
 
           <Link
