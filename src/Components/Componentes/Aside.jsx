@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { FaSpeakerDeck, FaUserAlt, FaCaretDown, FaHome, FaPaste, FaPrescriptionBottleAlt, FaPiggyBank, FaHospitalUser, FaUserAltSlash } from "react-icons/fa";
+import { FaSpeakerDeck, FaUserAlt, FaCaretDown, FaHome, FaPaste, FaPrescriptionBottleAlt, FaPiggyBank, FaHospitalUser, FaUserAltSlash, FaUserTie } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 
 export const Aside = () => {
   const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(true);
-  const [submenuOpenP, setSubmenuOpenP] = useState(true);
 
   return (
     <nav className="block">
@@ -60,7 +59,7 @@ export const Aside = () => {
                 }`}
           >
             <span className="text-xl block float-left">
-              <FaUserAlt />
+              < FaUserTie />
             </span>
             <span
               className={`text-base font-medium flex-1 duration-200 ${
@@ -72,7 +71,7 @@ export const Aside = () => {
           </li></Link>
 
           {/*Departamentos */}
-          <Link to="/"><li
+          <Link to="/departamento"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
@@ -87,9 +86,9 @@ export const Aside = () => {
               Departamentos
             </span>
           </li></Link>
-
+          
           {/*Prestaciones */}
-          <li
+          <Link to="/prestaciones"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
@@ -103,64 +102,8 @@ export const Aside = () => {
             >
               Prestaciones
             </span>
-            <span>
-              <FaCaretDown
-                className={`duration-500 ${!open && "hidden"} ${!submenuOpenP && "rotate-180"}`}
-                onClick={() => setSubmenuOpenP(!submenuOpenP)}
-              />
-            </span>
-          </li>
-          <ul className={`duration-500 ${submenuOpenP && "hidden"}`}>
-            {/*ISSS-Patrono */}
-            <Link to="/">
-              <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
-                }`}
-              >
-                ISSS - Patrono
-              </li>
-            </Link>
-
-            {/*ISSS-Empleado*/}
-            <Link to="/">
-              <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
-                }`}
-              >
-                ISSS - Empleado
-              </li>
-            </Link>
-
-            {/*AFP-Patrono*/}
-            <Link to="/">
-              <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
-                }`}
-              >
-                AFP - Patrono
-              </li>
-            </Link>
-
-            {/*AFP-Empleado*/}
-            <Link to="/">
-              <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
-                }`}
-              >
-                AFP - Empleado
-              </li>
-            </Link>
-
-            {/*Renta*/}
-            <Link to="/">
-              <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
-                }`}
-              >
-                Renta
-              </li>
-            </Link>
-          </ul>
+          </li></Link>
+          
           {/*Faltas */}
           <li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
@@ -195,7 +138,7 @@ export const Aside = () => {
             </Link>
 
             {/*Ausencias*/}
-            <Link to="/">
+            <Link to="/ausencia">
               <li
                 className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
                 }`}
@@ -207,7 +150,7 @@ export const Aside = () => {
           </ul>
 
           {/*Indemnizaciones */}
-          <Link to="/"><li
+          <Link to="/indemnizaciones"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
@@ -220,6 +163,23 @@ export const Aside = () => {
               }`}
             >
               Indemnizaciones
+            </span>
+          </li></Link>
+
+          {/*Usuarios */}
+          <Link to="/usuarios"><li
+            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+                }`}
+          >
+            <span className="text-xl block float-left">
+              <FaUserAlt />
+            </span>
+            <span
+              className={`text-base font-medium flex-1 duration-200 ${
+                !open && "hidden"
+              }`}
+            >
+              Usuarios
             </span>
           </li></Link>
 
