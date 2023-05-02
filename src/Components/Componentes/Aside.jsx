@@ -12,7 +12,7 @@ export const Aside = () => {
     <nav className="flex">
       <div
         className={`bg-dark-purple h-screen p-5 pt-8 ${
-          open ? "w-72" : "w-20"
+          open ? "w-60" : "w-20"
         } duration-300 relative`}
       >
         <BsArrowLeftShort
