@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 export const Aside = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(true);
 
   return (
