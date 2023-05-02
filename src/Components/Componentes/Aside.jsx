@@ -1,38 +1,15 @@
 import { useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { FaSpeakerDeck, FaUserAlt, FaCaretDown } from "react-icons/fa";
+import { FaSpeakerDeck, FaUserAlt, FaCaretDown, FaHome, FaPaste, FaPrescriptionBottleAlt, FaPiggyBank, FaHospitalUser, FaUserAltSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Aside = () => {
   const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(true);
   const [submenuOpenP, setSubmenuOpenP] = useState(true);
-  const Menus = [
-    { title: "Inicio" },
-    { title: "Empleados" },
-    { title: "Departamentos" },
-    {
-      title: "Prestaciones",
-      submenu: true,
-      submenuItems: [
-        { title: "ISSS - Patrono" },
-        { title: "ISSS - Empleado" },
-        { title: "AFP - Patrono" },
-        { title: "AFP - Empleado" },
-        { title: "Renta" },
-      ],
-    },
-    {
-      title: "Faltas",
-      submenu: true,
-      submenuItems: [{ title: "Incapacidades" }, { title: "Ausencias" }],
-    },
-    { title: "Indemnizaciones" },
-    { title: "Salir", spacing: true },
-  ];
 
   return (
-    <div className="flex">
+    <nav className="flex">
       <div
         className={`bg-dark-purple h-screen p-5 pt-8 ${
           open ? "w-72" : "w-20"
@@ -60,12 +37,12 @@ export const Aside = () => {
         </div>
         <ul className="pt-2">
           {/*Inicio */}
-          <li
+          <Link to="/"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
             <span className="text-xl block float-left">
-              <FaUserAlt />
+              <FaHome />
             </span>
             <span
               className={`text-base font-medium flex-1 duration-200 ${
@@ -74,10 +51,10 @@ export const Aside = () => {
             >
               Inicio
             </span>
-          </li>
+          </li></Link>
 
           {/*Empleado */}
-          <li
+          <Link to="/"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
@@ -91,15 +68,15 @@ export const Aside = () => {
             >
               Empleados
             </span>
-          </li>
+          </li></Link>
 
           {/*Departamentos */}
-          <li
+          <Link to="/"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
-              <FaUserAlt />
+              <FaPaste />
             </span>
             <span
               className={`text-base font-medium flex-1 duration-200 ${
@@ -108,7 +85,7 @@ export const Aside = () => {
             >
               Departamentos
             </span>
-          </li>
+          </li></Link>
 
           {/*Prestaciones */}
           <li
@@ -116,7 +93,7 @@ export const Aside = () => {
                 }`}
           >
             <span className="text-xl block float-left">
-              <FaUserAlt />
+              <FaPrescriptionBottleAlt />
             </span>
             <span
               className={`text-base font-medium flex-1 duration-200 ${
@@ -127,12 +104,12 @@ export const Aside = () => {
             </span>
             <span>
               <FaCaretDown
-                className=""
+                className={`duration-500 ${!open && "hidden"} ${!submenuOpenP && "rotate-180"}`}
                 onClick={() => setSubmenuOpenP(!submenuOpenP)}
               />
             </span>
           </li>
-          <ul className={`${submenuOpenP && "hidden"}`}>
+          <ul className={`duration-500 ${submenuOpenP && "hidden"}`}>
             {/*ISSS-Patrono */}
             <Link to="/">
               <li
@@ -189,7 +166,7 @@ export const Aside = () => {
                 }`}
           >
             <span className="text-xl block float-left">
-              <FaUserAlt />
+              <FaPiggyBank  />
             </span>
             <span
               className={`text-base font-medium flex-1 duration-200 ${
@@ -200,7 +177,7 @@ export const Aside = () => {
             </span>
             <span>
               <FaCaretDown
-                className=""
+                 className={`duration-500 ${!open && "hidden"} ${!submenuOpen && "rotate-180"}`}
                 onClick={() => setSubmenuOpen(!submenuOpen)}
               />
             </span>
@@ -227,11 +204,42 @@ export const Aside = () => {
             </Link>
 
           </ul>
+
+          {/*Indemnizaciones */}
+          <Link to="/"><li
+            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+                }`}
+          >
+            <span className="text-xl block float-left">
+              <FaHospitalUser />
+            </span>
+            <span
+              className={`text-base font-medium flex-1 duration-200 ${
+                !open && "hidden"
+              }`}
+            >
+              Indemnizaciones
+            </span>
+          </li></Link>
+
+          {/*Salir*/}
+          <Link to="/"><li
+            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+                }`}
+          >
+            <span className="text-xl block float-left">
+              <FaUserAltSlash />
+            </span>
+            <span
+              className={`text-base font-medium flex-1 duration-200 ${
+                !open && "hidden"
+              }`}
+            >
+              Salir
+            </span>
+          </li></Link>
         </ul>
       </div>
-      <div className="p-7">
-        <h1 className="text-2xl font-semibold">Home Page</h1>
-      </div>
-    </div>
+    </nav>
   );
 };

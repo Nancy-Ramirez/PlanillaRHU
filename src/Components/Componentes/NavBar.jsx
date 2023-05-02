@@ -6,7 +6,7 @@ export const Navbar = () => {
         return (
             <div className="">
               <nav
-                class="relative flex w-full items-center justify-between bg-aFuerte3 py-2 shadow-md shadow-black/5 lg:flex-wrap lg:justify-start"
+                class=" flex w-full items-center justify-between bg-gray-100 py-2 shadow-md shadow-black/5 lg:flex-wrap lg:justify-start"
                 data-te-navbar-ref
               >
                 <div class="flex w-full flex-wrap items-center justify-between pl-1 pr-6 ">

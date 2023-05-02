@@ -7,9 +7,11 @@ export const Dashboard = () =>{
     return(
         <div className="flex">
             <Aside/>
-            <div class="ml-16 w-full">
-                
+            <div class="w-full">
                 <Navbar/>
+                <div>
+                    
+                </div>
             </div>
         </div>
     )
