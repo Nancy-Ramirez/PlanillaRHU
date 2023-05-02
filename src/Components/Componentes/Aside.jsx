@@ -223,7 +223,7 @@ export const Aside = () => {
           </li></Link>
 
           {/*Salir*/}
-          <Link to="/"><li
+          <a href="/"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
@@ -237,7 +237,7 @@ export const Aside = () => {
             >
               Salir
             </span>
-          </li></Link>
+          </li></a>
         </ul>
       </div>
     </nav>
