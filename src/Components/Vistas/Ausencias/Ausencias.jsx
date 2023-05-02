@@ -6,7 +6,7 @@ import { Navbar } from "../../Componentes/NavBar";
 import { Aside } from "../../Componentes/Aside";
 import { Link } from "react-router-dom";
 
-export const Empleado = () => {
+export const Ausencias = () => {
   return (
     <div className="flex">
       <Aside />
@@ -17,7 +17,7 @@ export const Empleado = () => {
             <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
               <div className="flex justify-between pt-5">
                 <div></div>
-                <h1 className=" text-center text-3xl text-black">EMPLEADOS</h1>
+                <h1 className=" text-center text-3xl text-black">AUSENCIAS</h1>
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
                     <a
@@ -56,7 +56,7 @@ export const Empleado = () => {
                       type="text"
                       id="table-search-users"
                       className="block p-2 pl-10 text-sm text-black border border-gray-700 rounded-lg w-80 bg-gray-100 focus:ring-blue-500 focus:border-blue-500  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Ingrese nombre de empleado"
+                      placeholder="Ingrese el nombre de empleado"
                     />
                   </div>
                 </div>
@@ -68,13 +68,10 @@ export const Empleado = () => {
                           Nombre
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          DUI
-                        </th>
-                        <th scope="col" className="px-6 py-3">
                           Departamento
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Cargo
+                          Días
                         </th>
                         <th scope="col" className="px-6 py-3">
                           Acciones
@@ -92,14 +89,10 @@ export const Empleado = () => {
                             <div className="text-base font-semibold text-black">
                               Alejandro Steven Marroquin
                             </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
+                        <td className="px-6 py-4">Aseo</td>
+                        <td className="px-6 py-4">2</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -122,7 +115,6 @@ export const Empleado = () => {
                           </button>
                         </td>
                       </tr>
-
                       {/*Dato 1 */}
                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
                         <th
@@ -133,14 +125,10 @@ export const Empleado = () => {
                             <div className="text-base font-semibold text-black">
                               Alejandro Steven Marroquin
                             </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
+                        <td className="px-6 py-4">Aseo</td>
+                        <td className="px-6 py-4">2</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -163,7 +151,6 @@ export const Empleado = () => {
                           </button>
                         </td>
                       </tr>
-
                       {/*Dato 1 */}
                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
                         <th
@@ -174,14 +161,10 @@ export const Empleado = () => {
                             <div className="text-base font-semibold text-black">
                               Alejandro Steven Marroquin
                             </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
+                        <td className="px-6 py-4">Aseo</td>
+                        <td className="px-6 py-4">2</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -204,7 +187,6 @@ export const Empleado = () => {
                           </button>
                         </td>
                       </tr>
-
                       {/*Dato 1 */}
                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
                         <th
@@ -215,14 +197,10 @@ export const Empleado = () => {
                             <div className="text-base font-semibold text-black">
                               Alejandro Steven Marroquin
                             </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
+                        <td className="px-6 py-4">Aseo</td>
+                        <td className="px-6 py-4">2</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -245,6 +223,10 @@ export const Empleado = () => {
                           </button>
                         </td>
                       </tr>
+                      
+
+
+
                     </tbody>
                   </table>
                 </div>

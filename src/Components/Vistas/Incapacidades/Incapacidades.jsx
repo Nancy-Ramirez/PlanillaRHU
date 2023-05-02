@@ -6,7 +6,7 @@ import { Navbar } from "../../Componentes/NavBar";
 import { Aside } from "../../Componentes/Aside";
 import { Link } from "react-router-dom";
 
-export const Empleado = () => {
+export const Incapacidades = () => {
   return (
     <div className="flex">
       <Aside />
@@ -17,7 +17,7 @@ export const Empleado = () => {
             <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
               <div className="flex justify-between pt-5">
                 <div></div>
-                <h1 className=" text-center text-3xl text-black">EMPLEADOS</h1>
+                <h1 className=" text-center text-3xl text-black">INCAPACIDADES</h1>
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
                     <a
@@ -56,7 +56,7 @@ export const Empleado = () => {
                       type="text"
                       id="table-search-users"
                       className="block p-2 pl-10 text-sm text-black border border-gray-700 rounded-lg w-80 bg-gray-100 focus:ring-blue-500 focus:border-blue-500  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="Ingrese nombre de empleado"
+                      placeholder="Ingrese el nombre de empleado"
                     />
                   </div>
                 </div>
@@ -68,13 +68,16 @@ export const Empleado = () => {
                           Nombre
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          DUI
+                          Días
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Departamento
+                          Fecha inicio
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Cargo
+                          Fecha fin
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Documentación
                         </th>
                         <th scope="col" className="px-6 py-3">
                           Acciones
@@ -92,14 +95,126 @@ export const Empleado = () => {
                             <div className="text-base font-semibold text-black">
                               Alejandro Steven Marroquin
                             </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
+                          </div>
+                        </th>
+                        <td className="px-6 py-4">6</td>
+                        <td className="px-6 py-4">15/04/2023</td>
+                        <td className="px-6 py-4">20/04/2023</td>
+                        <td className="px-6 py-4">Sí</td>
+                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
+                          <Link
+                            to="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-ver">
+                              <img src={ver} alt="" width="30px" />
+                            </button>
+                          </Link>
+                          <a
+                            href="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-editar ">
+                              <img src={editar} alt="" width="25px" />
+                            </button>
+                          </a>
+                          <button className="btn btn-eliminar ">
+                            <img src={eliminar} alt="" width="25px" />
+                          </button>
+                        </td>
+                      </tr>
+                       {/*Dato 1 */}
+                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                        <th
+                          scope="row"
+                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                        >
+                          <div className="pl-3 text-start">
+                            <div className="text-base font-semibold text-black">
+                              Alejandro Steven Marroquin
                             </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
+                        <td className="px-6 py-4">6</td>
+                        <td className="px-6 py-4">15/04/2023</td>
+                        <td className="px-6 py-4">20/04/2023</td>
+                        <td className="px-6 py-4">Sí</td>
+                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
+                          <Link
+                            to="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-ver">
+                              <img src={ver} alt="" width="30px" />
+                            </button>
+                          </Link>
+                          <a
+                            href="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-editar ">
+                              <img src={editar} alt="" width="25px" />
+                            </button>
+                          </a>
+                          <button className="btn btn-eliminar ">
+                            <img src={eliminar} alt="" width="25px" />
+                          </button>
+                        </td>
+                      </tr>
+                       {/*Dato 1 */}
+                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                        <th
+                          scope="row"
+                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                        >
+                          <div className="pl-3 text-start">
+                            <div className="text-base font-semibold text-black">
+                              Alejandro Steven Marroquin
+                            </div>
+                          </div>
+                        </th>
+                        <td className="px-6 py-4">6</td>
+                        <td className="px-6 py-4">15/04/2023</td>
+                        <td className="px-6 py-4">20/04/2023</td>
+                        <td className="px-6 py-4">Sí</td>
+                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
+                          <Link
+                            to="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-ver">
+                              <img src={ver} alt="" width="30px" />
+                            </button>
+                          </Link>
+                          <a
+                            href="/inicio"
+                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          >
+                            <button className="btn btn-editar ">
+                              <img src={editar} alt="" width="25px" />
+                            </button>
+                          </a>
+                          <button className="btn btn-eliminar ">
+                            <img src={eliminar} alt="" width="25px" />
+                          </button>
+                        </td>
+                      </tr>
+                       {/*Dato 1 */}
+                       <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                        <th
+                          scope="row"
+                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                        >
+                          <div className="pl-3 text-start">
+                            <div className="text-base font-semibold text-black">
+                              Alejandro Steven Marroquin
+                            </div>
+                          </div>
+                        </th>
+                        <td className="px-6 py-4">6</td>
+                        <td className="px-6 py-4">15/04/2023</td>
+                        <td className="px-6 py-4">20/04/2023</td>
+                        <td className="px-6 py-4">Sí</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -123,128 +238,7 @@ export const Empleado = () => {
                         </td>
                       </tr>
 
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <img src={ver} alt="" width="30px" />
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <img src={editar} alt="" width="25px" />
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <img src={eliminar} alt="" width="25px" />
-                          </button>
-                        </td>
-                      </tr>
 
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <img src={ver} alt="" width="30px" />
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <img src={editar} alt="" width="25px" />
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <img src={eliminar} alt="" width="25px" />
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <img src={ver} alt="" width="30px" />
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <img src={editar} alt="" width="25px" />
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <img src={eliminar} alt="" width="25px" />
-                          </button>
-                        </td>
-                      </tr>
                     </tbody>
                   </table>
                 </div>

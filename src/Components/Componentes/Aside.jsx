@@ -17,7 +17,7 @@ export const Aside = () => {
         } duration-300 relative`}
       >
         <BsArrowLeftShort
-          className={`bg-white text-dark-purple text-3xl rounded-full absolute -right-3 top-9 border border-dark-purple cursor-pointer ${
+          className={`bg-white text-dark-purple text-3xl rounded-full absolute -right-3 top-14 border border-dark-purple cursor-pointer ${
             !open && "rotate-180"
           }`}
           onClick={() => setOpen(!open)}
@@ -38,7 +38,7 @@ export const Aside = () => {
         </div>
         <ul className="pt-2">
           {/*Inicio */}
-          <Link to="/"><li
+          <Link to="/inicio"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
@@ -185,7 +185,7 @@ export const Aside = () => {
           </li>
           <ul className={`${submenuOpen && "hidden"}`}>
             {/*Incapacidades */}
-            <Link to="/">
+            <Link to="/incapacidad">
               <li
                 className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
                 }`}
