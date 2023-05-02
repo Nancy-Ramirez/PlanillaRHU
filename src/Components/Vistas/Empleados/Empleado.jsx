@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 
 export const Empleado = () => {
   return (
-    <div className="flex">
+    <div className="flex ">
       <Aside />
       <div class="w-full">
         <Navbar />
         <div>
-          <main className="flex">
-            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
-              <div className="flex justify-between pt-5">
+          <main className="flex ml-24 mb-8 ">
+            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg pb-5">
+              <div className="flex justify-between pt-24">
                 <div></div>
                 <h1 className=" text-center text-3xl text-black">EMPLEADOS</h1>
                 <div className="">

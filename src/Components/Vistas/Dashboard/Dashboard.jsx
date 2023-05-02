@@ -10,7 +10,7 @@ export const Dashboard = () =>{
             <div class="w-full">
                 <Navbar/>
                 <div>
-                    
+                    AQUI VA EL CONTENIDO
                 </div>
             </div>
         </div>

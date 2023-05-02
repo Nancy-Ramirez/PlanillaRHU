@@ -9,9 +9,9 @@ export const Aside = () => {
   const [submenuOpen, setSubmenuOpen] = useState(true);
 
   return (
-    <nav className="block">
+    <nav className="fixed z-10">
       <div
-        className={`bg-dark-purple h-screen p-5 pt-8 ${
+        className={` bg-dark-purple h-screen p-5 pt-8 ${
           open ? "w-60" : "w-20"
         } duration-300 relative`}
       >
