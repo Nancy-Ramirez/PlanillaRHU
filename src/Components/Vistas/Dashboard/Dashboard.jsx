@@ -9,7 +9,7 @@ export const Dashboard = () =>{
             <Aside/>
             <div class="w-full">
                 <Navbar/>
-                <div>
+                <div className="ml-24 mb-8">
                     AQUI VA EL CONTENIDO
                 </div>
             </div>

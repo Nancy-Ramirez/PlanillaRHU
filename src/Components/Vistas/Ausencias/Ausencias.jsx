@@ -12,9 +12,9 @@ export const Ausencias = () => {
       <Aside />
       <div class="w-full">
         <Navbar />
-        <div>
+        <div className="ml-24 mb-8"> 
           <main className="flex">
-            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg pb-8">
               <div className="flex justify-between pt-5">
                 <div></div>
                 <h1 className=" text-center text-3xl text-black">AUSENCIAS</h1>

@@ -8,7 +8,7 @@ export const Navbar = () => {
             <div className="">
               
               <nav
-                class=" flex w-full items-center justify-between bg-dark-purple py-2 shadow-md bshadow-black/5 lg:flex-wrap lg:justify-start"
+                class="fixed flex z-8 w-full items-center justify-between bg-dark-purple py-2 shadow-md bshadow-black/5 lg:flex-wrap lg:justify-start"
                 data-te-navbar-ref
               >
                 <div class="flex w-full flex-wrap items-center justify-between pl-1 pr-6 ">

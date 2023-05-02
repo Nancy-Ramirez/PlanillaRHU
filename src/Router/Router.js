@@ -8,7 +8,6 @@ import { Usuarios } from "../Components/Vistas/Usuarios/Usuarios";
 import { Indemnizacion } from "../Components/Vistas/Indemnizacion/Indemnizacion";
 import { Prestaciones } from "../Components/Vistas/Prestaciones/Prestaciones";
 import { Departamento } from "../Components/Vistas/Departamento/Departamento";
-import Cashboard from "../Components/Componentes/Dashboard/Dashboard";
 
 export default function Router() {
   return (
@@ -16,7 +15,6 @@ export default function Router() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/inicio" element={<Dashboard />} />
-        <Route path="/dd" element={<Cashboard />} />
 
         {/*Empleado */}
         <Route path="/empleado" element={<Empleado />} />
