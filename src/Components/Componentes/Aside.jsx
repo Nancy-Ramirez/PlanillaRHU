@@ -3,13 +3,14 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { FaSpeakerDeck, FaUserAlt, FaCaretDown, FaHome, FaPaste, FaPrescriptionBottleAlt, FaPiggyBank, FaHospitalUser, FaUserAltSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+
 export const Aside = () => {
   const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(true);
   const [submenuOpenP, setSubmenuOpenP] = useState(true);
 
   return (
-    <nav className="flex">
+    <nav className="block">
       <div
         className={`bg-dark-purple h-screen p-5 pt-8 ${
           open ? "w-60" : "w-20"
@@ -54,7 +55,7 @@ export const Aside = () => {
           </li></Link>
 
           {/*Empleado */}
-          <Link to="/"><li
+          <Link to="/empleado"><li
             className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
