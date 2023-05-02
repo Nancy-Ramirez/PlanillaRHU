@@ -12,7 +12,7 @@ export const Ausencias = () => {
       <Aside />
       <div class="w-full">
         <Navbar />
-        <div className="ml-24 mb-8"> 
+        <div className="ml-24 mb-8 mt-8 pt-12 "> 
           <main className="flex">
             <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg pb-8">
               <div className="flex justify-between pt-5">

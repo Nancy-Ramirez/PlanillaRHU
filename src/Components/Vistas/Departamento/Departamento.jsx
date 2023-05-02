@@ -12,14 +12,14 @@ export const Departamento = () => {
       <Aside />
       <div class="w-full">
         <Navbar />
-        <div>
+        <div className="ml-24 mb-8 mt-8 pt-12 ">
           <main className="flex">
-            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
+            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg pb-8">
               <div className="flex justify-between pt-5">
                 <div></div>
-                <h1 className=" text-center text-3xl text-black">DEPARTAMENTOS</h1>
+                <h1 className=" text-center text-3xl text-black pl-20">DEPARTAMENTOS</h1>
                 <div className="">
-                  <div className="flex items-center md:justify-end px-5 m-2">
+                  <div className="flex items-center md:justify-end px-5 m-2 mr-24">
                     <a
                       href="/institucion/institucion"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -31,8 +31,8 @@ export const Departamento = () => {
                   </div>
                 </div>
               </div>
-              <div className="mx-5">
-                <div className="flex items-center md:justify-end pb-3 m-2">
+              <div className="mx-5 ">
+                <div className="flex items-center md:justify-end pb-3 m-2 mr-24">
                   <label htmlFor="table-search" className="sr-only">
                     Buscar
                   </label>
@@ -60,7 +60,7 @@ export const Departamento = () => {
                     />
                   </div>
                 </div>
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-24">
                   <table className="w-full text-sm text-left text-black  dark:text-gray-400 ">
                     <thead className="text-xs text-black uppercase text-center bg-col2">
                       <tr>
