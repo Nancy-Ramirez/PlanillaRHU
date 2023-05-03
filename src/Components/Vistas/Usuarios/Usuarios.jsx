@@ -18,7 +18,7 @@ export const Usuarios = () => {
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
                     <a
-                      href="/institucion/institucion"
+                      href="/agregar-usuarios"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-agregar rounded-full">
@@ -69,9 +69,6 @@ export const Usuarios = () => {
                           Correo electrónico
                         </th>
                         <th scope="col" className="px-6 py-3">
-                          Estado
-                        </th>
-                        <th scope="col" className="px-6 py-3">
                           Acciones
                         </th>
                       </tr>
@@ -90,7 +87,6 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-4">Activo</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -133,7 +129,6 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-4">Activo</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -177,7 +172,6 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-4">Activo</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -221,7 +215,6 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-4">Activo</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"
@@ -251,8 +244,6 @@ export const Usuarios = () => {
                           </button>
                         </td>
                       </tr>
-
-
                     </tbody>
                   </table>
                 </div>
