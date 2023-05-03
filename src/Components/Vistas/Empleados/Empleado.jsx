@@ -18,7 +18,7 @@ export const Empleado = () => {
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
                     <a
-                      href="/institucion/institucion"
+                      href="/agregar-empleado"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-agregar rounded-full">
