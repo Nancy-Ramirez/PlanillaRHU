@@ -38,7 +38,7 @@ export const Aside = () => {
         <ul className="pt-2">
           {/*Inicio */}
           <Link to="/inicio"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -55,7 +55,7 @@ export const Aside = () => {
 
           {/*Empleado */}
           <Link to="/empleado"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -72,7 +72,7 @@ export const Aside = () => {
 
           {/*Departamentos */}
           <Link to="/departamento"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -89,7 +89,7 @@ export const Aside = () => {
           
           {/*Prestaciones */}
           <Link to="/prestaciones"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -106,7 +106,7 @@ export const Aside = () => {
           
           {/*Faltas */}
           <li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -130,7 +130,7 @@ export const Aside = () => {
             {/*Incapacidades */}
             <Link to="/incapacidad">
               <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
+                className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
                 }`}
               >
                 Incapacidades
@@ -140,7 +140,7 @@ export const Aside = () => {
             {/*Ausencias*/}
             <Link to="/ausencia">
               <li
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
+                className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md mt-2 mx-5
                 }`}
               >
                 Ausencias
@@ -151,7 +151,7 @@ export const Aside = () => {
 
           {/*Indemnizaciones */}
           <Link to="/indemnizaciones"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -168,7 +168,7 @@ export const Aside = () => {
 
           {/*Usuarios */}
           <Link to="/usuarios"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
@@ -185,7 +185,7 @@ export const Aside = () => {
 
           {/*Salir*/}
           <a href="/"><li
-            className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 py-1 hover:bg-light-white rounded-md  mt-3
                 }`}
           >
             <span className="text-xl block float-left">
