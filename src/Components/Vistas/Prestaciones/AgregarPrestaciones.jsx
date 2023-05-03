@@ -3,7 +3,7 @@ import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { AiFillPrinter } from "react-icons/ai";
 
-export const AgregarPrestacion = ()  => {
+export const AgregarPrestacion = () => {
   return (
     <div className="flex">
       <Aside />
@@ -101,10 +101,9 @@ export const AgregarPrestacion = ()  => {
             <div className="md:col-span-2 lg:col-span-1">
               <div className="h-full py-6 px-6 ">
                 <a>
-                <AiFillPrinter className="h-16 w-16 text-azul-ver flex justify-start"/>
-                <h1>Imprimir Boleta de pagoo</h1>
+                  <AiFillPrinter className="h-16 w-16 text-azul-ver flex justify-start" />
+                  <h1>Imprimir Boleta de pagoo</h1>
                 </a>
-                
               </div>
             </div>
             <div className="md:col-span-2 lg:col-span-3 mb-4">
@@ -115,7 +114,7 @@ export const AgregarPrestacion = ()  => {
                 <div class="mt-4 border-t-2 border-gray-100 pt-4">
                   <form action="">
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
-                    <div className="flex justify-start">
+                      <div className="flex justify-start">
                         <label
                           for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
@@ -130,9 +129,8 @@ export const AgregarPrestacion = ()  => {
                           placeholder="$"
                           disabled
                         />
-                       
-                    </div>
-                    <div className="flex justify-start">
+                      </div>
+                      <div className="flex justify-start">
                         <label
                           for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
@@ -147,9 +145,8 @@ export const AgregarPrestacion = ()  => {
                           placeholder="$"
                           disabled
                         />
-                       
-                    </div>
-                    <div className="flex justify-start">
+                      </div>
+                      <div className="flex justify-start">
                         <label
                           for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
@@ -164,9 +161,8 @@ export const AgregarPrestacion = ()  => {
                           placeholder="$"
                           disabled
                         />
-                       
-                    </div>
-                    <div className="flex justify-start">
+                      </div>
+                      <div className="flex justify-start">
                         <label
                           for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
@@ -181,9 +177,8 @@ export const AgregarPrestacion = ()  => {
                           placeholder="$"
                           disabled
                         />
-                       
-                    </div>
-                    <div className="flex justify-start">
+                      </div>
+                      <div className="flex justify-start">
                         <label
                           for="first_name"
                           class="flex mb-2 w-36 text-sm font-bold text-gray-900 "
@@ -198,55 +193,54 @@ export const AgregarPrestacion = ()  => {
                           placeholder="$"
                           disabled
                         />
-                       
-                    </div>
+                      </div>
                     </div>
                     <div className="mt-4 border-t-2 border-gray-100 pt-4">
-                    <label
+                      <label
                         for="text"
                         class="block mb-2 text-sm font-medium text-gray-900 "
                       >
                         Impuesto sobre la renta:
                       </label>
                       <input
-                          type="number"
-                          name="#"
-                          id="#"
-                          class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
-                          placeholder="$"
-                          disabled
-                        />
+                        type="number"
+                        name="#"
+                        id="#"
+                        class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
+                        placeholder="$"
+                        disabled
+                      />
                     </div>
                     <div className="mt-4 border-t-2 border-gray-100 pt-4">
-                    <label
+                      <label
                         for="text"
                         class="block mb-2 text-sm font-bold text-gray-900 "
                       >
                         Salario Liquido:
                       </label>
                       <input
-                          type="number"
-                          name="#"
-                          id="#"
-                          class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
-                          placeholder="$"
-                          disabled
-                        />
+                        type="number"
+                        name="#"
+                        id="#"
+                        class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
+                        placeholder="$"
+                        disabled
+                      />
                     </div>
                     <div className="mt-2">
-                    <button
-                      type="submit"
-                      class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-                    >
-                      Guardar
-                    </button>
-                    <button
-                      type="submit"
-                      class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                    >
-                      Cancelar
-                    </button>
-                  </div>
+                      <button
+                        type="submit"
+                        class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                      >
+                        Guardar
+                      </button>
+                      <button
+                        type="submit"
+                        class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -256,4 +250,4 @@ export const AgregarPrestacion = ()  => {
       </div>
     </div>
   );
-}
+};
