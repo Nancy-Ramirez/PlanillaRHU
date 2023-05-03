@@ -17,15 +17,15 @@ export const Indemnizacion = () => {
                 <h1 className=" text-center text-3xl text-black">INDEMNIZACIONES</h1>
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
-                    <a
-                      href="/institucion/institucion"
+                    <Link
+                      to="/agregar-indemnizacion"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-agregar rounded-full">
                         <span className="text-col4 text-4xl" > 
                         <FaPlusCircle /></span>
                       </button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
