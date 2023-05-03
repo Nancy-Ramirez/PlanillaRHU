@@ -32,6 +32,21 @@ export const Dashboard = () =>{
                 </h5>
                 
               </Link>
+              <Link
+                to="/empleado"
+                class="block max-w-sm p-6 bg-dark-purple border border-col1 rounded-lg shadow hover:bg-col2 "
+              >
+                <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+                  <AiOutlineTrophy
+                    style={{ height: 30, width: 30 }}
+                    className="text-dark-purpl dark:text-gray-800 transform transition-transform duration-500 ease-in-out"
+                  />
+                </div>
+                <h5 class="mb-2  text-center text-2xl font-bold tracking-tight text-gray-50 dark:text-gray-900">
+                  Empleados
+                </h5>
+                
+              </Link>
               
             </div>
                 </div>
