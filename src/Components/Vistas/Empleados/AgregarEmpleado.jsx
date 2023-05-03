@@ -9,18 +9,19 @@ export const AgregarEmpleados = () => {
         <Navbar />
         <div className="ml-24 mb-8">
           <main className="flex">
-            <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg pb-8">
+            <section className=" w-full  overflow-x-auto shadow-md sm:rounded-lg pb-8">
               <div className="flex justify-center pt-24">
                 <h1 className=" text-center text-2xl text-black">
                   AGREGAR EMPLEADOS
                 </h1>
               </div>
               <div className="mx-5">
-                <div class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+                {/*Parte 1 */}
+                <div class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
                   {/*Linea 1 */}
-                  <div className="flex flex-row space-x-24 px-10">
+                  <div className="flex flex-wrap px-10">
                     {/*Nombres */}
-                    <div className="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="nombres"
                         class="leading-7 text-sm text-gray-600"
@@ -35,7 +36,7 @@ export const AgregarEmpleados = () => {
                       />
                     </div>
                     {/*Apellidos */}
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="apellidos"
                         class="leading-7 text-sm text-gray-600"
@@ -52,9 +53,9 @@ export const AgregarEmpleados = () => {
                   </div>
 
                   {/*Linea 2 */}
-                  <div className="flex flex-row space-x-24 px-10 pt-5">
+                  <div className="flex flex-wrap px-10">
                     {/*Fecha de Nacimiento */}
-                    <div className="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="fechaNac"
                         class="leading-7 text-sm text-gray-600"
@@ -69,11 +70,8 @@ export const AgregarEmpleados = () => {
                       />
                     </div>
                     {/*DUI */}
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
-                      <label
-                        for="dui"
-                        class="leading-7 text-sm text-gray-600"
-                      >
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label for="dui" class="leading-7 text-sm text-gray-600">
                         DUI
                       </label>
                       <input
@@ -86,13 +84,10 @@ export const AgregarEmpleados = () => {
                   </div>
 
                   {/*Linea 3 */}
-                  <div className="flex flex-row space-x-24 px-10 pt-5">
+                  <div className="flex flex-wrap px-10">
                     {/*NIT */}
-                    <div className="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
-                      <label
-                        for="nit"
-                        class="leading-7 text-sm text-gray-600"
-                      >
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label for="nit" class="leading-7 text-sm text-gray-600">
                         NIT
                       </label>
                       <input
@@ -103,7 +98,7 @@ export const AgregarEmpleados = () => {
                       />
                     </div>
                     {/*Telefono */}
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="telefono"
                         class="leading-7 text-sm text-gray-600"
@@ -120,9 +115,9 @@ export const AgregarEmpleados = () => {
                   </div>
 
                   {/*Linea 4 */}
-                  <div className="flex flex-row space-x-24 px-10 pt-5">
+                  <div className="flex flex-wrap px-10">
                     {/*Dirección */}
-                    <div className="w-full">
+                    <div className="w-full px-2">
                       <label
                         for="direccion"
                         class="leading-7 text-sm text-gray-600"
@@ -139,9 +134,9 @@ export const AgregarEmpleados = () => {
                   </div>
 
                   {/*Linea 5 */}
-                  <div className="flex flex-row space-x-24 px-10 pt-5">
+                  <div className="flex flex-wrap px-10">
                     {/*Correo electrónico*/}
-                    <div className="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="email"
                         class="leading-7 text-sm text-gray-600"
@@ -156,12 +151,12 @@ export const AgregarEmpleados = () => {
                       />
                     </div>
                     {/*Estado civil */}
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
                         for="telefono"
                         class="leading-7 text-sm text-gray-600"
                       >
-                        Teléfono
+                        Estado civil
                       </label>
                       <select
                         id="estadoCivil"
@@ -177,14 +172,11 @@ export const AgregarEmpleados = () => {
                     </div>
                   </div>
 
-                  {/*Linea 5 */}
-                  <div className="flex flex-row space-x-24 px-10 pt-5">
+                  {/*Linea 6 */}
+                  <div className="flex flex-wrap px-10">
                     {/*Sexo */}
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full">
-                      <label
-                        for="sexo"
-                        class="leading-7 text-sm text-gray-600"
-                      >
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label for="sexo" class="leading-7 text-sm text-gray-600">
                         Sexo
                       </label>
                       <select
@@ -197,21 +189,125 @@ export const AgregarEmpleados = () => {
                         <option id="masculino">Masculino</option>
                       </select>
                     </div>
-                    <div class="xl:w-1/2 lg:w-1/2 md:w-full sm:w-full"></div>
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2"></div>
+                  </div>
+                </div>
+
+                {/*Parte 2 */}
+                <div class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
+                  {/*Linea 7 */}
+                  <div className="flex flex-wrap px-10">
+                    {/*Salario */}
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        for="salario"
+                        class="leading-7 text-sm text-gray-600"
+                      >
+                        Nombres
+                      </label>
+                      <input
+                        type=""
+                        id="salario"
+                        name="salario"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        placeholder="$"
+                      />
+                    </div>
+                    {/*Tipo de pago */}
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        for="tipoPago"
+                        class="leading-7 text-sm text-gray-600"
+                      >
+                        Tipo de pago
+                      </label>
+                      <select
+                        id="tipoPago"
+                        name="tipoPago"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                      >
+                        <option id="">**Seleccione**</option>
+                        <option id="mensual">Mensual</option>
+                        <option id="quincenal">Quincenal</option>
+                      </select>
+                    </div>
                   </div>
 
+                  {/*Linea 8 */}
+                  <div className="flex flex-wrap px-10">
+                    {/*Departamento*/}
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        for="departamento"
+                        class="leading-7 text-sm text-gray-600"
+                      >
+                        Departamento
+                      </label>
+                      <select
+                        id="departamento"
+                        name="departamento"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                      >
+                        <option id="">**Seleccione**</option>
+                        <option id="1">Ventas</option>
+                        <option id="2">Compras</option>
+                      </select>
+                    </div>
+                    {/*Cargo */}
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label for="cargo" class="leading-7 text-sm text-gray-600">
+                        Cargo
+                      </label>
+                      <input
+                        type="text"
+                        id="cargo"
+                        name="cargo"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
+                  </div>
 
-
-
-
-
-
-                  <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                    Button
+                  {/*Linea 9 */}
+                  <div className="flex flex-wrap px-10">
+                    {/*Tipo contrato*/}
+                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        for="tipoContrato"
+                        class="leading-7 text-sm text-gray-600"
+                      >
+                        Tipo de contrato
+                      </label>
+                      <select
+                        id="tipoContrato"
+                        name="tipoContrato"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                      >
+                        <option id="">**Seleccione**</option>
+                        <option id="formal">Contrato formal</option>
+                        <option id="profesionales">Servicios profesionales</option>
+                      </select>
+                    </div>
+                    {/*Fecha de inicio */}
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        for="fechaInicio"
+                        class="leading-7 text-sm text-gray-600"
+                      >
+                        Fecha de inicio
+                      </label>
+                      <input
+                        type="date"
+                        id="fechaInicio"
+                        name="fechaInicio"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-end pt-8">
+                  <button class="text-white bg-col4 border-0 py-2 px-8 focus:outline-none hover:bg-col4 rounded text-lg">
+                    Registrar
                   </button>
-                  <p class="text-xs text-gray-500 mt-3">
-                    Literally you probably haven't heard of them jean shorts.
-                  </p>
+                  </div>
                 </div>
               </div>
             </section>
