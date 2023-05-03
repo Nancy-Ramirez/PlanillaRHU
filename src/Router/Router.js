@@ -8,6 +8,7 @@ import { Usuarios } from "../Components/Vistas/Usuarios/Usuarios";
 import { Indemnizacion } from "../Components/Vistas/Indemnizacion/Indemnizacion";
 import { Prestaciones } from "../Components/Vistas/Prestaciones/Prestaciones";
 import { Departamento } from "../Components/Vistas/Departamento/Departamento";
+import { AgregarPrestacion } from "../Components/Vistas/Prestaciones/AgregarPrestaciones";
 
 export default function Router() {
   return (
@@ -33,6 +34,7 @@ export default function Router() {
 
         {/*Prestaciones*/}
         <Route path="/prestaciones" element={<Prestaciones />} />
+        <Route path="/agregar-prestaciones" element={<AgregarPrestacion />} />
 
         {/*Departamentos*/}
         <Route path="/departamento" element={<Departamento />} />
