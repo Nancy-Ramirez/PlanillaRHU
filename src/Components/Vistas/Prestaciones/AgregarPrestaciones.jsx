@@ -9,9 +9,9 @@ export const AgregarPrestacion = ()  => {
       <Aside />
       <div className="w-full">
         <Navbar />
-        <div className="ml-20 mt-14">
+        <div className="ml-24 mb-8 mt-8 pt-12">
           <div className="w-full mx-auto mt-4 max-w-lg text-center ">
-            <h1 className="text-3xl  sm:text-4xl text-black">
+            <h1 className="text-xl  sm:text-3xl  text-black">
               CALCULO DE PRESTACIONES
             </h1>
           </div>
@@ -65,7 +65,7 @@ export const AgregarPrestacion = ()  => {
                     <input
                       type="number"
                       id="number"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                       placeholder="$500.00"
                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                       disabled
@@ -128,6 +128,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
+                          disabled
                         />
                        
                     </div>
@@ -144,6 +145,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
+                          disabled
                         />
                        
                     </div>
@@ -160,6 +162,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
+                          disabled
                         />
                        
                     </div>
@@ -176,6 +179,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
+                          disabled
                         />
                        
                     </div>
@@ -192,6 +196,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
+                          disabled
                         />
                        
                     </div>
@@ -209,6 +214,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
                           placeholder="$"
+                          disabled
                         />
                     </div>
                     <div className="mt-4 border-t-2 border-gray-100 pt-4">
@@ -224,6 +230,7 @@ export const AgregarPrestacion = ()  => {
                           id="#"
                           class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
                           placeholder="$"
+                          disabled
                         />
                     </div>
                     <div className="mt-2">
