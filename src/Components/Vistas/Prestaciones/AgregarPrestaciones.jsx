@@ -17,7 +17,7 @@ export const AgregarPrestacion = () => {
           </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-2">
-              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-white">
+              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
                   <div>
                     <label
@@ -107,7 +107,7 @@ export const AgregarPrestacion = () => {
               </div>
             </div>
             <div className="md:col-span-2 lg:col-span-3 mb-4">
-              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-white">
+              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="mt-2 ">
                   <h2 class="text-lg font-bold text-gray-900">Calculos</h2>
                 </div>

@@ -16,7 +16,7 @@ export const AgregarIndemnizacion = () => {
           </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="md:col-span-2 lg:col-span-3">
-              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-white">
+              <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200 ">
                 <div className="mt-4 pt-4">
                   <form action="">
                     <div className=" mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -122,7 +122,7 @@ export const AgregarIndemnizacion = () => {
           </div>
           <div className="mt-4 mx-4 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="md:col-span-2 lg:col-span-3">
-              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-white">
+              <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="mt-2 ">
                   <h2 class="text-lg font-bold text-gray-900">Calculos</h2>
                 </div>

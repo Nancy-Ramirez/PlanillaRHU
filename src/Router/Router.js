@@ -13,6 +13,7 @@ import { AgregarEmpleados } from "../Components/Vistas/Empleados/AgregarEmpleado
 import {AgregarIndemnizacion} from "../Components/Vistas/Indemnizacion/AgregarIndemnizacion";
 import { AgregarDepartamento } from "../Components/Vistas/Departamento/AgregarDepartamento";
 import { AgregarUsuario } from "../Components/Vistas/Usuarios/AgregarUsuarios";
+import { EditarDepartamento } from "../Components/Vistas/Departamento/EditarDepartamento";
 
 export default function Router() {
   return (
@@ -24,6 +25,7 @@ export default function Router() {
         {/*Empleado */}
         <Route path="/empleado" element={<Empleado />} />
         <Route path="/agregar-empleado" element={<AgregarEmpleados/>} />
+        
 
         {/*Incapacidades */}
         <Route path="/incapacidad" element={<Incapacidades />} />
@@ -46,6 +48,7 @@ export default function Router() {
         {/*Departamentos*/}
         <Route path="/departamento" element={<Departamento />} />
         <Route path="/agregar-departamento" element={<AgregarDepartamento />} />
+        <Route path="/editar-departamento" element={<EditarDepartamento/>} />
       </Routes>
     </BrowserRouter>
   );

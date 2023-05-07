@@ -88,7 +88,7 @@ export const Departamento = () => {
                             </button>
                           </Link>
                           <a
-                            href="/inicio"
+                            href="/editar-departamento"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
