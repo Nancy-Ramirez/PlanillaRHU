@@ -2,6 +2,8 @@ import React from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { AiFillPrinter } from "react-icons/ai";
+import { FiArrowLeft } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export const AgregarPrestacion = () => {
   return (
@@ -10,11 +12,18 @@ export const AgregarPrestacion = () => {
       <div className="w-full">
         <Navbar />
         <div className="ml-24 mb-8 mt-8 pt-12">
-          <div className="w-full mx-auto mt-4 max-w-lg text-center ">
-            <h1 className="text-xl  sm:text-3xl  text-black">
-              CALCULO DE PRESTACIONES
-            </h1>
-          </div>
+          <div className="flex justify-between ">
+              <Link to="/prestaciones" className="pl-5 text-3xl text-gray-500">
+                    <FiArrowLeft />
+                  </Link>
+                <h1 className=" text-center text-2xl text-black">
+                  CÁLCULO DE PRESTACIONES
+                </h1>
+                <h1>
+
+                </h1>
+                
+              </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-2">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">

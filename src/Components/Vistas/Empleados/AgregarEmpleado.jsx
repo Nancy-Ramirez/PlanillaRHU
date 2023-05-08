@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
+import { FiArrowLeft } from "react-icons/fi";
 
 export const AgregarEmpleados = () => {
   return (
@@ -10,10 +12,17 @@ export const AgregarEmpleados = () => {
         <div className="ml-24 mb-8">
           <main className="flex">
             <section className=" w-full  overflow-x-auto shadow-md sm:rounded-lg pb-8">
-              <div className="flex justify-center pt-24">
+              <div className="flex justify-between pt-24 ">
+              <Link to="/empleado" className="pl-5 text-3xl text-gray-500">
+                    <FiArrowLeft />
+                  </Link>
                 <h1 className=" text-center text-2xl text-black">
                   AGREGAR EMPLEADOS
                 </h1>
+                <h1>
+
+                </h1>
+                
               </div>
               <div className="mx-5">
                 {/*Parte 1 */}

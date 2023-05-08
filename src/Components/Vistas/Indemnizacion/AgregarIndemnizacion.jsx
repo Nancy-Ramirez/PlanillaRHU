@@ -1,6 +1,8 @@
 import React from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
+import { Link } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 
 export const AgregarIndemnizacion = () => {
   return (
@@ -9,11 +11,18 @@ export const AgregarIndemnizacion = () => {
       <div className="w-full">
         <Navbar />
         <div className="ml-24 mb-8 mt-8 pt-12">
-          <div className="w-full mx-auto mt-4 max-w-lg text-center ">
-            <h1 className="text-xl  sm:text-3xl  text-black">
-              CALCULO DE INDEMNIZACION
-            </h1>
-          </div>
+        <div className="flex justify-between">
+              <Link to="/indemnizaciones" className="pl-5 text-3xl text-gray-500">
+                    <FiArrowLeft />
+                  </Link>
+                <h1 className=" text-center text-2xl text-black">
+                  CALCULO DE INDEMNIZACIÓN
+                </h1>
+                <h1>
+
+                </h1>
+                
+              </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="md:col-span-2 lg:col-span-3">
               <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200 ">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { FaSpeakerDeck, FaUserAlt, FaCaretDown, FaHome, FaPaste, FaPrescriptionBottleAlt, FaPiggyBank, FaHospitalUser, FaUserAltSlash, FaUserTie } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import logo from "../../Images/logo2.png"
 
 
 export const Aside = () => {
@@ -22,7 +23,7 @@ export const Aside = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="inline-flex">
-          <FaSpeakerDeck
+          <img src={logo} width={25}
             className={`text-white text-4xl rounded cursor-pointer block float-left mr-2 duration-500 ${
               open && "rotate-[360deg]"
             }`}
@@ -32,7 +33,7 @@ export const Aside = () => {
               !open && "scale-0"
             }`}
           >
-            SisCont
+            IMMANYOTL
           </h1>
         </div>
         <ul className="pt-2">

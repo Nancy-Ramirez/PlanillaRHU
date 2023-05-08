@@ -1,5 +1,7 @@
+import { FiArrowLeft } from "react-icons/fi";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
+import { Link } from "react-router-dom";
 
 export const AgregarUsuario = () => {
   return (
@@ -10,10 +12,17 @@ export const AgregarUsuario = () => {
         <div className="ml-24 mb-8">
           <main className="flex">
             <section className=" w-full  overflow-x-auto shadow-md sm:rounded-lg pb-8">
-              <div className="flex justify-center pt-24">
+            <div className="flex justify-between pt-24 ">
+              <Link to="/usuarios" className="pl-5 text-3xl text-gray-500">
+                    <FiArrowLeft />
+                  </Link>
                 <h1 className=" text-center text-2xl text-black">
                   AGREGAR USUARIO
                 </h1>
+                <h1>
+
+                </h1>
+                
               </div>
               <div className="mx-32">
                 {/*Parte 1 */}
