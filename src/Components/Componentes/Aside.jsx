@@ -10,7 +10,7 @@ export const Aside = () => {
   const [submenuOpen, setSubmenuOpen] = useState(true);
 
   return (
-    <nav className="fixed z-10">
+    <nav className="fixed z-20">
       <div
         className={` bg-dark-purple h-screen p-5 pt-8 ${
           open ? "w-60" : "w-20"
