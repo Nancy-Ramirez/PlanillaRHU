@@ -14,6 +14,7 @@ import {AgregarIndemnizacion} from "../Components/Vistas/Indemnizacion/AgregarIn
 import { AgregarDepartamento } from "../Components/Vistas/Departamento/AgregarDepartamento";
 import { AgregarUsuario } from "../Components/Vistas/Usuarios/AgregarUsuarios";
 import { EditarDepartamento } from "../Components/Vistas/Departamento/EditarDepartamento";
+import { VerEmpleados } from "../Components/Vistas/Empleados/VerEmpleado";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
         {/*Empleado */}
         <Route path="/empleado" element={<Empleado />} />
         <Route path="/agregar-empleado" element={<AgregarEmpleados/>} />
+        <Route path="/ver-empleado" element={<VerEmpleados/>} />
         
 
         {/*Incapacidades */}
