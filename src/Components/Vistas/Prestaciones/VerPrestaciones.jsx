@@ -31,24 +31,23 @@ export const VerPrestaciones = () => {
               </div>
               <div className="xl:mx-56 lg:mx-56 mx-0 place-content-center">
                 <div className="px-10 w-full pb-5">
-                  {/*Tipo de pago */}
-                  <div className="xl:mx-48">
-                    <div className="flex justify-start pt-5">
-                      <div className="w-1/2">
-                        <h3 className="font-bold">Tipo de pago: </h3>
-                      </div>
-                      <div className="w-1/2">
-                        <h3>Mensual</h3>
-                      </div>
-                    </div>
-
-                    {/*Salario*/}
-                    <div className="flex justify-start pt-5">
-                      <div className="w-1/2">
-                        <h3 className="font-bold">Salario </h3>
-                      </div>
-                      <div className="w-1/2">
-                        <h3>$ 525.26</h3>
+                  {/*SALARIO */}
+                  <div className="pt-5 overflow-x-auto shadow-sm p-8 ">
+                    <div className="xl:flex xl:justify-normal lg:flex lg:justify-normal md:flex md:justify-normal 
+                    xl:text-base lg:text-base md:text-base text-center space-y-5">
+                      {/*Salario */}
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full pt-5">
+                          <h3 className="font-bold">Salario: </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3>$ 524.50</h3>
+                        </div>
+                      {/*Tipo de pago*/}
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3 className="font-bold">Tipo de pago: </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3>Mensual</h3>
                       </div>
                     </div>
                   </div>
@@ -99,36 +98,74 @@ export const VerPrestaciones = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/*DESCUENTOS */}
+                  {/*DESCUENTOS ANTES DE RENTA */}
                   <div className="pt-5 overflow-x-auto shadow-sm p-8">
-                    <h2 className="text-gray-500 text-xl pb-3 px-12 ">ISSS</h2>
+                    <h2 className="text-gray-500 text-xl pb-3 px-12 ">Pago antes de la renta</h2>
                     <div className="xl:flex xl:justify-normal lg:flex lg:justify-normal md:flex md:justify-normal 
                     xl:text-base lg:text-base md:text-base text-center space-y-5">
-                      <div className="xl:mx-48">
-                    <div className="flex justify-start pt-5">
-                      <div className="w-1/2">
-                        <h3 className="font-bold">Tipo de pago: </h3>
-                      </div>
-                      <div className="w-1/2">
-                        <h3>Mensual</h3>
-                      </div>
-                    </div>
+                      {/*Descuento total */}
 
-                    {/*Salario*/}
-                    <div className="flex justify-start pt-5">
-                      <div className="w-1/2">
-                        <h3 className="font-bold">Salario </h3>
-                      </div>
-                      <div className="w-1/2">
-                        <h3>$ 525.26</h3>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full pt-5">
+                          <h3 className="font-bold">Descuento total: </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3>$ 58.25</h3>
+                        </div>
+                      {/*ISSS Empleado */}
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3 className="font-bold"> </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3></h3>
                       </div>
                     </div>
                   </div>
+
+                  {/*CALCULO RENTA */}
+                  <div className="pt-5 overflow-x-auto shadow-sm p-8">
+                    <h2 className="text-gray-500 text-xl pb-3 px-12 ">Impuesto sobre la renta</h2>
+                    <div className="xl:flex xl:justify-normal lg:flex lg:justify-normal md:flex md:justify-normal 
+                    xl:text-base lg:text-base md:text-base text-center space-y-5">
+                      {/*Renta */}
+
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full pt-5">
+                          <h3 className="font-bold">Renta: </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3>$ 45.20</h3>
+                        </div>
+                      {/*ISSS Empleado */}
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3 className="font-bold"> </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3></h3>
+                      </div>
                     </div>
                   </div>
 
-                  
+                  {/*SALARIO LIQUIDO */}
+                  <div className="pt-5 overflow-x-auto shadow-sm p-8">
+                    <h2 className="text-gray-500 text-xl pb-3 px-12 ">Salario líquido</h2>
+                    <div className="xl:flex xl:justify-normal lg:flex lg:justify-normal md:flex md:justify-normal 
+                    xl:text-base lg:text-base md:text-base text-center space-y-5">
+                      {/*Renta */}
+
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full pt-5">
+                          <h3 className="font-bold">Salario líquido: </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3>$ 350.25</h3>
+                        </div>
+                      {/*ISSS Empleado */}
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3 className="font-bold"> </h3>
+                        </div>
+                        <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
+                          <h3></h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
