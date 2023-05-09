@@ -1,0 +1,16 @@
+/*Invalid ingreso*/
+input:invalid {
+    animation: shake 300ms;
+    color: rgb(255, 35, 35);
+}
+@keyframes shake {
+    25% {
+        transform: translateX(4px);
+    }
+    50% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
