@@ -15,6 +15,7 @@ import { AgregarDepartamento } from "../Components/Vistas/Departamento/AgregarDe
 import { AgregarUsuario } from "../Components/Vistas/Usuarios/AgregarUsuarios";
 import { EditarDepartamento } from "../Components/Vistas/Departamento/EditarDepartamento";
 import { VerEmpleados } from "../Components/Vistas/Empleados/VerEmpleado";
+import { VerPrestaciones } from "../Components/Vistas/Prestaciones/VerPrestaciones";
 
 export default function Router() {
   return (
@@ -46,6 +47,7 @@ export default function Router() {
         {/*Prestaciones*/}
         <Route path="/prestaciones" element={<Prestaciones />} />
         <Route path="/agregar-prestaciones" element={<AgregarPrestacion />} />
+        <Route path="/ver-prestaciones" element={<VerPrestaciones />} />
 
         {/*Departamentos*/}
         <Route path="/departamento" element={<Departamento />} />

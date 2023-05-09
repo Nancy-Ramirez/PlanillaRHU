@@ -87,19 +87,10 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
+                          
                           <a
-                            href="/inicio"
+                            href="/editar-departamento"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
@@ -129,19 +120,10 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
+                          
                           <a
-                            href="/inicio"
+                            href="/editar-departamento"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
@@ -172,19 +154,10 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
+                          
                           <a
-                            href="/inicio"
+                            href="/editar-departamento"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
@@ -215,19 +188,10 @@ export const Usuarios = () => {
                           </div>
                         </th>
                         <td className="px-6 py-4">Carlotaarri@gmail.com</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
+                          
                           <a
-                            href="/inicio"
+                            href="/editar-departamento"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">

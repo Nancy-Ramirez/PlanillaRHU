@@ -11,18 +11,15 @@ export const AgregarIndemnizacion = () => {
       <div className="w-full">
         <Navbar />
         <div className="ml-24 mb-8 mt-8 pt-12">
-        <div className="flex justify-between">
-              <Link to="/indemnizaciones" className="pl-5 text-3xl text-gray-500">
-                    <FiArrowLeft />
-                  </Link>
-                <h1 className=" text-center text-2xl text-black">
-                  CALCULO DE INDEMNIZACIÓN
-                </h1>
-                <h1>
-
-                </h1>
-                
-              </div>
+          <div className="flex justify-between">
+            <Link to="/indemnizaciones" className="pl-5 text-3xl text-gray-500">
+              <FiArrowLeft />
+            </Link>
+            <h1 className=" text-center text-2xl text-black">
+              CALCULO DE INDEMNIZACIÓN
+            </h1>
+            <h1></h1>
+          </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="md:col-span-2 lg:col-span-3">
               <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200 ">
@@ -79,7 +76,7 @@ export const AgregarIndemnizacion = () => {
                               type="date"
                               id="last_name"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                              placeholder="Doe"
+                              disabled
                             />
                           </div>
                           <div>
@@ -104,14 +101,17 @@ export const AgregarIndemnizacion = () => {
                             >
                               Salario Mensual:
                             </label>
-                            <input
-                              type="number"
-                              name="#"
-                              id="#"
-                              class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
-                              placeholder="$"
-                              disabled
-                            />
+                            <div className="relative md:content-center">
+                              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                $
+                              </div>
+                              <input
+                                type="text"
+                                id="salario"
+                                className="block p-2 pl-10 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                disabled
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="mt-6">
@@ -136,7 +136,7 @@ export const AgregarIndemnizacion = () => {
                   <h2 class="text-lg font-bold text-gray-900">Calculos</h2>
                 </div>
                 <div className="mt-4 border-t-2 border-gray-100 pt-4">
-                    <form action="">
+                  <form action="">
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
                       <div className="flex justify-start">
                         <label
@@ -150,7 +150,6 @@ export const AgregarIndemnizacion = () => {
                           name="#"
                           id="#"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
-                          placeholder="$"
                           disabled
                         />
                       </div>
@@ -161,32 +160,36 @@ export const AgregarIndemnizacion = () => {
                         >
                           Pago por Años:
                         </label>
-                        <input
-                          type="number"
-                          name="#"
-                          id="#"
-                          class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
-                          placeholder="$"
-                          disabled
-                        />
+                        <div className="relative md:content-center">
+                          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            $
+                          </div>
+                          <input
+                            type="text"
+                            id="pagoAños"
+                            className="block p-2 pl-10 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            disabled
+                          />
+                          
+                        </div>
                       </div>
                     </div>
-                    </form>
+                  </form>
                 </div>
                 <div className="mt-2">
-                      <button
-                        type="submit"
-                        class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-                      >
-                        Guardar
-                      </button>
-                      <button
-                        type="submit"
-                        class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                      >
-                        Cancelar
-                      </button>
-                    </div>
+                  <button
+                    type="submit"
+                    class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="submit"
+                    class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
