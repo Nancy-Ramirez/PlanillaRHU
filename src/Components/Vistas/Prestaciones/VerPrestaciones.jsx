@@ -25,7 +25,7 @@ export const VerPrestaciones = () => {
                 </div>
                 <div className="flex justify-center pr-5">
                   <div className="text-start pt-5">
-                    <h2 className="font-semibold text-xl">Ventas</h2>
+                    <h2 className="font-semibold text-xl uppercase">Ventas</h2>
                   </div>
                 </div>
               </div>
@@ -78,13 +78,13 @@ export const VerPrestaciones = () => {
 
                   {/*CALCULO ISSS */}
                   <div className="pt-5 overflow-x-auto shadow-sm p-8">
-                    <h2 className="text-gray-500 text-xl pb-3 px-12 ">ISSS</h2>
+                    <h2 className="text-gray-700 text-xl pb-3 xl:px-12 lg:px-12 md:px-12 sm:px-0 xl:text-start lg:text-start md:text-start text-center ">ISSS</h2>
                     <div className="xl:flex xl:justify-normal lg:flex lg:justify-normal md:flex md:justify-normal 
                     xl:text-base lg:text-base md:text-base text-center space-y-5">
                       {/*ISSS Patronal */}
 
                         <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full pt-5">
-                          <h3 className="font-bold">Patronal: </h3>
+                          <h3 className="font-bold text-gray-600">Patronal: </h3>
                         </div>
                         <div className="xl:w-1/4 lg:w-1/4 md:w-1/4 sm:w-full">
                           <h3>$ 25.50</h3>
