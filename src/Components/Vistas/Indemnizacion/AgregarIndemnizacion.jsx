@@ -28,25 +28,7 @@ export const AgregarIndemnizacion = () => {
                     <div className=" mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
                       <div className="md:col-span-2 lg:col-span-2">
                         <div className="grid gap-6 mb-6 md:grid-cols-2">
-                          <div>
-                            <label
-                              for="first_name"
-                              class="block mb-2 text-sm font-medium text-gray-900 "
-                            >
-                              Departamento
-                            </label>
-                            <select
-                              id="default"
-                              class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
-                            >
-                              <option selected>Departamento</option>
-                              <option value="US">Ventas</option>
-                              <option value="CA">Contabilidad</option>
-                              <option value="FR">Gerencia</option>
-                              <option value="DE">Produccion</option>
-                            </select>
-                          </div>
-                          <div>
+                        <div>
                             <label
                               for="first_name"
                               class="block mb-2 text-sm font-medium text-gray-900 "
@@ -64,6 +46,25 @@ export const AgregarIndemnizacion = () => {
                               <option value="DE">Produccion</option>
                             </select>
                           </div>
+                          <div>
+                            <label
+                              for="first_name"
+                              class="block mb-2 text-sm font-medium text-gray-900 "
+                            >
+                              Departamento
+                            </label>
+                            <select
+                              id="default"
+                              class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 " disabled
+                            >
+                              <option selected>Departamento</option>
+                              <option value="US">Ventas</option>
+                              <option value="CA">Contabilidad</option>
+                              <option value="FR">Gerencia</option>
+                              <option value="DE">Produccion</option>
+                            </select>
+                          </div>
+                          
                           <div>
                             <label
                               for="first_name"
@@ -117,7 +118,7 @@ export const AgregarIndemnizacion = () => {
                         <div className="mt-6">
                           <button
                             type="submit"
-                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " disabled
                           >
                             Calcular
                           </button>
