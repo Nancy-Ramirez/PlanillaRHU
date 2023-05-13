@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Paginacion } from "../../Componentes/Paginacion";
+import Swal from "sweetalert2";
 
 export const Empleado = () => {
   //Paginación
@@ -79,7 +80,7 @@ export const Empleado = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Eliminado", "El cuestionario se ha removido", "success");
+        Swal.fire("Eliminado", "El empleado ha sido removido", "success");
       }
     });
   };
@@ -136,6 +137,8 @@ export const Empleado = () => {
                       id="table-search-users"
                       className="block p-2 pl-10 text-sm text-black border border-gray-700 rounded-lg w-80 bg-gray-100 focus:ring-blue-500 focus:border-blue-500  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Ingrese nombre de empleado"
+                      value={busqueda}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -204,7 +207,7 @@ export const Empleado = () => {
                                     </span>
                                   </button>
                                 </a>
-                                <button className="btn btn-eliminar ">
+                                <button className="btn btn-eliminar " onClick={FuncionEliminar}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
                                   </span>
