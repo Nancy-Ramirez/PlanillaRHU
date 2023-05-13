@@ -2,8 +2,44 @@ import { FaPlusCircle, FaRegEye, FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Navbar } from "../../Componentes/NavBar";
 import { Aside } from "../../Componentes/Aside";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Empleado = () => {
+  //Paginación
+  const [dataPage, setDataPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tablaData, setTablaData] = useState([]);
+
+  const sigIndex = currentPage * dataPage;
+  const primerIndex = sigIndex - dataPage;
+
+  //Para hacer la busqueda
+  const [busqueda, setBusqueda] = useState("");
+
+  //Llamar API
+  const [datosServidor, setDatosServidor] = useState([]);
+  const totalData = datosServidor.length;
+  useEffect(() => {
+    async function getInfo() {
+      const url = ""; //AQUI METE LA URL
+
+      let config = {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+        },
+      };
+      try {
+        const resp = await axios.get(url, config);
+        setDatosServidor(resp.data);
+        setTablaData(resp.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  });
+
   return (
     <div className="flex ">
       <Aside />
@@ -22,8 +58,9 @@ export const Empleado = () => {
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-agregar rounded-full">
-                        <span className="text-col4 text-4xl" > 
-                        <FaPlusCircle /></span>
+                        <span className="text-col4 text-4xl">
+                          <FaPlusCircle />
+                        </span>
                       </button>
                     </a>
                   </div>
@@ -79,24 +116,27 @@ export const Empleado = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                    <tbody className="text-center">
+                      {datosServidor && 
+                      datosServidor
+                      .map((empl) => {
+                        return(
+                           <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
                         <th
                           scope="row"
                           className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
                         >
                           <div className="pl-3 text-start">
                             <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
+                             {empl.nombres} {empl.apellidos}
                             </div>
                             <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
+                              {empl.correo}
                             </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
+                        <td className="px-6 py-4">{empl.documento_identidad}</td>
+                        <td className="px-6 py-4">{empl.departamento}</td>
                         <td className="px-6 py-4">Asesor</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
@@ -105,7 +145,7 @@ export const Empleado = () => {
                           >
                             <button className="btn btn-ver">
                               <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
+                                <FaRegEye />
                               </span>
                             </button>
                           </Link>
@@ -114,163 +154,22 @@ export const Empleado = () => {
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
-                              <span  className="text-amarillo-editar text-2xl"> 
-                              <FaRegEdit/>
+                              <span className="text-amarillo-editar text-2xl">
+                                <FaRegEdit />
                               </span>
-                              
                             </button>
                           </a>
                           <button className="btn btn-eliminar ">
                             <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt/>
+                              <FaTrashAlt />
                             </span>
                           </button>
                         </td>
                       </tr>
-
+                        )
+                      })}
                       {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <span  className="text-amarillo-editar text-2xl"> 
-                              <FaRegEdit/>
-                              </span>
-                              
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt/>
-                            </span>
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <span  className="text-amarillo-editar text-2xl"> 
-                              <FaRegEdit/>
-                              </span>
-                              
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt/>
-                            </span>
-                          </button>
-                        </td>
-                      </tr>
-
-                      {/*Dato 1 */}
-                      <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              Alejandro Steven Marroquin
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              Alejandro@gmail.com
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">05614585-2</td>
-                        <td className="px-6 py-4">Ventas</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <span  className="text-amarillo-editar text-2xl"> 
-                              <FaRegEdit/>
-                              </span>
-                              
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt/>
-                            </span>
-                          </button>
-                        </td>
-                      </tr>
+                     
                     </tbody>
                   </table>
                 </div>
