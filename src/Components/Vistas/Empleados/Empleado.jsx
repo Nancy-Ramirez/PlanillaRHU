@@ -142,7 +142,7 @@ export const Empleado = () => {
                                 {empl.documento_identidad}
                               </td>
                               <td className="px-6 py-4">{empl.id_departamento}</td>
-                              <td className="px-6 py-4">{empl.id_cargo}</td>
+                              <td className="px-6 py-4">{empl.cargo}</td>
                               <td className="px-6 py-8 text-center flex justify-evenly content-center">
                                 <Link
                                   to="/ver-empleado"

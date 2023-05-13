@@ -75,7 +75,7 @@ export const Paginacion = ({
             <button
               key={numeroPagina}
               className={
-                "items-center hidden px-4 py-2 mx-1 text-white transition-colors duration-300 transform bg-white bg-opacity-25 rounded-md sm:flex  hover:bg-black hover:text-white ${numeroPagina === currentPage ? 'fill-current' : '' "
+                "items-center hidden px-4 py-2 mx-1 text-black transition-colors duration-300 transform bg-white bg-opacity-25 rounded-md sm:flex  hover:bg-black hover:text-white ${numeroPagina === currentPage ? 'fill-current' : '' "
               }
               onClick={() => onSpecificpage(numeroPagina)}
             >
