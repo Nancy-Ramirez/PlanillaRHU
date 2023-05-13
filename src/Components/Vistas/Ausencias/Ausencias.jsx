@@ -96,8 +96,8 @@ export const Ausencias = () => {
                 <h1 className=" text-center text-3xl text-black">AUSENCIAS</h1>
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
-                    <a
-                      href="/institucion/institucion"
+                    <Link
+                      to="/agregar-ausencia"
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-ver rounded-full">
@@ -105,7 +105,7 @@ export const Ausencias = () => {
                           <FaPlusCircle />
                         </span>
                       </button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
