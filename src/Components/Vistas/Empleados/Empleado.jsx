@@ -117,59 +117,58 @@ export const Empleado = () => {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {datosServidor && 
-                      datosServidor
-                      .map((empl) => {
-                        return(
-                           <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                             {empl.nombres} {empl.apellidos}
-                            </div>
-                            <div className="font-normal text-gray-500">
-                              {empl.correo}
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">{empl.documento_identidad}</td>
-                        <td className="px-6 py-4">{empl.departamento}</td>
-                        <td className="px-6 py-4">Asesor</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/ver-empleado"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye />
-                              </span>
-                            </button>
-                          </Link>
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <span className="text-amarillo-editar text-2xl">
-                                <FaRegEdit />
-                              </span>
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar ">
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt />
-                            </span>
-                          </button>
-                        </td>
-                      </tr>
-                        )
-                      })}
-                      {/*Dato 1 */}
-                     
+                      {datosServidor &&
+                        datosServidor.map(empl => {
+                          return (
+                            <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                              <th
+                                scope="row"
+                                className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                              >
+                                <div className="pl-3 text-start">
+                                  <div className="text-base font-semibold text-black">
+                                    {empl.nombres} {empl.apellidos}
+                                  </div>
+                                  <div className="font-normal text-gray-500">
+                                    {empl.correo}
+                                  </div>
+                                </div>
+                              </th>
+                              <td className="px-6 py-4">
+                                {empl.documento_identidad}
+                              </td>
+                              <td className="px-6 py-4">{empl.departamento}</td>
+                              <td className="px-6 py-4">Asesor</td>
+                              <td className="px-6 py-8 text-center flex justify-evenly content-center">
+                                <Link
+                                  to="/ver-empleado"
+                                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                >
+                                  <button className="btn btn-ver">
+                                    <span className="text-azul-ver text-2xl">
+                                      <FaRegEye />
+                                    </span>
+                                  </button>
+                                </Link>
+                                <a
+                                  href="/inicio"
+                                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                >
+                                  <button className="btn btn-editar ">
+                                    <span className="text-amarillo-editar text-2xl">
+                                      <FaRegEdit />
+                                    </span>
+                                  </button>
+                                </a>
+                                <button className="btn btn-eliminar ">
+                                  <span className="text-rojo-eliminar text-xl">
+                                    <FaTrashAlt />
+                                  </span>
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
