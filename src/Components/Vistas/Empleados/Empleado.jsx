@@ -12,12 +12,10 @@ export const Empleado = () => {
   const [dataPage, setDataPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [tablaData, setTablaData] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
 
   const sigIndex = currentPage * dataPage;
   const primerIndex = sigIndex - dataPage;
-
-  //Para hacer la busqueda
-  const [busqueda, setBusqueda] = useState("");
 
   //Llamar API
   const [datosServidor, setDatosServidor] = useState([]);
@@ -42,7 +40,7 @@ export const Empleado = () => {
       }
     }
     getInfo();
-  });
+  },[]);
 
   //Busqueda
 
@@ -53,7 +51,7 @@ export const Empleado = () => {
   const filtrar = (terminoBusqueda) => {
     var resultadosBusqueda = tablaData.filter((elemento) => {
       if (
-        elemento.nombre
+        elemento.nombres
           .toString()
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase()) ||
