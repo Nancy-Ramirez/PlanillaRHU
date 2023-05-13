@@ -4,6 +4,7 @@ import { Aside } from "../../Componentes/Aside";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Paginacion } from "../../Componentes/Paginacion";
 
 export const Empleado = () => {
   //Paginación
@@ -20,6 +21,7 @@ export const Empleado = () => {
   //Llamar API
   const [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
+  console.log("Listar datos", datosServidor);
   useEffect(() => {
     async function getInfo() {
       const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
@@ -38,7 +40,9 @@ export const Empleado = () => {
         console.error(err);
       }
     }
+    getInfo();
   });
+  
 
   return (
     <div className="flex ">
@@ -168,10 +172,11 @@ export const Empleado = () => {
                               </td>
                             </tr>
                           );
-                        })}
+                        }).slice(primerIndex, sigIndex)}
                     </tbody>
                   </table>
                 </div>
+                <Paginacion dataPage={dataPage} currentPage={currentPage} setCurrentPage={setCurrentPage} totalData={totalData}/>
               </div>
             </section>
           </main>
