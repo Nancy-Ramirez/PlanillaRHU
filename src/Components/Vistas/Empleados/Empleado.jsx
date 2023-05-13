@@ -22,7 +22,7 @@ export const Empleado = () => {
   const totalData = datosServidor.length;
   useEffect(() => {
     async function getInfo() {
-      const url = ""; //AQUI METE LA URL
+      const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
 
       let config = {
         headers: {
