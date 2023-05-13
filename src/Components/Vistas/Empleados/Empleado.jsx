@@ -42,7 +42,7 @@ export const Empleado = () => {
     }
     getInfo();
   });
-  
+
 
   return (
     <div className="flex ">
@@ -141,8 +141,8 @@ export const Empleado = () => {
                               <td className="px-6 py-4">
                                 {empl.documento_identidad}
                               </td>
-                              <td className="px-6 py-4">{empl.departamento}</td>
-                              <td className="px-6 py-4">Asesor</td>
+                              <td className="px-6 py-4">{empl.id_departamento}</td>
+                              <td className="px-6 py-4">{empl.id_cargo}</td>
                               <td className="px-6 py-8 text-center flex justify-evenly content-center">
                                 <Link
                                   to="/ver-empleado"
