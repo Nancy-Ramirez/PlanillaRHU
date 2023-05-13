@@ -43,6 +43,46 @@ export const Empleado = () => {
     getInfo();
   });
 
+  //Busqueda
+
+  const handleChange = (e) => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  }
+  const filtrar = (terminoBusqueda) => {
+    var resultadosBusqueda = tablaData.filter((elemento) => {
+      if (
+        elemento.nombre
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.id_departamento
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setDatosServidor(resultadosBusqueda);
+  }
+
+  //Funcion eliminar
+  const FuncionEliminar = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede revertir",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, estoy seguro",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Eliminado", "El cuestionario se ha removido", "success");
+      }
+    });
+  };
 
   return (
     <div className="flex ">
