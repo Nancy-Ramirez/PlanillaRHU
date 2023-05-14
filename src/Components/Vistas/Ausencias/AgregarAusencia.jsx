@@ -11,7 +11,7 @@ export const AgregarAusencia = () => {
         <Navbar />
         <div className="ml-24 mb-8 mt-8 pt-12">
           <div className="flex">
-            <Link to="/incapacidad" className="pl-5 text-3xl text-gray-500">
+            <Link to="/ausencia" className="pl-5 text-3xl text-gray-500">
               <FiArrowLeft />
             </Link>
 
