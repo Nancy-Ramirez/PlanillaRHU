@@ -46,6 +46,24 @@ export const AgregarIncapacidades = () => {
                       <div>
                         <label
                           for="first_name"
+                          class="block mb-2 text-sm font-medium text-gray-900 "
+                        >
+                       Empleado
+                        </label>
+                        <select
+                          id="default"
+                          class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
+                        >
+                          <option selected>Empleado</option>
+                          <option value="US">Ana Beltran</option>
+                          <option value="CA">Jose Hernandez</option>
+                          <option value="FR">Sofia Ayala</option>
+                          <option value="DE">Karen Hernandez</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
                           Numero de Dias:
