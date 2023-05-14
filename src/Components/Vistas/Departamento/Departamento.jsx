@@ -1,7 +1,7 @@
 import { FaPlusCircle, FaRegEye, FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Navbar } from "../../Componentes/NavBar";
 import { Aside } from "../../Componentes/Aside";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Paginacion } from "../../Componentes/Paginacion";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 
 export const Departamento = () => {
 
-  //Paginación
+
+  //!Paginación
   const [dataPage, setDataPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [tablaData, setTablaData] = useState([]);
@@ -18,7 +19,7 @@ export const Departamento = () => {
   const sigIndex = currentPage * dataPage;
   const primerIndex = sigIndex - dataPage;
 
-  //Llamar API
+  //!Llamar API
   const [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);

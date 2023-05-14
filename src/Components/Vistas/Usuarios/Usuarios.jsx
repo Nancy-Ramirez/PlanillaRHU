@@ -22,7 +22,7 @@ export const Usuarios = () => {
   console.log("Listar datos", datosServidor);
   useEffect(() => {
     async function getInfo() {
-      const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
+      const url = "http://127.0.0.1:8000/usuarios/"; //AQUI METE LA URL
 
       let config = {
         headers: {
@@ -75,7 +75,7 @@ export const Usuarios = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, estoy seguro",
-    }).then((result) => {
+    }).then(result => {
       if (result.isConfirmed) {
         Swal.fire("Eliminado", "El usuario ha sido removido", "success");
       }
@@ -144,9 +144,6 @@ export const Usuarios = () => {
                     <thead className="text-xs text-black uppercase text-center bg-col2">
                       <tr>
                         <th scope="col" className="px-6 py-3">
-                          ID
-                        </th>
-                        <th scope="col" className="px-6 py-3">
                           Correo electrónico
                         </th>
                         <th scope="col" className="px-6 py-3">
@@ -155,44 +152,45 @@ export const Usuarios = () => {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {datosServidor && datosServidor.map(usu =>{
-                        return(
-                          <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                          <th
-                            scope="row"
-                            className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                          >
-                            <div className="pl-3">
-                              <div className="text-base font-semibold text-black">
-                                {usu.id_usuario}
-                              </div>
-                            </div>
-                          </th>
-                          <td className="px-6 py-4">{usu.correo}</td>
-                          <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
-                            <a
-                              href="/editar-departamento"
-                              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                            >
-                              <button className="btn btn-editar ">
-                                <span className="text-amarillo-editar text-2xl">
-                                  <FaRegEdit />
-                                </span>
-                              </button>
-                            </a>
-                            <button className="btn btn-eliminar" onClick={FuncionEliminar}>
-                              <span className="text-rojo-eliminar text-xl">
-                                <FaTrashAlt />
-                              </span>
-                            </button>
-                          </td>
-                        </tr>
-                        );
-                      }).slice(primerIndex, sigIndex)}
+                      {datosServidor &&
+                        datosServidor
+                          .map(usu => {
+                            return (
+                              <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                                <td className="px-6 py-4">{usu.email}</td>
+                                <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
+                                  <a
+                                    href="/editar-departamento"
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                  >
+                                    <button className="btn btn-editar ">
+                                      <span className="text-amarillo-editar text-2xl">
+                                        <FaRegEdit />
+                                      </span>
+                                    </button>
+                                  </a>
+                                  <button
+                                    className="btn btn-eliminar"
+                                    onClick={FuncionEliminar}
+                                  >
+                                    <span className="text-rojo-eliminar text-xl">
+                                      <FaTrashAlt />
+                                    </span>
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })
+                          .slice(primerIndex, sigIndex)}
                     </tbody>
                   </table>
                 </div>
-                <Paginacion dataPage={dataPage} currentPage={currentPage} setCurrentPage={setCurrentPage} totalData={totalData}/>
+                <Paginacion
+                  dataPage={dataPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalData={totalData}
+                />
               </div>
             </section>
           </main>
