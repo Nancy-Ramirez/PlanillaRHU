@@ -21,7 +21,7 @@ export const Dashboard = () =>{
               
               <Link
                 to="/empleado"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-red-500  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaUserTie
@@ -36,7 +36,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/departamento"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-orange-500 shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaPaste
@@ -51,7 +51,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/prestaciones"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-blue-600 shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaPrescriptionBottleAlt
@@ -66,7 +66,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/incapacidad"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-green-800  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaPiggyBank
@@ -81,7 +81,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/ausencia"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-cyan-700  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaPiggyBank
@@ -96,7 +96,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/indemnizaciones"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-indigo-700  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaHospitalUser
@@ -111,7 +111,7 @@ export const Dashboard = () =>{
               </Link>
               <Link
                 to="/usuarios"
-                class="block max-w-sm p-6 bg-dark-purple  shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
+                class="block max-w-sm p-6 bg-pink-500 shadow-lg rounded-md items-center justify-between  border-b-4 border-dark-purple  text-white font-medium group "
               >
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
                   <FaUserAlt
