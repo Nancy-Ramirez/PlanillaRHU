@@ -25,24 +25,7 @@ export const AgregarIncapacidades = () => {
                 <div className="mt-4 pt-4">
                   <form action="">
                     <div className="grid gap-6 mb-6 ">
-                      <div>
-                        <label
-                          for="first_name"
-                          class="block mb-2 text-sm font-medium text-gray-900 "
-                        >
-                          Departamento
-                        </label>
-                        <select
-                          id="default"
-                          class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
-                        >
-                          <option selected>Departamento</option>
-                          <option value="US">Ventas</option>
-                          <option value="CA">Contabilidad</option>
-                          <option value="FR">Gerencia</option>
-                          <option value="DE">Produccion</option>
-                        </select>
-                      </div>
+                      {/*Empleado */}
                       <div>
                         <label
                           for="first_name"
@@ -61,6 +44,40 @@ export const AgregarIncapacidades = () => {
                           <option value="DE">Karen Hernandez</option>
                         </select>
                       </div>
+                      {/*Departamento */}
+                      <div>
+                        <label
+                          for="first_name"
+                          class="block mb-2 text-sm font-medium text-gray-900 "
+                        >
+                          Departamento
+                        </label>
+                        <select
+                          id="default"
+                          class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
+                        >
+                          <option selected>Departamento</option>
+                          <option value="US">Ventas</option>
+                          <option value="CA">Contabilidad</option>
+                          <option value="FR">Gerencia</option>
+                          <option value="DE">Produccion</option>
+                        </select>
+                      </div>
+                      {/*Motivo*/}
+                      <div>
+                        <label
+                          for="first_name"
+                          class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
+                        >
+                          Motivo:
+                        </label>
+                        <input
+                          type="text"
+                          id="motivo"
+                          className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        />
+                      </div>
+                      {/*Días */}
                       <div>
                         <label
                           for="first_name"
@@ -74,6 +91,7 @@ export const AgregarIncapacidades = () => {
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         />
                       </div>
+                      {/*Fecha inicio */}
                       <div>
                         <label
                           for="first_name"
@@ -88,6 +106,7 @@ export const AgregarIncapacidades = () => {
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         />
                       </div>
+                      {/*Fecha final */}
                       <div>
                         <label
                           for="first_name"

@@ -24,7 +24,7 @@ export const Departamento = () => {
   console.log("Listar datos", datosServidor);
   useEffect(() => {
     async function getInfo() {
-      const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
+      const url = "http://127.0.0.1:8000/empleados/departamento"; //AQUI METE LA URL
 
       let config = {
         headers: {
@@ -52,11 +52,7 @@ export const Departamento = () => {
   const filtrar = (terminoBusqueda) => {
     var resultadosBusqueda = tablaData.filter((elemento) => {
       if (
-        elemento.nombres
-          .toString()
-          .toLowerCase()
-          .includes(terminoBusqueda.toLowerCase()) ||
-        elemento.id_departamento
+        elemento.nombre_departamento
           .toString()
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase())
@@ -158,7 +154,7 @@ export const Departamento = () => {
                       {datosServidor && datosServidor.map(dep =>{
                         return(
                           <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <td className="px-6 py-4 font-semibold">{dep.nombre}</td>
+                        <td className="px-6 py-4 font-semibold">{dep.nombre_departamento}</td>
 
                         <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
                           <a
