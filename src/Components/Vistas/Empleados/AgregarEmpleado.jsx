@@ -167,7 +167,7 @@ export const AgregarEmpleados = () => {
     }
   }; //Conexión a API
   function EnviarDatosServer() {
-    const url = "http://127.0.0.1:8000/empleados/empleados";
+    const url = "http://127.0.0.1:8000/empleados/empleados/";
 
     let config = {
       headers: {
@@ -672,13 +672,14 @@ export const AgregarEmpleados = () => {
                         id="documento_identidad"
                         name="documento_identidad"
                         className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        placeholder="00000000-0 (con guión)"
                         value={formulario.documento_identidad}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
                           input =>
-                            input.valorInput === "fecha_contratacion" &&
+                            input.valorInput === "documento_identidad" &&
                             input.estado === true
                         )
                         .map(message => (
@@ -1045,10 +1046,10 @@ export const AgregarEmpleados = () => {
                         onChange={ManejarEventoDeInputs}
                       >
                         <option id="">**Seleccione**</option>
-                        <option id="Formal" value="formal">
+                        <option id="Formal" value="Formal">
                           Contrato formal
                         </option>
-                        <option id="profesionales" value="Servicios">
+                        <option id="Servicios" value="Servicios">
                           Servicios profesionales
                         </option>
                       </select>
