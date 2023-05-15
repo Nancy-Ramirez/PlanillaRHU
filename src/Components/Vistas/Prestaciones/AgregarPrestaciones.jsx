@@ -6,8 +6,6 @@ import { FiArrowLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 export const AgregarPrestacion = () => {
-
-  
   return (
     <div className="flex">
       <Aside />
