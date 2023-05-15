@@ -19,6 +19,7 @@ import { VerPrestaciones } from "../Components/Vistas/Prestaciones/VerPrestacion
 import { AgregarIncapacidades } from "../Components/Vistas/Incapacidades/AgregarIncapacidad";
 import { AgregarAusencia } from "../Components/Vistas/Ausencias/AgregarAusencia";
 import { EditarEmpleado } from "../Components/Vistas/Empleados/EditarEmpleado";
+import { Pruebas } from "../Components/Vistas/Prestaciones/Pruebas";
 
 export default function Router() {
   return (
@@ -55,6 +56,7 @@ export default function Router() {
         <Route path="/prestaciones" element={<Prestaciones />} />
         <Route path="/agregar-prestaciones" element={<AgregarPrestacion />} />
         <Route path="/ver-prestaciones" element={<VerPrestaciones />} />
+        <Route path="/pruebas" element={<Pruebas />} />
 
         {/*Departamentos*/}
         <Route path="/departamento" element={<Departamento />} />
