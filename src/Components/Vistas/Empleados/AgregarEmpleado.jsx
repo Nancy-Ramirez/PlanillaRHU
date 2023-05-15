@@ -4,20 +4,88 @@ import { Navbar } from "../../Componentes/NavBar";
 import { FiArrowLeft } from "react-icons/fi";
 import "../../Styles/agregar.css";
 import { useEffect, useState } from "react";
-import $ from 'jquery';
-import 'jquery-mask-plugin';
+import $ from "jquery";
+import "jquery-mask-plugin";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export const AgregarEmpleados = () => {
+  //Valores validos para el correo
+  const isValidEmail =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
- //!Validaciones de datos
+  //Llamar departamentos
+  const [datosDepto, setDatosDepto] = useState([]);
+  console.log(datosDepto);
+
+  useEffect(() => {
+    async function getInfoDep() {
+      const url = "http://127.0.0.1:8000/empleados/departamento/";
+
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': "application/json",
+        },
+      };
+      try {
+        const resp = await axios.get(url, config);
+        console.log(resp.data);
+        setDatosDepto(resp.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getInfoDep();
+  }, []);
+
+  //Llamar cargos
+  const [datosCargo, setDatosCargo] = useState([]);
+  console.log(datosDepto);
+
+  useEffect(() => {
+    async function getInfoCargo() {
+      const url = "http://127.0.0.1:8000/empleados/cargo/";
+
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': "application/json",
+        },
+      };
+      try {
+        const resp = await axios.get(url, config);
+        console.log(resp.data);
+        setDatosCargo(resp.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getInfoCargo();
+  }, []);
+
+  //!Validaciones de datos
   //Navegación del botón luego de validar correctamente
   const Navigate = useNavigate();
 
   //Estado inicial del formulario
-  const datosDepartamento = {
-    nombre_departamento: "",
+  const datosEmpleado = {
+    nombres: "",
+    apellidos: "",
+    fecha_nacimiento: "",
+    direccion: "",
+    telefono: "",
+    sexo: "",
+    documento_identidad: "",
+    correo: "",
+    estado_civil: "",
+    no_isss: "",
+    no_afp: "",
+    salario: "",
+    fecha_contratacion: "",
+    tipo_contrato: "",
+    cargo: "",
+    id_departamento: "",
   };
 
   //Estado inicial de la alerta
@@ -28,7 +96,7 @@ export const AgregarEmpleados = () => {
   };
 
   //Estado para manejar los valores del formulario
-  const [formulario, setformulario] = useState(datosDepartamento);
+  const [formulario, setformulario] = useState(datosEmpleado);
 
   //Estado para manejar las alertas de validación
   const [alerta, setAlerta] = useState([initialStateInput]);
@@ -49,7 +117,31 @@ export const AgregarEmpleados = () => {
 
     //Ordenamos los datos para enviarlos a la validación
     let verificarInputs = [
-      { nombre: "nombre_departamento", value: formulario.nombre_departamento },
+      { nombre: "nombres", value: formulario.nombres },
+      { nombre: "apellidos", value: formulario.apellidos },
+      {
+        nombre: "fecha_nacimiento",
+        value: formulario.fecha_nacimiento,
+      },
+      { nombre: "direccion", value: formulario.direccion },
+      { nombre: "telefono", value: formulario.telefono },
+      { nombre: "sexo", value: formulario.sexo },
+      {
+        nombre: "documento_identidad",
+        value: formulario.documento_identidad,
+      },
+      { nombre: "correo", value: formulario.correo },
+      { nombre: "estado_civil", value: formulario.estado_civil },
+      { nombre: "no_isss", value: formulario.no_isss },
+      { nombre: "no_afp", value: formulario.no_afp },
+      { nombre: "salario", value: formulario.salario },
+      {
+        nombre: "fecha_contratacion",
+        value: formulario.fecha_contratacion,
+      },
+      { nombre: "tipo_contrato", value: formulario.tipo_contrato },
+      { nombre: "cargo", value: formulario.cargo },
+      { nombre: "id_departamento", value: formulario.id_departamento },
     ];
 
     //Enviamos los datos a la función de validación y recibimos las validaciones
@@ -61,7 +153,7 @@ export const AgregarEmpleados = () => {
 
     //Obtener el total de validación
     const totalValidaciones = datosValidados
-      .filter((input )=> input.estado === false)
+      .filter((input) => input.estado === false)
       .map((estado) => {
         return false;
       });
@@ -69,13 +161,13 @@ export const AgregarEmpleados = () => {
     console.log("Total de validaciones", totalValidaciones.length);
 
     //Validación para enviar los datos al servidor
-    if (totalValidaciones.length >= 1) {
+    if (totalValidaciones.length >= 16) {
       console.log("Enviar al servidor");
       EnviarDatosServer();
     }
   }; //Conexión a API
   function EnviarDatosServer() {
-    const url = "http://127.0.0.1:8000/empleados/departamento/";
+    const url = "http://127.0.0.1:8000/empleados/empleados";
 
     let config = {
       headers: {
@@ -84,23 +176,36 @@ export const AgregarEmpleados = () => {
       },
     };
     const setDataFormulario = {
-      nombre_departamento: formulario.nombre_departamento,
+      nombres: formulario.nombres,
+      apellidos: formulario.apellidos,
+      fecha_nacimiento: formulario.fecha_nacimiento,
+      direccion: formulario.direccion,
+      telefono: formulario.telefono,
+      sexo: formulario.sexo,
+      documento_identidad: formulario.documento_identidad,
+      correo: formulario.correo,
+      estado_civil: formulario.estado_civil,
+      no_isss: formulario.no_isss,
+      no_afp: formulario.no_afp,
+      salario: formulario.salario,
+      fecha_contratacion: formulario.fecha_contratacion,
+      tipo_contrato: formulario.tipo_contrato,
+      cargo: formulario.cargo,
+      id_departamento: formulario.id_departamento,
     };
 
     axios
       .post(url, setDataFormulario, config)
-      .then((response) => 
-      console.log(response.data, "Response--------------")
-      );
-    setformulario(datosDepartamento);
+      .then((response) => console.log(response.data, "Response--------------"));
+    setformulario(datosEmpleado);
     Swal.fire({
       icon: "success",
-      title: "Departamento agregado",
+      title: "Empleado registrado",
       showConfirmButton: false,
       timer: 1500,
     });
     setTimeout(() => {
-      Navigate("/departamento");
+      Navigate("/empleado");
     }, 1500);
   }
 
@@ -117,11 +222,258 @@ export const AgregarEmpleados = () => {
     datosDelFormulario.map((valorInput) => {
       //eslint-disable-next-line default-case
       switch (valorInput.nombre) {
-        case "nombre_departamento": {
+        case "nombres": {
           if (valorInput.value === "" || valorInput.value === null) {
             errors.push({
               valorInput: valorInput.nombre,
-              mensaje: "Por favor ingrese el nombre del departamento",
+              mensaje: "Ingrese los nombres del empleado",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "apellidos": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese los apellidos del empleado",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "fecha_nacimiento": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese una fecha de nacimiento valida",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "direccion": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese una dirección valida",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "telefono": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un número de telefono valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "sexo": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor elija una opción",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "documento_identidad": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un número de dui valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "correo": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor ingresa tu correo electrónico",
+              estado: true,
+            });
+          } else if (!isValidEmail.test(valorInput.value)) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingresa un correo electrónico válido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+
+          break;
+        }
+        case "estado_civil": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor elija una opción",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "no_isss": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un número de ISSS valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "no_afp": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un número de AFP valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "salario": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un valor valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "fecha_contratacion": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese una fecha de contratación valida",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "tipo_contrato": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor elija una opción",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "cargo": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor elija una opción",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "id_departamento": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Por favor elija una opción",
               estado: true,
             });
           } else {
@@ -140,59 +492,46 @@ export const AgregarEmpleados = () => {
   };
   console.log(formulario);
 
-  {/*Mascaras */}
+  {
+    /*Mascaras */
+  }
   useEffect(() => {
-
-    $("#salario").change(function() {
-      var valor = $(this).val();
-      if (valor.indexOf("*") !== -1) {
-        var punto = ".";
-        valor = valor.replace("*", punto);
-        $(this).val(valor);
-      }
-    });
-
-    $(document).ready(function() {
-      $("#telefono").mask("0000-0000");
+    $(document).ready(function () {
+      $("#telefono").mask("00000000000");
       $("#nit").mask("0000-000000-000-0");
-      $("#dui").mask("00000000-0");
-      $("#isss").mask("000000000");
-      $("#afp").mask("00000000000");
-      $("#salario").mask("0000000.00", {reverse: true});
+      $("#documento_identidad").mask("00000000-0");
+      $("#no_isss").mask("000000000");
+      $("#no_afp").mask("000000000000");
     });
   }, []);
 
   return (
     <div className="flex">
       <Aside />
-      <div class="w-full">
+      <div className="w-full">
         <Navbar />
         <div className="ml-24 mb-8">
           <main className="flex">
             <section className=" w-full  overflow-x-auto shadow-md sm:rounded-lg pb-8">
               <div className="flex justify-between pt-24 ">
-              <Link to="/empleado" className="pl-5 text-3xl text-gray-500">
-                    <FiArrowLeft />
-                  </Link>
+                <Link to="/empleado" className="pl-5 text-3xl text-gray-500">
+                  <FiArrowLeft />
+                </Link>
                 <h1 className=" text-center text-2xl text-black">
                   AGREGAR EMPLEADOS
                 </h1>
-                <h1>
-
-                </h1>
-                
+                <h1></h1>
               </div>
-              <form onSubmit={handleLoginSession}  className="mx-5">
+              <form onSubmit={handleLoginSession} className="mx-5">
                 {/*Parte 1 */}
-                <div  
-                 class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
+                <div className="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
                   {/*Linea 1 */}
                   <div className="flex flex-wrap px-10">
                     {/*Nombres */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="nombres"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="nombres"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Nombres
                       </label>
@@ -200,17 +539,17 @@ export const AgregarEmpleados = () => {
                         type="text"
                         id="nombres"
                         name="nombres"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"  pattern="[A-Za-z]*"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.nombres}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "nombres" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -221,8 +560,8 @@ export const AgregarEmpleados = () => {
                     {/*Apellidos */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="apellidos"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="apellidos"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Apellidos
                       </label>
@@ -230,17 +569,17 @@ export const AgregarEmpleados = () => {
                         type="text"
                         id="apellidos"
                         name="apellidos"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" pattern="[A-Za-z]*"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.apellidos}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "apellidos" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -255,8 +594,8 @@ export const AgregarEmpleados = () => {
                     {/*Fecha de Nacimiento */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="fecha_nacimiento"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="fecha_nacimiento"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Fecha de nacimiento
                       </label>
@@ -264,17 +603,19 @@ export const AgregarEmpleados = () => {
                         type="date"
                         id="fecha_nacimiento"
                         name="fecha_nacimiento"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        min="1950-01-01"
+                        max="2005-01-31"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.fecha_nacimiento}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "fecha_nacimiento" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -283,10 +624,10 @@ export const AgregarEmpleados = () => {
                         ))}
                     </div>
                     {/*Telefono */}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="telefono"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="telefono"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Teléfono
                       </label>
@@ -294,17 +635,19 @@ export const AgregarEmpleados = () => {
                         type="text"
                         id="telefono"
                         name="telefono"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" inputmode="Numeric" 
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        inputMode="Numeric"
+                        placeholder="503########"
                         value={formulario.telefono}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "telefono" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -312,32 +655,33 @@ export const AgregarEmpleados = () => {
                           </div>
                         ))}
                     </div>
-                    
                   </div>
 
                   {/*Linea 3 */}
                   <div className="flex flex-wrap px-10">
-                    
                     {/*DUI */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
-                      <label for="documento_identidad" class="leading-7 text-sm text-gray-600">
+                      <label
+                        htmlFor="documento_identidad"
+                        className="leading-7 text-sm text-gray-600"
+                      >
                         DUI
                       </label>
                       <input
                         type="text"
                         id="documento_identidad"
-                        name="dui"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        name="documento_identidad"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.documento_identidad}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
-                            input.valorInput === "documento_identidad" &&
+                          input =>
+                            input.valorInput === "fecha_contratacion" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -348,8 +692,8 @@ export const AgregarEmpleados = () => {
                     {/*Correo electrónico*/}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="correo"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="correo"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Correo electrónico
                       </label>
@@ -357,17 +701,17 @@ export const AgregarEmpleados = () => {
                         type="email"
                         id="correo"
                         name="correo"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.correo}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "correo" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -377,28 +721,31 @@ export const AgregarEmpleados = () => {
                     </div>
                   </div>
 
-                   {/*Linea 4 */}
-                   <div className="flex flex-wrap px-10">
+                  {/*Linea 4 */}
+                  <div className="flex flex-wrap px-10">
                     {/*ISSS */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
-                      <label for="no_isss" class="leading-7 text-sm text-gray-600">
+                      <label
+                        htmlFor="no_isss"
+                        className="leading-7 text-sm text-gray-600"
+                      >
                         ISSS
                       </label>
                       <input
                         type="text"
                         id="no_isss"
                         name="no_isss"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.no_isss}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "no_isss" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -408,24 +755,27 @@ export const AgregarEmpleados = () => {
                     </div>
                     {/*AFP */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
-                      <label for="no_afp" class="leading-7 text-sm text-gray-600">
+                      <label
+                        htmlFor="no_afp"
+                        className="leading-7 text-sm text-gray-600"
+                      >
                         AFP
                       </label>
                       <input
                         type="text"
                         id="no_afp"
                         name="no_afp"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.no_afp}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "no_afp" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -440,8 +790,8 @@ export const AgregarEmpleados = () => {
                     {/*Dirección */}
                     <div className="w-full px-2">
                       <label
-                        for="direccion"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="direccion"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Dirección
                       </label>
@@ -449,17 +799,17 @@ export const AgregarEmpleados = () => {
                         type="address"
                         id="direccion"
                         name="direccion"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.direccion}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "direccion" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -471,88 +821,129 @@ export const AgregarEmpleados = () => {
 
                   {/*Linea 6 */}
                   <div className="flex flex-wrap px-10">
-                     {/*Sexo */}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
-                      <label for="sexo" class="leading-7 text-sm text-gray-600">
+                    {/*Sexo */}
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label htmlFor="sexo" className="leading-7 text-sm text-gray-600">
                         Sexo
                       </label>
                       <select
                         id="sexo"
                         name="sexo"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        onChange={ManejarEventoDeInputs}
+                        value={formulario.sexo}
                       >
-                        <option id="">**Seleccione**</option>
-                        <option id="femenino">Femenino</option>
-                        <option id="masculino">Masculino</option>
+                        <option
+                          id=""
+                          onChange={ManejarEventoDeInputs}
+                          value={""}
+                        >
+                          Seleccione una opción
+                        </option>
+                        <option id="F" value="F">
+                          Femenino
+                        </option>
+                        <option id="M" value="M">
+                          Masculino
+                        </option>
                       </select>
                     </div>
+
                     {/*Estado civil */}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="telefono"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="estado_civil"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Estado civil
                       </label>
                       <select
-                        id="estadoCivil"
-                        name="estadoCivil"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        id="estado_civil"
+                        name="estado_civil"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        value={formulario.estado_civil}
+                        onChange={ManejarEventoDeInputs}
                       >
-                        <option id="">**Seleccione**</option>
-                        <option id="casado">Casado</option>
-                        <option id="soltero">Soltero</option>
-                        <option id="viudo">Viudo</option>
-                        <option id="divorciado">Divorciado</option>
+                        <option id="" value="">
+                          Seleccione una opción
+                        </option>
+                        <option id="casado" value="casado">
+                          Casado
+                        </option>
+                        <option id="soltero" value="soltero">
+                          Soltero
+                        </option>
+                        <option id="viudo" value="viudo">
+                          Viudo
+                        </option>
+                        <option id="divorciado" value="divorciado">
+                          Divorciado
+                        </option>
                       </select>
+                      {alerta
+                        .filter(
+                          input =>
+                            input.valorInput === "estado_civil" &&
+                            input.estado === true
+                        )
+                        .map(message => (
+                          <div className="py-2">
+                            <span className="text-red-500 mt-2">
+                              {message.mensaje}
+                            </span>
+                          </div>
+                        ))}
                     </div>
                   </div>
-
                 </div>
 
                 {/*Parte 2 */}
-                <div class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
+                <div className="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10">
                   {/*Linea 8 */}
                   <div className="flex flex-wrap px-10">
                     {/*Salario */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="salario"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="salario"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Salario
                       </label>
                       <div className="relative md:content-center">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                      $
-                    </div>
-                    <input
-                      type="text"
-                      id="salario"
-                      className="block p-2 pl-10 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      value={formulario.salario}
-                      onChange={ManejarEventoDeInputs}
-                    />
-                    {alerta
-                      .filter(
-                        (input) =>
-                          input.valorInput === "salario" &&
-                          input.estado === true
-                      )
-                      .map((message )=> (
-                        <div className="py-2">
-                          <span className="text-red-500 mt-2">
-                            {message.mensaje}
-                          </span>
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          $
                         </div>
-                      ))}
-                  </div>
+                        <input
+                          type="number"
+                          id="salario"
+                          name="salario"
+                          min="1"
+                          max="100000000"
+                          step="0.01"
+                          className="block p-2 pl-10 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          value={formulario.salario}
+                          onChange={ManejarEventoDeInputs}
+                        />
+                        {alerta
+                          .filter(
+                            input =>
+                              input.valorInput === "salario" &&
+                              input.estado === true
+                          )
+                          .map(message => (
+                            <div className="py-2">
+                              <span className="text-red-500 mt-2">
+                                {message.mensaje}
+                              </span>
+                            </div>
+                          ))}
+                      </div>
                     </div>
                     {/*Fecha de inicio */}
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="fecha_contratacion"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="fecha_contratacion"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Fecha de inicio
                       </label>
@@ -560,17 +951,19 @@ export const AgregarEmpleados = () => {
                         type="date"
                         id="fecha_contratacion"
                         name="fecha_contratacion"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                        min="2015-01-01"
+                        max="2023-06-06"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         value={formulario.fecha_contratacion}
                         onChange={ManejarEventoDeInputs}
                       />
                       {alerta
                         .filter(
-                          (input) =>
+                          input =>
                             input.valorInput === "fecha_contratacion" &&
                             input.estado === true
                         )
-                        .map((message )=> (
+                        .map(message => (
                           <div className="py-2">
                             <span className="text-red-500 mt-2">
                               {message.mensaje}
@@ -583,64 +976,92 @@ export const AgregarEmpleados = () => {
                   {/*Linea 9 */}
                   <div className="flex flex-wrap px-10">
                     {/*Departamento*/}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="departamento"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="id_departamento"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Departamento
                       </label>
                       <select
-                        id="departamento"
-                        name="departamento"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        id="id_departamento"
+                        name="id_departamento"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        value={formulario.id_departamento}
+                        onChange={ManejarEventoDeInputs}
                       >
                         <option id="">**Seleccione**</option>
-                        <option id="1">Ventas</option>
-                        <option id="2">Compras</option>
+                        {datosDepto.map((depa, inde)=> {
+                          return (
+                            <option key={inde} id={depa.id} value={depa.id}>
+                              {depa.nombre_departamento}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                     {/*Cargo */}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
-                      <label for="cargo" class="leading-7 text-sm text-gray-600">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
+                      <label
+                        htmlFor="cargo"
+                        className="leading-7 text-sm text-gray-600"
+                      >
                         Cargo
                       </label>
-                      <input
-                        type="text"
+                      <select
                         id="cargo"
                         name="cargo"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      />
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        value={formulario.cargo}
+                        onChange={ManejarEventoDeInputs}
+                      >
+                        <option id="">**Seleccione**</option>
+                        {datosCargo.map((carg, index) => {
+                          return (
+                            <option key={index} id={carg.id} value={carg.id}>
+                              {carg.nombre_cargo}
+                            </option>
+                          );
+                        })}
+                      </select>
                     </div>
                   </div>
 
                   {/*Linea 10 */}
                   <div className="flex flex-wrap px-10">
                     {/*Tipo contrato*/}
-                    <div class="xl:w-1/2 md:w-1/2 w-full px-2">
+                    <div className="xl:w-1/2 md:w-1/2 w-full px-2">
                       <label
-                        for="tipoContrato"
-                        class="leading-7 text-sm text-gray-600"
+                        htmlFor="tipo_contrato"
+                        className="leading-7 text-sm text-gray-600"
                       >
                         Tipo de contrato
                       </label>
                       <select
-                        id="tipoContrato"
-                        name="tipoContrato"
-                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        id="tipo_contrato"
+                        name="tipo_contrato"
+                        className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-11"
+                        value={formulario.tipo_contrato}
+                        onChange={ManejarEventoDeInputs}
                       >
                         <option id="">**Seleccione**</option>
-                        <option id="formal">Contrato formal</option>
-                        <option id="profesionales">Servicios profesionales</option>
+                        <option id="Formal" value="formal">
+                          Contrato formal
+                        </option>
+                        <option id="profesionales" value="Servicios">
+                          Servicios profesionales
+                        </option>
                       </select>
                     </div>
                     <div className="xl:w-1/2 md:w-1/2 w-full px-2"></div>
-                    
                   </div>
                   <div className="flex justify-end pt-8">
-                  <button class="text-white bg-col4 border-0 py-2 px-8 focus:outline-none hover:bg-col4 rounded text-lg">
-                    Registrar
-                  </button>
+                    <button
+                      type="submit"
+                      className="text-white bg-col4 border-0 py-2 px-8 focus:outline-none hover:bg-col4 rounded text-lg"
+                    >
+                      Registrar
+                    </button>
                   </div>
                 </div>
               </form>
