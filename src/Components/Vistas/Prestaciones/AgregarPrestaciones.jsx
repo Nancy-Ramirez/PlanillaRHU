@@ -4,8 +4,35 @@ import { Navbar } from "../../Componentes/NavBar";
 import { AiFillPrinter } from "react-icons/ai";
 import { FiArrowLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export const AgregarPrestacion = () => {
+
+//Mandar a llamar empleado
+const [datosEmpleado, setDatosEmpleado] = useState([]);
+console.log(datosEmpleado);
+
+useEffect(() => {
+  async function getInfoEmp(){
+    const url = "http://127.0.0.1:8000/empleados/empleados/";
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+          'Accept': "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      console.log(resp.data);
+      setDatosEmpleado(resp.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getInfoEmp();
+}, []);
+
 
   const [renta, setRenta] = useState(0);
   const [salario, setSalario] = useState(575.25);
@@ -98,18 +125,35 @@ export const AgregarPrestacion = () => {
     // Cálculo del ISSS Laboral
     if (salario >= 1000) {
       isssLab = 1000 * 0.03;
+      if(isssLab > 30){
+        isssLab = 30;
+      }
     } else {
       isssLab = salario * 0.03;
+      if(isssLab > 30){
+        isssLab = 30;
+      }
     }
     setIsssLaboral(isssLab.toFixed(2));
 
     // Cálculo del ISSS Patronal
     if (salario >= 1000) {
       isssPat = 1000 * 0.075;
+
+        setIsssPatronal(isssPat.toFixed(2));
+
+
     } else {
       isssPat = salario * 0.075;
+      if(isssPat > 30) {
+        isssPat = 30;
+        setIsssPatronal(isssPat.toFixed(2));
+      } else{
+        setIsssPatronal(isssPat.toFixed(2));
+      }
     }
-    setIsssPatronal(isssPat.toFixed(2));
+    
+    
 
     // Cálculo del AFP Laboral
     afpLab = salario * 0.0725;
@@ -186,10 +230,12 @@ export const AgregarPrestacion = () => {
                       class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
                     >
                       <option selected>Empleado</option>
-                      <option value="US">Luis Ramirez</option>
-                      <option value="CA">Sonia Delgado</option>
-                      <option value="FR">Maria Rodriguez</option>
-                      <option value="DE">Henry Hernandez</option>
+                      {datosEmpleado.map((empl, index) =>{
+                        return(
+                          <option key={index} id={empl.id} value={empl.id}>{empl.nombres} {empl.apellidos}</option>
+                        )
+                      })}
+                      
                     </select>
                   </div>
                   <div>
