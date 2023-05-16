@@ -10,6 +10,9 @@ export const AgregarPrestacion = () => {
 
 //Mandar a llamar empleado
 const [datosEmpleado, setDatosEmpleado] = useState([]);
+const [depto, setDepto] = useState('');
+const [salario, setSalario] = useState(0);
+const [datosEmpleadUnico, setDatosEmpleadoUnico] = useState([]);
 console.log(datosEmpleado);
 
 useEffect(() => {
@@ -33,9 +36,25 @@ useEffect(() => {
   getInfoEmp();
 }, []);
 
+//Obtener id de empleado
 
+const handlerCargarDatos = function (e)
+ {
+  const op = e.target.value
+  console.log(op);
+  const depart = datosEmpleado[op-1].id_departamento;
+  setDepto(depart);
+
+  const sala = datosEmpleado[op-1].salario;
+  setSalario(sala);
+ }
+
+//obtener departamento y salario por medio del id
+
+
+
+//Calculos
   const [renta, setRenta] = useState(0);
-  const [salario, setSalario] = useState(575.25);
   const [afpPatronal, setAfpPatronal] = useState(0);
   const [afpLaboral, setAfpLaboral] = useState(0);
   const [isssPatronal, setIsssPatronal] = useState(0);
@@ -153,8 +172,6 @@ useEffect(() => {
       }
     }
     
-    
-
     // Cálculo del AFP Laboral
     afpLab = salario * 0.0725;
     setAfpLaboral(afpLab.toFixed(2));
@@ -200,24 +217,7 @@ useEffect(() => {
             <div className="md:col-span-2 lg:col-span-2">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
-                  <div>
-                    <label
-                      for="first_name"
-                      class="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Departamento
-                    </label>
-                    <select
-                      id="default"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
-                    >
-                      <option selected>Departamento</option>
-                      <option value="US">Ventas</option>
-                      <option value="CA">Contabilidad</option>
-                      <option value="FR">Gerencia</option>
-                      <option value="DE">Produccion</option>
-                    </select>
-                  </div>
+                  
                   <div>
                     <label
                       for="first_name"
@@ -226,10 +226,10 @@ useEffect(() => {
                       Empleado
                     </label>
                     <select
-                      id="default"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
+                      id="empleados"
+                      name="empleados"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5" onClick={handlerCargarDatos}
                     >
-                      <option selected>Empleado</option>
                       {datosEmpleado.map((empl, index) =>{
                         return(
                           <option key={index} id={empl.id} value={empl.id}>{empl.nombres} {empl.apellidos}</option>
@@ -237,6 +237,21 @@ useEffect(() => {
                       })}
                       
                     </select>
+                  </div>
+                  <div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Departamento
+                    </label>
+                    <input
+                      type="text"
+                      id="departamento"
+                      value= {depto}
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                      disabled
+                    />
                   </div>
                   <div>
                     <label
@@ -248,6 +263,7 @@ useEffect(() => {
                     <input
                       type="number"
                       id="number"
+                      value = {salario}
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                       placeholder="$500.00"
                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
