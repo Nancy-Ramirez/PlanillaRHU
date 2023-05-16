@@ -925,6 +925,7 @@ export const AgregarEmpleados = () => {
                           value={formulario.salario}
                           onChange={ManejarEventoDeInputs}
                         />
+                        <div>
                         {alerta
                           .filter(
                             input =>
@@ -938,6 +939,7 @@ export const AgregarEmpleados = () => {
                               </span>
                             </div>
                           ))}
+                          </div>
                       </div>
                     </div>
                     {/*Fecha de inicio */}
