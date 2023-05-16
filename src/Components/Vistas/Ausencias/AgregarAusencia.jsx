@@ -1,4 +1,3 @@
-import React from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { Link } from "react-router-dom";

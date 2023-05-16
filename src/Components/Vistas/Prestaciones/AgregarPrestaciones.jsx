@@ -1,11 +1,183 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { AiFillPrinter } from "react-icons/ai";
 import { FiArrowLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export const AgregarPrestacion = () => {
+
+//Mandar a llamar empleado
+const [datosEmpleado, setDatosEmpleado] = useState([]);
+console.log(datosEmpleado);
+
+useEffect(() => {
+  async function getInfoEmp(){
+    const url = "http://127.0.0.1:8000/empleados/empleados/";
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+          'Accept': "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      console.log(resp.data);
+      setDatosEmpleado(resp.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getInfoEmp();
+}, []);
+
+
+  const [renta, setRenta] = useState(0);
+  const [salario, setSalario] = useState(575.25);
+  const [afpPatronal, setAfpPatronal] = useState(0);
+  const [afpLaboral, setAfpLaboral] = useState(0);
+  const [isssPatronal, setIsssPatronal] = useState(0);
+  const [isssLaboral, setIsssLaboral] = useState(0);
+  const [salarioDesc, setSalarioDesc] = useState(0);
+  const [descTotal, setDescTotal] = useState(0);
+  const [salLiquido, setSalLiquido] = useState(0);
+
+
+  function calcRenta(salarioDesc){
+      // Cálculo de la renta
+      let tramo = 0;
+      if (salarioDesc >= 2038.11) {
+        tramo = 4;
+      } else if (salarioDesc >= 895.24) {
+        tramo = 3;
+      } else if (salarioDesc >= 472) {
+        tramo = 2;
+      } else if (salarioDesc >= 0.01) {
+        tramo = 1;
+      }
+      console.log(tramo);
+  
+      switch (tramo) {
+          case 1: {
+            setRenta(0);
+            const retencion = 0;
+            return retencion;
+            break;
+          }
+          case 2: {
+            const porcentaje = 0.1;
+            const sobreExc = 472.0;
+            const cuotaFija = 17.67;
+    
+            const exceso = salarioDesc - sobreExc;
+            const porcExceso = exceso * porcentaje;
+            const retencion = porcExceso + cuotaFija;
+            setRenta(retencion.toFixed(2));
+            return retencion;
+            break;
+          }
+          case 3: {
+            const porcentaje = 0.2;
+            const sobreExc = 895.24;
+            const cuotaFija = 60.0;
+    
+            const exceso = salarioDesc - sobreExc;
+            const porcExceso = exceso * porcentaje;
+            const retencion = porcExceso + cuotaFija;
+            setRenta(retencion.toFixed(2));
+            return retencion;
+            break;
+          }
+          case 4: {
+            const porcentaje = 0.3;
+            const sobreExc = 2038.1;
+            const cuotaFija = 288.57;
+    
+            const exceso = salarioDesc - sobreExc;
+            const porcExceso = exceso * porcentaje;
+            const retencion = porcExceso + cuotaFija;
+            setRenta(retencion.toFixed(2));
+            return retencion;
+            break;
+          }
+          default:
+            break;
+        }
+  }
+
+  function calcSalLiquido(salarioDesc, renta){
+        // Salario liquido
+        let salLiq = salarioDesc- renta;
+        setSalLiquido(salLiq.toFixed(2));
+  }
+  const handleCalculosClick = () => {
+
+    let isssLab;
+    let isssPat;
+    let afpLab;
+    let afpPat;
+    let salDesc;
+    let descT;
+    let salLiq;
+
+    // Cálculo del ISSS Laboral
+    if (salario >= 1000) {
+      isssLab = 1000 * 0.03;
+      if(isssLab > 30){
+        isssLab = 30;
+      }
+    } else {
+      isssLab = salario * 0.03;
+      if(isssLab > 30){
+        isssLab = 30;
+      }
+    }
+    setIsssLaboral(isssLab.toFixed(2));
+
+    // Cálculo del ISSS Patronal
+    if (salario >= 1000) {
+      isssPat = 1000 * 0.075;
+
+        setIsssPatronal(isssPat.toFixed(2));
+
+
+    } else {
+      isssPat = salario * 0.075;
+      if(isssPat > 30) {
+        isssPat = 30;
+        setIsssPatronal(isssPat.toFixed(2));
+      } else{
+        setIsssPatronal(isssPat.toFixed(2));
+      }
+    }
+    
+    
+
+    // Cálculo del AFP Laboral
+    afpLab = salario * 0.0725;
+    setAfpLaboral(afpLab.toFixed(2));
+
+    // Cálculo del AFP Patronal
+    afpPat = salario * 0.0775;
+    setAfpPatronal(afpPat.toFixed(2));
+
+    // Descuento total
+    descT = afpLab + isssLab;
+    setDescTotal(descT.toFixed(2));
+
+    // Salario después de descuentos
+    salDesc = salario - descT;
+    setSalarioDesc(salDesc);
+
+  calcRenta(salDesc);
+  const rent = calcRenta(salDesc);
+
+    // Salario liquido
+    calcSalLiquido(salDesc, rent);
+  };
+
   return (
     <div className="flex">
       <Aside />
@@ -58,10 +230,12 @@ export const AgregarPrestacion = () => {
                       class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
                     >
                       <option selected>Empleado</option>
-                      <option value="US">Luis Ramirez</option>
-                      <option value="CA">Sonia Delgado</option>
-                      <option value="FR">Maria Rodriguez</option>
-                      <option value="DE">Henry Hernandez</option>
+                      {datosEmpleado.map((empl, index) =>{
+                        return(
+                          <option key={index} id={empl.id} value={empl.id}>{empl.nombres} {empl.apellidos}</option>
+                        )
+                      })}
+                      
                     </select>
                   </div>
                   <div>
@@ -83,7 +257,7 @@ export const AgregarPrestacion = () => {
                   
                   <div>
                     <button
-                      type="submit"
+                      type="submit" onClick={handleCalculosClick}
                       class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                     >
                       Calcular
@@ -119,10 +293,12 @@ export const AgregarPrestacion = () => {
                           type="number"
                           name="#"
                           id="#"
+                          value  = {afpPatronal}
+                          step="0.01"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
-                        />
+                        /> 
                       </div>
                       <div className="flex justify-start">
                         <label
@@ -135,6 +311,7 @@ export const AgregarPrestacion = () => {
                           type="number"
                           name="#"
                           id="#"
+                          value  = {isssPatronal}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -151,6 +328,7 @@ export const AgregarPrestacion = () => {
                           type="number"
                           name="#"
                           id="#"
+                          value  = {afpLaboral}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -167,6 +345,7 @@ export const AgregarPrestacion = () => {
                           type="number"
                           name="#"
                           id="#"
+                          value  = {isssLaboral}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -183,6 +362,7 @@ export const AgregarPrestacion = () => {
                           type="number"
                           name="#"
                           id="#"
+                          value  = {descTotal}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -200,6 +380,7 @@ export const AgregarPrestacion = () => {
                         type="number"
                         name="#"
                         id="#"
+                        value  = {renta}
                         class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
                         placeholder="$"
                         disabled
@@ -216,6 +397,7 @@ export const AgregarPrestacion = () => {
                         type="number"
                         name="#"
                         id="#"
+                        value={salLiquido}
                         class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
                         placeholder="$"
                         disabled
