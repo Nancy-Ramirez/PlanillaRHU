@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
 export const AgregarIndemnizacion = () => {
+  const [anios, setAnios] = useState(2);
+  const [salario, setSalario] = useState(400);
+  const [dias, setDias] = useState(260);
+  const [indemnizacion, setIndemnizacion] = useState(0);
+
+  const Suma = (total_salario_años, total_salario_dias) => {
+    // Total indemnización
+    const suma = total_salario_años + total_salario_dias;
+    setIndemnizacion(suma);
+    console.log(indemnizacion);
+  };
+
+  const calculo = (e) => {
+    e.preventDefault();
+    // cálculo de indemnización por años
+    const total_salario_años = anios * salario;
+    // cálculo de indemnización proporcional
+    const total_salario_dias = (dias / 365) * salario;
+    Suma(total_salario_años, total_salario_dias);
+  };
+
+  useEffect(() => {
+    console.log(indemnizacion);
+  }, [indemnizacion]);
+
   return (
     <div className="flex">
       <Aside />
@@ -116,12 +141,13 @@ export const AgregarIndemnizacion = () => {
                           </div>
                         </div>
                         <div className="mt-6">
-                          <button
+                          <a
                             type="submit"
-                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " disabled
+                            onClick={calculo}
+                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                           >
                             Calcular
-                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -159,7 +185,7 @@ export const AgregarIndemnizacion = () => {
                           for="first_name"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
-                          Pago por Años:
+                          Indemnización:
                         </label>
                         <div className="relative md:content-center">
                           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -168,6 +194,7 @@ export const AgregarIndemnizacion = () => {
                           <input
                             type="text"
                             id="pagoAños"
+                            value={indemnizacion}
                             className="block p-2 pl-10 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                             disabled
                           />
