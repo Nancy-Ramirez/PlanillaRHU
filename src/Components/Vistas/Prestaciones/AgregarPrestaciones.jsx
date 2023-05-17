@@ -7,53 +7,49 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const AgregarPrestacion = () => {
+  //Mandar a llamar empleado
+  const [datosEmpleado, setDatosEmpleado] = useState([]);
+  const [depto, setDepto] = useState("");
+  const [salario, setSalario] = useState(0);
+  const [datosEmpleadUnico, setDatosEmpleadoUnico] = useState([]);
+  console.log(datosEmpleado);
 
-//Mandar a llamar empleado
-const [datosEmpleado, setDatosEmpleado] = useState([]);
-const [depto, setDepto] = useState('');
-const [salario, setSalario] = useState(0);
-const [datosEmpleadUnico, setDatosEmpleadoUnico] = useState([]);
-console.log(datosEmpleado);
+  useEffect(() => {
+    async function getInfoEmp() {
+      const url = "http://127.0.0.1:8000/empleados/empleados/";
 
-useEffect(() => {
-  async function getInfoEmp(){
-    const url = "http://127.0.0.1:8000/empleados/empleados/";
-
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-          'Accept': "application/json",
-      },
-    };
-    try {
-      const resp = await axios.get(url, config);
-      console.log(resp.data);
-      setDatosEmpleado(resp.data);
-    } catch (err) {
-      console.error(err);
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      };
+      try {
+        const resp = await axios.get(url, config);
+        console.log(resp.data);
+        setDatosEmpleado(resp.data);
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
-  getInfoEmp();
-}, []);
+    getInfoEmp();
+  }, []);
 
-//Obtener id de empleado
+  //Obtener id de empleado
 
-const handlerCargarDatos = function (e)
- {
-  const op = e.target.value
-  console.log(op);
-  const depart = datosEmpleado[op-1].id_departamento;
-  setDepto(depart);
+  const handlerCargarDatos = function (e) {
+    const op = e.target.value;
+    console.log(op);
+    const depart = datosEmpleado[op - 1].id_departamento;
+    setDepto(depart);
 
-  const sala = datosEmpleado[op-1].salario;
-  setSalario(sala);
- }
+    const sala = datosEmpleado[op - 1].salario;
+    setSalario(sala);
+  };
 
-//obtener departamento y salario por medio del id
+  //obtener departamento y salario por medio del id
 
-
-
-//Calculos
+  //Calculos
   const [renta, setRenta] = useState(0);
   const [afpPatronal, setAfpPatronal] = useState(0);
   const [afpLaboral, setAfpLaboral] = useState(0);
@@ -63,76 +59,74 @@ const handlerCargarDatos = function (e)
   const [descTotal, setDescTotal] = useState(0);
   const [salLiquido, setSalLiquido] = useState(0);
 
+  function calcRenta(salarioDesc) {
+    // Cálculo de la renta
+    let tramo = 0;
+    if (salarioDesc >= 2038.11) {
+      tramo = 4;
+    } else if (salarioDesc >= 895.24) {
+      tramo = 3;
+    } else if (salarioDesc >= 472) {
+      tramo = 2;
+    } else if (salarioDesc >= 0.01) {
+      tramo = 1;
+    }
+    console.log(tramo);
 
-  function calcRenta(salarioDesc){
-      // Cálculo de la renta
-      let tramo = 0;
-      if (salarioDesc >= 2038.11) {
-        tramo = 4;
-      } else if (salarioDesc >= 895.24) {
-        tramo = 3;
-      } else if (salarioDesc >= 472) {
-        tramo = 2;
-      } else if (salarioDesc >= 0.01) {
-        tramo = 1;
+    switch (tramo) {
+      case 1: {
+        setRenta(0);
+        const retencion = 0;
+        return retencion;
+        break;
       }
-      console.log(tramo);
-  
-      switch (tramo) {
-          case 1: {
-            setRenta(0);
-            const retencion = 0;
-            return retencion;
-            break;
-          }
-          case 2: {
-            const porcentaje = 0.1;
-            const sobreExc = 472.0;
-            const cuotaFija = 17.67;
-    
-            const exceso = salarioDesc - sobreExc;
-            const porcExceso = exceso * porcentaje;
-            const retencion = porcExceso + cuotaFija;
-            setRenta(retencion.toFixed(2));
-            return retencion;
-            break;
-          }
-          case 3: {
-            const porcentaje = 0.2;
-            const sobreExc = 895.24;
-            const cuotaFija = 60.0;
-    
-            const exceso = salarioDesc - sobreExc;
-            const porcExceso = exceso * porcentaje;
-            const retencion = porcExceso + cuotaFija;
-            setRenta(retencion.toFixed(2));
-            return retencion;
-            break;
-          }
-          case 4: {
-            const porcentaje = 0.3;
-            const sobreExc = 2038.1;
-            const cuotaFija = 288.57;
-    
-            const exceso = salarioDesc - sobreExc;
-            const porcExceso = exceso * porcentaje;
-            const retencion = porcExceso + cuotaFija;
-            setRenta(retencion.toFixed(2));
-            return retencion;
-            break;
-          }
-          default:
-            break;
-        }
+      case 2: {
+        const porcentaje = 0.1;
+        const sobreExc = 472.0;
+        const cuotaFija = 17.67;
+
+        const exceso = salarioDesc - sobreExc;
+        const porcExceso = exceso * porcentaje;
+        const retencion = porcExceso + cuotaFija;
+        setRenta(retencion.toFixed(2));
+        return retencion;
+        break;
+      }
+      case 3: {
+        const porcentaje = 0.2;
+        const sobreExc = 895.24;
+        const cuotaFija = 60.0;
+
+        const exceso = salarioDesc - sobreExc;
+        const porcExceso = exceso * porcentaje;
+        const retencion = porcExceso + cuotaFija;
+        setRenta(retencion.toFixed(2));
+        return retencion;
+        break;
+      }
+      case 4: {
+        const porcentaje = 0.3;
+        const sobreExc = 2038.1;
+        const cuotaFija = 288.57;
+
+        const exceso = salarioDesc - sobreExc;
+        const porcExceso = exceso * porcentaje;
+        const retencion = porcExceso + cuotaFija;
+        setRenta(retencion.toFixed(2));
+        return retencion;
+        break;
+      }
+      default:
+        break;
+    }
   }
 
-  function calcSalLiquido(salarioDesc, renta){
-        // Salario liquido
-        let salLiq = salarioDesc- renta;
-        setSalLiquido(salLiq.toFixed(2));
+  function calcSalLiquido(salarioDesc, renta) {
+    // Salario liquido
+    let salLiq = salarioDesc - renta;
+    setSalLiquido(salLiq.toFixed(2));
   }
   const handleCalculosClick = () => {
-
     let isssLab;
     let isssPat;
     let afpLab;
@@ -144,12 +138,12 @@ const handlerCargarDatos = function (e)
     // Cálculo del ISSS Laboral
     if (salario >= 1000) {
       isssLab = 1000 * 0.03;
-      if(isssLab > 30){
+      if (isssLab > 30) {
         isssLab = 30;
       }
     } else {
       isssLab = salario * 0.03;
-      if(isssLab > 30){
+      if (isssLab > 30) {
         isssLab = 30;
       }
     }
@@ -159,19 +153,13 @@ const handlerCargarDatos = function (e)
     if (salario >= 1000) {
       isssPat = 1000 * 0.075;
 
-        setIsssPatronal(isssPat.toFixed(2));
-
-
+      setIsssPatronal(isssPat.toFixed(2));
     } else {
       isssPat = salario * 0.075;
-      if(isssPat > 30) {
-        isssPat = 30;
-        setIsssPatronal(isssPat.toFixed(2));
-      } else{
-        setIsssPatronal(isssPat.toFixed(2));
-      }
+
+      setIsssPatronal(isssPat.toFixed(2));
     }
-    
+
     // Cálculo del AFP Laboral
     afpLab = salario * 0.0725;
     setAfpLaboral(afpLab.toFixed(2));
@@ -188,8 +176,8 @@ const handlerCargarDatos = function (e)
     salDesc = salario - descT;
     setSalarioDesc(salDesc);
 
-  calcRenta(salDesc);
-  const rent = calcRenta(salDesc);
+    calcRenta(salDesc);
+    const rent = calcRenta(salDesc);
 
     // Salario liquido
     calcSalLiquido(salDesc, rent);
@@ -202,22 +190,18 @@ const handlerCargarDatos = function (e)
         <Navbar />
         <div className="ml-24 mb-8 mt-8 pt-12">
           <div className="flex justify-between ">
-              <Link to="/prestaciones" className="pl-5 text-3xl text-gray-500">
-                    <FiArrowLeft />
-                  </Link>
-                <h1 className=" text-center text-2xl text-black">
-                  CÁLCULO DE PRESTACIONES
-                </h1>
-                <h1>
-
-                </h1>
-                
-              </div>
+            <Link to="/prestaciones" className="pl-5 text-3xl text-gray-500">
+              <FiArrowLeft />
+            </Link>
+            <h1 className=" text-center text-2xl text-black">
+              CÁLCULO DE PRESTACIONES
+            </h1>
+            <h1></h1>
+          </div>
           <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-2">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
-                  
                   <div>
                     <label
                       for="first_name"
@@ -228,14 +212,16 @@ const handlerCargarDatos = function (e)
                     <select
                       id="empleados"
                       name="empleados"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5" onClick={handlerCargarDatos}
+                      class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5"
+                      onClick={handlerCargarDatos}
                     >
-                      {datosEmpleado.map((empl, index) =>{
-                        return(
-                          <option key={index} id={empl.id} value={empl.id}>{empl.nombres} {empl.apellidos}</option>
-                        )
+                      {datosEmpleado.map((empl, index) => {
+                        return (
+                          <option key={index} id={empl.id} value={empl.id}>
+                            {empl.nombres} {empl.apellidos}
+                          </option>
+                        );
                       })}
-                      
                     </select>
                   </div>
                   <div>
@@ -248,7 +234,7 @@ const handlerCargarDatos = function (e)
                     <input
                       type="text"
                       id="departamento"
-                      value= {depto}
+                      value={depto}
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                       disabled
                     />
@@ -263,17 +249,18 @@ const handlerCargarDatos = function (e)
                     <input
                       type="number"
                       id="number"
-                      value = {salario}
+                      value={salario}
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                       placeholder="$500.00"
                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                       disabled
                     />
                   </div>
-                  
+
                   <div>
                     <button
-                      type="submit" onClick={handleCalculosClick}
+                      type="submit"
+                      onClick={handleCalculosClick}
                       class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                     >
                       Calcular
@@ -309,12 +296,12 @@ const handlerCargarDatos = function (e)
                           type="number"
                           name="#"
                           id="#"
-                          value  = {afpPatronal}
+                          value={afpPatronal}
                           step="0.01"
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
-                        /> 
+                        />
                       </div>
                       <div className="flex justify-start">
                         <label
@@ -327,7 +314,7 @@ const handlerCargarDatos = function (e)
                           type="number"
                           name="#"
                           id="#"
-                          value  = {isssPatronal}
+                          value={isssPatronal}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -344,7 +331,7 @@ const handlerCargarDatos = function (e)
                           type="number"
                           name="#"
                           id="#"
-                          value  = {afpLaboral}
+                          value={afpLaboral}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -361,7 +348,7 @@ const handlerCargarDatos = function (e)
                           type="number"
                           name="#"
                           id="#"
-                          value  = {isssLaboral}
+                          value={isssLaboral}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -378,7 +365,7 @@ const handlerCargarDatos = function (e)
                           type="number"
                           name="#"
                           id="#"
-                          value  = {descTotal}
+                          value={descTotal}
                           class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                           placeholder="$"
                           disabled
@@ -396,7 +383,7 @@ const handlerCargarDatos = function (e)
                         type="number"
                         name="#"
                         id="#"
-                        value  = {renta}
+                        value={renta}
                         class="bg-gray-50 w-96 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5"
                         placeholder="$"
                         disabled
