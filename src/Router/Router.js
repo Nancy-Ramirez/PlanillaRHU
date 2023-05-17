@@ -21,13 +21,14 @@ import { AgregarAusencia } from "../Components/Vistas/Ausencias/AgregarAusencia"
 import { EditarEmpleado } from "../Components/Vistas/Empleados/EditarEmpleado";
 import {Prueba} from "../Components/Vistas/Prestaciones/Pruebas";
 
+
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/inicio" element={<Dashboard />} />
-
+        
         {/*Empleado */}
         <Route path="/empleado" element={<Empleado />} />
         <Route path="/agregar-empleado" element={<AgregarEmpleados/>} />
