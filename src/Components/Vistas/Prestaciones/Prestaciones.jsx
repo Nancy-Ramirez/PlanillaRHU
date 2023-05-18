@@ -23,7 +23,7 @@ export const Prestaciones = () => {
    console.log("Listar datos", datosServidor);
    useEffect(() => {
      async function getInfo() {
-       const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
+       const url = "http://127.0.0.1:8000/empleados/prestaciones"; //AQUI METE LA URL
  
        let config = {
          headers: {
@@ -51,7 +51,7 @@ export const Prestaciones = () => {
    const filtrar = (terminoBusqueda) => {
      var resultadosBusqueda = tablaData.filter((elemento) => {
        if (
-         elemento.nombres
+         elemento.empleado
            .toString()
            .toLowerCase()
            .includes(terminoBusqueda.toLowerCase()) ||
@@ -170,13 +170,13 @@ export const Prestaciones = () => {
                         >
                           <div className="pl-3 text-start">
                             <div className="text-base font-semibold text-black">
-                              {pres.nombres} {pres.apellidos}
+                              {pres.empleado}
                             </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">{pres.id_departamento}</td>
+                        <td className="px-6 py-4">{pres.departamento}</td>
                         <td className="px-6 py-4">$ {pres.salario}</td>
-                        <td className="px-6 py-4">$ {pres.salarioLiquido}</td>
+                        <td className="px-6 py-4">$ {pres.sueldo_liquido}</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/ver-prestaciones"

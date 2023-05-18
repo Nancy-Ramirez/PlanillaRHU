@@ -12,7 +12,7 @@ export const AgregarPrestacion = () => {
   //Mandar a llamar empleado
   const [datosEmpleado, setDatosEmpleado] = useState([]);
   const [depto, setDepto] = useState("");
-  const [salario, setSalario] = useState(0);
+  const [salari, setSalario] = useState(0);
   const [empleado_id, setEmpleado_id] = useState("");
   console.log(datosEmpleado);
 
@@ -141,13 +141,13 @@ export const AgregarPrestacion = () => {
     let salLiq;
 
     // Cálculo del ISSS Laboral
-    if (salario >= 1000) {
+    if (salari >= 1000) {
       isssLab = 1000 * 0.03;
       if (isssLab > 30) {
         isssLab = 30;
       }
     } else {
-      isssLab = salario * 0.03;
+      isssLab = salari * 0.03;
       if (isssLab > 30) {
         isssLab = 30;
       }
@@ -155,22 +155,22 @@ export const AgregarPrestacion = () => {
     setIsssLaboral(isssLab.toFixed(2));
 
     // Cálculo del ISSS Patronal
-    if (salario >= 1000) {
+    if (salari >= 1000) {
       isssPat = 1000 * 0.075;
 
       setIsssPatronal(isssPat.toFixed(2));
     } else {
-      isssPat = salario * 0.075;
+      isssPat = salari * 0.075;
 
       setIsssPatronal(isssPat.toFixed(2));
     }
 
     // Cálculo del AFP Laboral
-    afpLab = salario * 0.0725;
+    afpLab = salari * 0.0725;
     setAfpLaboral(afpLab.toFixed(2));
 
     // Cálculo del AFP Patronal
-    afpPat = salario * 0.0775;
+    afpPat = salari * 0.0775;
     setAfpPatronal(afpPat.toFixed(2));
 
     // Descuento total
@@ -178,7 +178,7 @@ export const AgregarPrestacion = () => {
     setDescTotal(descT.toFixed(2));
 
     // Salario después de descuentos
-    salDesc = salario - descT;
+    salDesc = salari - descT;
     setSalarioDesc(salDesc);
 
     calcRenta(salDesc);
@@ -192,51 +192,50 @@ export const AgregarPrestacion = () => {
 //Navegación del botón luego de validar correctamente
 const Navigate = useNavigate();
 
-
-
 //Función encargada de validar campos
 const handleLoginSession = (e) => {
   e.preventDefault(); 
-    EnviarDatosServer();
+  enviarDatos();
 }; 
 //Conexión a API
-function EnviarDatosServer() {
-  const url = "http://127.0.0.1:8000/empleados/prestaciones/";
-
-  let config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      'Accept': "application/json",
-    },
+  const enviarDatos = async() => {
+    try {
+      const url = "http://127.0.0.1:8000/empleados/prestaciones/";
+  
+      // Crear un objeto con los datos a enviar
+      const datos = {
+        salario: salari,
+        isss_laboral: isssLaboral,
+        isss_patronal: isssPatronal,
+        afp_laboral: afpLaboral,
+        afp_patronal: afpPatronal,
+        impuesto_renta: renta,
+        total_descuento: descTotal,
+        sueldo_liquido: salLiquido,
+        empleado: empleado_id, // Corregir el nombre de la variable
+        departamento: depto,
+      };
+  
+      console.log(datos);
+      // Realizar la solicitud POST a la API
+      const response = await axios.post(url, datos);
+  
+      // Realizar las acciones necesarias después de guardar los datos
+      console.log(response.data);
+      Swal.fire({
+        icon: "success",
+        title: "Usuario registrado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+        Navigate("/prestaciones");
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  const setDataFormulario = {
-    salario: salario,
-    isss_laboral: isssLaboral,
-    isss_patronal: isssPatronal,
-    afp_laboral: afpLaboral,
-    afp_patronal: afpPatronal,
-    impuesto_renta: renta,
-    total_descuento: descTotal,
-    sueldo_liquido: salLiquido,
-    empleado: empleado_id,
-    departamento: depto
-  };
 
-  axios
-    .post(url, setDataFormulario, config)
-    .then((response) => 
-    console.log(response.data, "Response--------------")
-    );
-  Swal.fire({
-    icon: "success",
-    title: "Usuario registrado",
-    showConfirmButton: false,
-    timer: 1500,
-  });
-  setTimeout(() => {
-    Navigate("/usuarios");
-  }, 1500);
-}
 
   return (
     <div className="flex">
@@ -253,7 +252,7 @@ function EnviarDatosServer() {
             </h1>
             <h1></h1>
           </div>
-          <form onSubmit={handleLoginSession} className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-2">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -304,7 +303,7 @@ function EnviarDatosServer() {
                     <input
                       type="number"
                       id="number"
-                      value={salario}
+                      value={salari}
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
                       placeholder="$500.00"
                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -331,7 +330,7 @@ function EnviarDatosServer() {
                 </a>
               </div>
             </div>
-            <div className="md:col-span-2 lg:col-span-3 mb-4">
+            <form onSubmit={handleLoginSession} className="md:col-span-2 lg:col-span-3 mb-4">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="mt-2 ">
                   <h2 class="text-lg font-bold text-gray-900">Calculos</h2>
@@ -467,17 +466,12 @@ function EnviarDatosServer() {
                       >
                         Guardar
                       </button>
-                      <button
-                        class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                      >
-                        Cancelar
-                      </button>
                     </div>
                   </form>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
