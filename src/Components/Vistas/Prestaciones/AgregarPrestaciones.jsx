@@ -190,6 +190,11 @@ export const AgregarPrestacion = () => {
 
   //Mandar datos a API
 
+  const handleLoginSession = (e) => {
+    e.preventDefault();
+    EnviarDatosServer();
+  }
+
   function EnviarDatosServer() {
     const url = "http://127.0.0.1:8000/empleados/prestaciones/";
 
@@ -218,16 +223,17 @@ export const AgregarPrestacion = () => {
       .then((response) => 
       console.log(response.data, "Response--------------")
       );
-    Swal.fire({
-      icon: "success",
-      title: "Prestación registrada",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Navigate("/prestaciones");
-    }, 2000);
-  };
+     
+      Swal.fire({
+        icon: "success",
+        title: "Usuario registrado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+        Navigate("/prestaciones");
+      }, 1500);
+    }
 
   return (
     <div className="flex">
@@ -454,8 +460,7 @@ export const AgregarPrestacion = () => {
                     </div>
                     <div className="mt-2">
                       <button
-                        type="submit"
-                        onClick={EnviarDatosServer}
+                        onClick={handleLoginSession}
                         class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                       >
                         Guardar
