@@ -8,13 +8,21 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export const AgregarPrestacion = () => {
-
   //Mandar a llamar empleado
   const [datosEmpleado, setDatosEmpleado] = useState([]);
   const [depto, setDepto] = useState("");
   const [salari, setSalario] = useState(0);
-  const [empleado_id, setEmpleado_id] = useState("");
+  const [renta, setRenta] = useState(0);
+  const [afpPatronal, setAfpPatronal] = useState(0);
+  const [afpLaboral, setAfpLaboral] = useState(0);
+  const [isssPatronal, setIsssPatronal] = useState(0);
+  const [isssLaboral, setIsssLaboral] = useState(0);
+  const [salarioDesc, setSalarioDesc] = useState(0);
+  const [descTotal, setDescTotal] = useState(0);
+  const [salLiquido, setSalLiquido] = useState(0);
+  const [emplead, setEmpleado] = useState();
   console.log(datosEmpleado);
+  const Navigate = useNavigate();
 
   useEffect(() => {
     async function getInfoEmp() {
@@ -23,7 +31,7 @@ export const AgregarPrestacion = () => {
       let config = {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Accept': "application/json",
         },
       };
       try {
@@ -48,21 +56,13 @@ export const AgregarPrestacion = () => {
     const sala = datosEmpleado[op - 1].salario;
     setSalario(sala);
 
-    const emp = datosEmpleado[op-1].id;
-    setEmpleado_id(emp);
+    const empp =datosEmpleado[op-1].id;
+    setEmpleado(empp);
   };
 
   //obtener departamento y salario por medio del id
 
   //Calculos
-  const [renta, setRenta] = useState(0);
-  const [afpPatronal, setAfpPatronal] = useState(0);
-  const [afpLaboral, setAfpLaboral] = useState(0);
-  const [isssPatronal, setIsssPatronal] = useState(0);
-  const [isssLaboral, setIsssLaboral] = useState(0);
-  const [salarioDesc, setSalarioDesc] = useState(0);
-  const [descTotal, setDescTotal] = useState(0);
-  const [salLiquido, setSalLiquido] = useState(0);
 
   function calcRenta(salarioDesc) {
     // Cálculo de la renta
@@ -188,54 +188,46 @@ export const AgregarPrestacion = () => {
     calcSalLiquido(salDesc, rent);
   };
 
-  //!Guardar datos
-//Navegación del botón luego de validar correctamente
-const Navigate = useNavigate();
+  //Mandar datos a API
 
-//Función encargada de validar campos
-const handleLoginSession = (e) => {
-  e.preventDefault(); 
-  enviarDatos();
-}; 
-//Conexión a API
-  const enviarDatos = async() => {
-    try {
-      const url = "http://127.0.0.1:8000/empleados/prestaciones/";
-  
-      // Crear un objeto con los datos a enviar
-      const datos = {
-        salario: salari,
-        isss_laboral: isssLaboral,
-        isss_patronal: isssPatronal,
-        afp_laboral: afpLaboral,
-        afp_patronal: afpPatronal,
-        impuesto_renta: renta,
-        total_descuento: descTotal,
-        sueldo_liquido: salLiquido,
-        empleado: empleado_id, // Corregir el nombre de la variable
-        departamento: depto,
-      };
-  
-      console.log(datos);
-      // Realizar la solicitud POST a la API
-      const response = await axios.post(url, datos);
-  
-      // Realizar las acciones necesarias después de guardar los datos
-      console.log(response.data);
-      Swal.fire({
-        icon: "success",
-        title: "Usuario registrado",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-        Navigate("/prestaciones");
-      }, 1500);
-    } catch (error) {
-      console.error(error);
-    }
+  function EnviarDatosServer() {
+    const url = "http://127.0.0.1:8000/empleados/prestaciones/";
+
+    let config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        'Accept': "application/json",
+      },
+    };
+    const formData = {
+      salario: salari,
+      isss_laboral: isssLaboral,
+      isss_patronal: isssPatronal,
+      afp_laboral: afpLaboral,
+      afp_patronal: afpPatronal,
+      impuesto_renta: renta,
+      total_descuento: descTotal,
+      sueldo_liquido: salLiquido,
+      empleado: emplead, // Corregir el nombre de la variable
+      departamento: depto,
+    };
+    console.log(formData);
+
+    axios
+      .post(url, formData, config)
+      .then((response) => 
+      console.log(response.data, "Response--------------")
+      );
+    Swal.fire({
+      icon: "success",
+      title: "Prestación registrada",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    setTimeout(() => {
+      Navigate("/prestaciones");
+    }, 2000);
   };
-
 
   return (
     <div className="flex">
@@ -264,8 +256,8 @@ const handleLoginSession = (e) => {
                       Empleado
                     </label>
                     <select
-                      id="empleado"
-                      name="empleado"
+                      id="empleados"
+                      name="empleados"
                       class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5"
                       onClick={handlerCargarDatos}
                     >
@@ -312,12 +304,13 @@ const handleLoginSession = (e) => {
                   </div>
 
                   <div>
-                    <a
+                    <button
+                      type="submit"
                       onClick={handleCalculosClick}
                       class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                     >
                       Calcular
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -330,7 +323,7 @@ const handleLoginSession = (e) => {
                 </a>
               </div>
             </div>
-            <form onSubmit={handleLoginSession} className="md:col-span-2 lg:col-span-3 mb-4">
+            <div className="md:col-span-2 lg:col-span-3 mb-4">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="mt-2 ">
                   <h2 class="text-lg font-bold text-gray-900">Calculos</h2>
@@ -461,7 +454,8 @@ const handleLoginSession = (e) => {
                     </div>
                     <div className="mt-2">
                       <button
-                      type="submit"
+                        type="submit"
+                        onClick={EnviarDatosServer}
                         class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                       >
                         Guardar
@@ -470,7 +464,7 @@ const handleLoginSession = (e) => {
                   </form>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
