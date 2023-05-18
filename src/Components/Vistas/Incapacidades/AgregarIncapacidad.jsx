@@ -1,9 +1,236 @@
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export const AgregarIncapacidades = () => {
+  const [datosEmpleado, setDatosEmpleado] = useState([]);
+  const [depto, setDepto] = useState(0);
+  const [emplead, setEmpleado] = useState();
+
+
+  //Llamar empleado
+useEffect(() => {
+  async function getInfoEmp() {
+    const url = "http://127.0.0.1:8000/empleados/empleados/";
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      console.log(resp.data);
+      setDatosEmpleado(resp.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getInfoEmp();
+}, []);
+
+//Obtener id de empleado
+
+const handlerCargarDatos = function (e) {
+  const op = e.target.value;
+  console.log(op);
+  const depart = datosEmpleado[op - 1].id_departamento;
+  setDepto(depart);
+  const empp =datosEmpleado[op-1].id;
+  setEmpleado(empp);
+};
+
+  //!Validaciones de datos
+  //Navegación del botón luego de validar correctamente
+  const Navigate = useNavigate();
+
+  //Estado inicial del formulario
+  const datosIncapacidad = {
+cantidad_dias: "",
+motivo: "",
+fecha_inicio: "",
+fecha_fin: "",
+  };
+
+  //Estado inicial de la alerta
+  const initialStateInput = {
+    valorInput: "",
+    mensaje: "",
+    estado: false,
+  };
+
+  //Estado para manejar los valores del formulario
+  const [formulario, setformulario] = useState(datosEmpleado);
+
+  //Estado para manejar las alertas de validación
+  const [alerta, setAlerta] = useState([initialStateInput]);
+
+  //Funcion para obtener la información a los inputs
+  const ManejarEventoDeInputs = (event) => {
+    //La propiedad target del event nos permitirá obtener los valores
+    const name = event.target.name;
+    const value = event.target.value;
+
+    //Actualizamos los valores capturados a nuestro estado de formulario
+    setformulario({ ...formulario, [name]: value });
+  };
+
+  //Función encargada de validar campos
+  const handleLoginSession = (e) => {
+    e.preventDefault();
+
+    //Ordenamos los datos para enviarlos a la validación
+    let verificarInputs = [
+      { nombre: "cantidad_dias", value: formulario.cantidad_dias},
+      { nombre: "motivo", value: formulario.motivo},      
+      { nombre: "fecha_inicio", value: formulario.fecha_inicio},    
+      { nombre: "fecha_fin", value: formulario.fecha_fin},    
+    ];
+
+    //Enviamos los datos a la función de validación y recibimos las validaciones
+    const datosValidados = ValidarInputs(verificarInputs);
+    console.log(datosValidados);
+
+    //Enviamos las validaciones al estado que se va a encargar de mostrarlas en el formulario
+    setAlerta(datosValidados);
+
+    //Obtener el total de validación
+    const totalValidaciones = datosValidados
+      .filter((input) => input.estado === false)
+      .map((estado) => {
+        return false;
+      });
+
+    console.log("Total de validaciones", totalValidaciones.length);
+
+    //Validación para enviar los datos al servidor
+    if (totalValidaciones.length >= 16) {
+      console.log("Enviar al servidor");
+      EnviarDatosServer();
+    }
+  }; //Conexión a API
+  function EnviarDatosServer() {
+    const url = "http://127.0.0.1:8000/empleados/empleados/";
+
+    let config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        'Accept': "application/json",
+      },
+    };
+    const setDataFormulario = {
+      id_empleado: emplead,
+      cantidad_dias: formulario.cantidad_dias,
+      motivo: formulario.motivo,
+      fecha_inicio: formulario.fecha_inicio,
+      fecha_fin: formulario.fecha_fin,
+      departamento: depto,
+    };
+    console.log(setDataFormulario);
+
+    axios
+      .post(url, setDataFormulario, config)
+      .then((response) => console.log(response.data, "Response--------------"));
+    Swal.fire({
+      icon: "success",
+      title: "Incapacidad registrada",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    setTimeout(() => {
+      Navigate("/empleado");
+    }, 1500);
+  }
+
+  const ValidarInputs = (data) => {
+    console.log(data);
+
+    //Declaramos un arreglo el cual se va a encargar de guardar las validaciones
+    let errors = [];
+
+    //Recibidos los datos a validar
+    const datosDelFormulario = data;
+
+    //Proceso de validación
+    datosDelFormulario.map((valorInput) => {
+      //eslint-disable-next-line default-case
+      switch (valorInput.nombre) {
+        case "cantidad_dias": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un numero valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "motivo": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese un motivo valido",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "fecha_inicio": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese una fecha valida",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+        case "fecha_fin": {
+          if (valorInput.value === "" || valorInput.value === null) {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "Ingrese una fecha valida",
+              estado: true,
+            });
+          } else {
+            errors.push({
+              valorInput: valorInput.nombre,
+              mensaje: "",
+              estado: false,
+            });
+          }
+          break;
+        }
+      }
+    });
+    //retornamos el total de validaciones
+    return errors;
+  };
+  console.log(formulario);
+
   return (
     <div className="flex">
       <Aside />
