@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 export const AgregarIndemnizacion = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
-  const [depto, setDepto] = useState("");
+  const [depto, setDepto] = useState(0);
   const [salari, setSalario] = useState(0);
   const [emplead, setEmpleado] = useState();
   const [fechaInicial, setFechaInicial] = useState();
@@ -17,7 +17,6 @@ export const AgregarIndemnizacion = () => {
   const [anios, setAnios] = useState(0);
   const [dias, setDias] = useState(0);
   const [indemnizacion, setIndemnizacion] = useState(0);
-  const [pag, setPag] = useState(0);
   const [añosTotal, setAñosTotal] = useState(0);
   const [tiempototal, setTiempoTotal] = useState("");
 
@@ -96,36 +95,11 @@ const handlerCargarDatos = function (e) {
   //Función encargada de validar campos
   const handleLoginSession = (e) => {
     e.preventDefault();
-
-    //Ordenamos los datos para enviarlos a la validación
-    let verificarInputs = [
-      { nombre: "fecha_retiro", value: formulario.fecha_retiro},
-    ];
-
-    //Enviamos los datos a la función de validación y recibimos las validaciones
-    const datosValidados = ValidarInputs(verificarInputs);
-    console.log(datosValidados);
-
-    //Enviamos las validaciones al estado que se va a encargar de mostrarlas en el formulario
-    setAlerta(datosValidados);
-
-    //Obtener el total de validación
-    const totalValidaciones = datosValidados
-      .filter((input )=> input.estado === false)
-      .map((estado) => {
-        return false;
-      });
-
-    console.log("Total de validaciones", totalValidaciones.length);
-
-    //Validación para enviar los datos al servidor
-    if (totalValidaciones.length >= 1) {
-      console.log("Enviar al servidor");
-      EnviarDatosServer();
-    }
+    EnviarDatosServer()
+   
   }; //Conexión a API
   function EnviarDatosServer() {
-    const url = "http://127.0.0.1:8000/usuarios/";
+    const url = "http://127.0.0.1:8000/empleados/indemnizacion/";
 
     let config = {
       headers: {
@@ -137,11 +111,14 @@ const handlerCargarDatos = function (e) {
       fecha_retiro: formulario.fecha_retiro,
       fecha_ingreso: fechaInicial,
       salario: salari,
-      años_completos: añosTotal,
-      pago: pag,
+      años_completos: anios,
+      dias: dias,
+      pago: indemnizacion,
       empleado: emplead,
       departamento: depto,
     };
+
+    console.log(setDataFormulario);
 
     axios
       .post(url, setDataFormulario, config)
@@ -151,7 +128,7 @@ const handlerCargarDatos = function (e) {
     setformulario(datosUsuario);
     Swal.fire({
       icon: "success",
-      title: "Usuario registrado",
+      title: "Indemnización guardada",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -198,7 +175,7 @@ const handlerCargarDatos = function (e) {
   console.log(formulario);
 
   const calculo = () => {
-    // Clacular dias y años
+    // Calcular dias y años
     const fecha1 = new Date(fechaInicial);
     const fecha2 = new Date(formulario.fecha_retiro);
     const unDiaEnMilisegundos = 24 * 60 * 60 * 1000;
@@ -217,9 +194,11 @@ const handlerCargarDatos = function (e) {
 
     // Calcular la indemnización total
     const suma = total_salario_años + total_salario_dias;
-    setIndemnizacion(suma);
+    setIndemnizacion((suma.toFixed(2)));
     console.log(indemnizacion);
-    setTiempoTotal(anios, "años y ", dias, " dias");
+    const value = `${anios} años y ${dias} días`;
+    setTiempoTotal(value);
+    console.log(tiempototal);
   };
 
   useEffect(() => {
@@ -318,6 +297,8 @@ const handlerCargarDatos = function (e) {
                               name="fecha_retiro"
                               type="date"
                               id="fecha_retiro"
+                              min={fechaInicial}
+                              max="2023-05-19"
                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                               value={formulario.fecha_retiro}
                               onChange={ManejarEventoDeInputs}
@@ -390,7 +371,7 @@ const handlerCargarDatos = function (e) {
                           Tiempo trabajado
                         </label>
                         <input
-                          type="number"
+                          type="text"
                           name="#"
                           id="#"
                           value={tiempototal}
@@ -424,16 +405,11 @@ const handlerCargarDatos = function (e) {
                 </div>
                 <div className="mt-2">
                   <button
+                  onClick={EnviarDatosServer}
                     type="submit"
                     class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                   >
                     Guardar
-                  </button>
-                  <button
-                    type="submit"
-                    class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-                  >
-                    Cancelar
                   </button>
                 </div>
               </div>
