@@ -8,13 +8,15 @@ import Swal from "sweetalert2";
 import { Paginacion } from "../../Componentes/Paginacion";
 import { PDFViewer } from '@react-pdf/renderer';
 import PDFReport from '../../Componentes/PDFReport';
+import PDFViewerComponent from "../../Componentes/PDFViewerComponent";
 
 export const Prestaciones = () => {
   //PDF 
+  const [showPDFViewer, setShowPDFViewer] = useState(false);
   const pdfViewerRef = useRef(null);
 
   const handleGeneratePDF = () => {
-    pdfViewerRef.current && pdfViewerRef.current.open(); // Abre el visor de PDF
+    setShowPDFViewer(true);
   };
 
 
@@ -121,10 +123,16 @@ export const Prestaciones = () => {
                 </div>
               </div>
               <div>
-      <button onClick={handleGeneratePDF}>Generar PDF</button>
-      <PDFViewer ref={pdfViewerRef}>
-        <PDFReport Prestaciones={Prestaciones} />
-      </PDFViewer>
+      <div>
+      <PDFViewerComponent Prestaciones={Prestaciones} />
+      
+    </div>
+    <button>
+        <Link to="/PDF-Prestaciones">
+          Ver PDF
+        </Link>
+      </button>
+
     </div>
               <div className="mx-5">
                 <div className="flex items-center md:justify-end pb-3 m-2">
