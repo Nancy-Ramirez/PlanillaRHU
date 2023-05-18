@@ -2,12 +2,24 @@ import { FaPlusCircle, FaRegEye, FaRegEdit, FaTrashAlt } from "react-icons/fa";
 import { Navbar } from "../../Componentes/NavBar";
 import { Aside } from "../../Componentes/Aside";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Paginacion } from "../../Componentes/Paginacion";
+import { PDFViewer } from '@react-pdf/renderer';
+import PDFReport from '../../Componentes/PDFReport';
 
 export const Prestaciones = () => {
+  //PDF 
+  const pdfViewerRef = useRef(null);
+
+  const handleGeneratePDF = () => {
+    pdfViewerRef.current && pdfViewerRef.current.open(); // Abre el visor de PDF
+  };
+
+
+
+
    //Paginación
    const [dataPage, setDataPage] = useState(4);
    const [currentPage, setCurrentPage] = useState(1);
@@ -18,9 +30,9 @@ export const Prestaciones = () => {
    const primerIndex = sigIndex - dataPage;
  
    //Llamar API
-   const [datosServidor, setDatosServidor] = useState([]);
-   const totalData = datosServidor.length;
-   console.log("Listar datos", datosServidor);
+   const [Prestaciones, setDatosServidor] = useState([]);
+   const totalData = Prestaciones.length;
+   console.log("Listar datos", Prestaciones);
    useEffect(() => {
      async function getInfo() {
        const url = "http://127.0.0.1:8000/empleados/prestaciones"; //AQUI METE LA URL
@@ -108,6 +120,12 @@ export const Prestaciones = () => {
                   </div>
                 </div>
               </div>
+              <div>
+      <button onClick={handleGeneratePDF}>Generar PDF</button>
+      <PDFViewer ref={pdfViewerRef}>
+        <PDFReport Prestaciones={Prestaciones} />
+      </PDFViewer>
+    </div>
               <div className="mx-5">
                 <div className="flex items-center md:justify-end pb-3 m-2">
                   <label htmlFor="table-search" className="sr-only">
@@ -161,7 +179,7 @@ export const Prestaciones = () => {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {datosServidor && datosServidor.map(pres =>{
+                      {Prestaciones && Prestaciones.map(pres =>{
                         return(
                           <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
                         <th

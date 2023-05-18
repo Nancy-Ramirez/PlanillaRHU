@@ -10,6 +10,8 @@ export const AgregarIncapacidades = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
   const [depto, setDepto] = useState(0);
   const [emplead, setEmpleado] = useState();
+  const [fecha_ingreso, setFecha_ingreso] = useState();
+  const [fechafinal, setFechaFin] = useState();
 
 
   //Llamar empleado
@@ -43,6 +45,8 @@ const handlerCargarDatos = function (e) {
   setDepto(depart);
   const empp =datosEmpleado[op-1].id;
   setEmpleado(empp);
+  const fech = datosEmpleado[op-1].fecha_contratacion;
+  setFecha_ingreso(fech);
 };
 
   //!Validaciones de datos
@@ -54,7 +58,7 @@ const handlerCargarDatos = function (e) {
 cantidad_dias: "",
 motivo: "",
 fecha_inicio: "",
-fecha_fin: "",
+fecha_final: "",
   };
 
   //Estado inicial de la alerta
@@ -89,12 +93,11 @@ fecha_fin: "",
       { nombre: "cantidad_dias", value: formulario.cantidad_dias},
       { nombre: "motivo", value: formulario.motivo},      
       { nombre: "fecha_inicio", value: formulario.fecha_inicio},    
-      { nombre: "fecha_fin", value: formulario.fecha_fin},    
+      { nombre: "fecha_final", value: formulario.fecha_final},    
     ];
 
     //Enviamos los datos a la función de validación y recibimos las validaciones
     const datosValidados = ValidarInputs(verificarInputs);
-    console.log(datosValidados);
 
     //Enviamos las validaciones al estado que se va a encargar de mostrarlas en el formulario
     setAlerta(datosValidados);
@@ -109,13 +112,13 @@ fecha_fin: "",
     console.log("Total de validaciones", totalValidaciones.length);
 
     //Validación para enviar los datos al servidor
-    if (totalValidaciones.length >= 16) {
+    if (totalValidaciones.length >= 4) {
       console.log("Enviar al servidor");
       EnviarDatosServer();
     }
   }; //Conexión a API
   function EnviarDatosServer() {
-    const url = "http://127.0.0.1:8000/empleados/empleados/";
+    const url = "http://127.0.0.1:8000/empleados/incapacidad/";
 
     let config = {
       headers: {
@@ -123,15 +126,16 @@ fecha_fin: "",
         'Accept': "application/json",
       },
     };
+    setFechaFin(formulario.fecha_fin);
     const setDataFormulario = {
       id_empleado: emplead,
       cantidad_dias: formulario.cantidad_dias,
       motivo: formulario.motivo,
       fecha_inicio: formulario.fecha_inicio,
-      fecha_fin: formulario.fecha_fin,
+      fecha_final: formulario.fecha_final,
       departamento: depto,
     };
-    console.log(setDataFormulario);
+    console.log("datos",setDataFormulario);
 
     axios
       .post(url, setDataFormulario, config)
@@ -143,7 +147,7 @@ fecha_fin: "",
       timer: 1500,
     });
     setTimeout(() => {
-      Navigate("/empleado");
+      Navigate("/incapacidad");
     }, 1500);
   }
 
@@ -208,7 +212,7 @@ fecha_fin: "",
           }
           break;
         }
-        case "fecha_fin": {
+        case "fecha_final": {
           if (valorInput.value === "" || valorInput.value === null) {
             errors.push({
               valorInput: valorInput.nombre,
@@ -250,7 +254,7 @@ fecha_fin: "",
             <div className="md:col-span-2 lg:col-span-3">
               <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200">
                 <div className="mt-4 pt-4">
-                  <form action="">
+                  <form onSubmit={handleLoginSession}>
                     <div className="grid gap-6 mb-6 ">
                       {/*Empleado */}
                       <div>
@@ -263,37 +267,37 @@ fecha_fin: "",
                         <select
                           id="default"
                           class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
+                          onClick={handlerCargarDatos}
                         >
-                          <option selected>Empleado</option>
-                          <option value="US">Ana Beltran</option>
-                          <option value="CA">Jose Hernandez</option>
-                          <option value="FR">Sofia Ayala</option>
-                          <option value="DE">Karen Hernandez</option>
+                          {datosEmpleado.map((empl, index) => {
+                        return (
+                          <option key={index} id={empl.id} value={empl.id}>
+                            {empl.nombres} {empl.apellidos}
+                          </option>
+                        );
+                      })}
                         </select>
                       </div>
                       {/*Departamento */}
                       <div>
-                        <label
-                          for="first_name"
-                          class="block mb-2 text-sm font-medium text-gray-900 "
-                        >
-                          Departamento
-                        </label>
-                        <select
-                          id="default"
-                          class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
-                        >
-                          <option selected>Departamento</option>
-                          <option value="US">Ventas</option>
-                          <option value="CA">Contabilidad</option>
-                          <option value="FR">Gerencia</option>
-                          <option value="DE">Produccion</option>
-                        </select>
-                      </div>
+                    <label
+                      for="first_name"
+                      class="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Departamento
+                    </label>
+                    <input
+                      type="text"
+                      id="departamento"
+                      value={depto}
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
+                      disabled
+                    />
+                  </div>
                       {/*Motivo*/}
                       <div>
                         <label
-                          for="first_name"
+                          for="motivo"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
                           Motivo:
@@ -301,58 +305,120 @@ fecha_fin: "",
                         <input
                           type="text"
                           id="motivo"
+                          name="motivo"
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          value={formulario.motivo}
+                        onChange={ManejarEventoDeInputs}
                         />
+                         {alerta
+                        .filter(
+                          input =>
+                            input.valorInput === "motivo" &&
+                            input.estado === true
+                        )
+                        .map(message => (
+                          <div className="py-2">
+                            <span className="text-red-500 mt-2">
+                              {message.mensaje}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                       {/*Días */}
                       <div>
                         <label
-                          for="first_name"
+                          for="cantidad_dias"
                           class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
                           Numero de Dias:
                         </label>
                         <input
                           type="number"
-                          id="dias"
+                          id="cantidad_dias"
+                          name="cantidad_dias"
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          value={formulario.cantidad_dias}
+                        onChange={ManejarEventoDeInputs}
                         />
+                        {alerta
+                        .filter(
+                          input =>
+                            input.valorInput === "cantidad_dias" &&
+                            input.estado === true
+                        )
+                        .map(message => (
+                          <div className="py-2">
+                            <span className="text-red-500 mt-2">
+                              {message.mensaje}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                       {/*Fecha inicio */}
                       <div>
                         <label
-                          for="first_name"
+                          for="fecha_inicio"
                           class="block mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
                           Fecha Inicio:
                         </label>
                         <input
-                          name="nacimientoEditPerfil"
+                          name="fecha_inicio"
                           type="date"
-                          id="last_name"
+                          id="fecha_inicio"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                          value={formulario.fecha_inicio}
+                        onChange={ManejarEventoDeInputs}
                         />
+                        {alerta
+                        .filter(
+                          input =>
+                            input.valorInput === "fecha_inicio" &&
+                            input.estado === true
+                        )
+                        .map(message => (
+                          <div className="py-2">
+                            <span className="text-red-500 mt-2">
+                              {message.mensaje}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                       {/*Fecha final */}
                       <div>
                         <label
-                          for="first_name"
+                          for="fecha_final"
                           class="block mb-2 w-32 text-sm font-medium text-gray-900 "
                         >
                           Fecha Fin:
                         </label>
                         <input
-                          name="nacimientoEditPerfil"
+                          name="fecha_final"
                           type="date"
-                          id="last_name"
+                          id="fecha_final"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                          value={formulario.fecha_final}
+                        onChange={ManejarEventoDeInputs}
                         />
+                        {alerta
+                        .filter(
+                          input =>
+                            input.valorInput === "fecha_final" &&
+                            input.estado === true
+                        )
+                        .map(message => (
+                          <div className="py-2">
+                            <span className="text-red-500 mt-2">
+                              {message.mensaje}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                     <div className="mt-6">
                           <button
                             type="submit"
-                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " disabled
+                            class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                           >
                             Guardar
                           </button>

@@ -24,7 +24,7 @@ export const Incapacidades = () => {
   console.log("Listar datos", datosServidor);
   useEffect(() => {
     async function getInfo() {
-      const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
+      const url = "http://127.0.0.1:8000/empleados/incapacidad/"; //AQUI METE LA URL
 
       let config = {
         headers: {
@@ -52,7 +52,7 @@ export const Incapacidades = () => {
   const filtrar = (terminoBusqueda) => {
     var resultadosBusqueda = tablaData.filter((elemento) => {
       if (
-        elemento.nombres
+        elemento.empleado
           .toString()
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase()) ||
@@ -171,13 +171,13 @@ export const Incapacidades = () => {
                         >
                           <div className="pl-3 text-start">
                             <div className="text-base font-semibold text-black">
-                              {inca.nombres} {inca.apellidos}
+                              {inca.empleado}
                             </div>
                           </div>
                         </th>
-                        <td className="px-6 py-4">{inca.dias}</td>
-                        <td className="px-6 py-4">{inca.fechaInicio}</td>
-                        <td className="px-6 py-4">{inca.fechaFin}</td>
+                        <td className="px-6 py-4">{inca.cantidad_dias}</td>
+                        <td className="px-6 py-4">{inca.fecha_inicio}</td>
+                        <td className="px-6 py-4">{inca.fecha_fin}</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"

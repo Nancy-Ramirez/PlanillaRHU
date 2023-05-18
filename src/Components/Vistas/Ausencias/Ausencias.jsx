@@ -23,7 +23,7 @@ export const Ausencias = () => {
   console.log("Listar datos", datosServidor);
   useEffect(() => {
     async function getInfo() {
-      const url = "http://127.0.0.1:8000/empleados/empleados"; //AQUI METE LA URL
+      const url = "http://127.0.0.1:8000/empleados/ausencia/"; //AQUI METE LA URL
 
       let config = {
         headers: {
@@ -51,7 +51,7 @@ export const Ausencias = () => {
   const filtrar = terminoBusqueda => {
     var resultadosBusqueda = tablaData.filter(elemento => {
       if (
-        elemento.nombres
+        elemento.empleado
           .toString()
           .toLowerCase()
           .includes(terminoBusqueda.toLowerCase()) ||
@@ -169,12 +169,12 @@ export const Ausencias = () => {
                               >
                                 <div className="pl-3 text-start">
                                   <div className="text-base font-semibold text-black">
-                                    {aus.nombres} {aus.apellido}
+                                    {aus.id_empleado}
                                   </div>
                                 </div>
                               </th>
-                              <td className="px-6 py-4">{aus.id_departamento}</td>
-                              <td className="px-6 py-4">{aus.dias}</td>
+                              <td className="px-6 py-4">{aus.departamento}</td>
+                              <td className="px-6 py-4">{aus.cantidad_dias}</td>
                               <td className="px-6 py-8 text-center flex justify-evenly content-center">
                                 <Link
                                   to="/inicio"
