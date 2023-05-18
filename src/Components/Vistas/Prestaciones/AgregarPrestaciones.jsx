@@ -3,15 +3,17 @@ import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { AiFillPrinter } from "react-icons/ai";
 import { FiArrowLeft } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const AgregarPrestacion = () => {
+
   //Mandar a llamar empleado
   const [datosEmpleado, setDatosEmpleado] = useState([]);
   const [depto, setDepto] = useState("");
   const [salario, setSalario] = useState(0);
-  const [datosEmpleadUnico, setDatosEmpleadoUnico] = useState([]);
+  const [empleado_id, setEmpleado_id] = useState("");
   console.log(datosEmpleado);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export const AgregarPrestacion = () => {
       let config = {
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
         },
       };
       try {
@@ -45,6 +47,9 @@ export const AgregarPrestacion = () => {
 
     const sala = datosEmpleado[op - 1].salario;
     setSalario(sala);
+
+    const emp = datosEmpleado[op-1].id;
+    setEmpleado_id(emp);
   };
 
   //obtener departamento y salario por medio del id
@@ -183,6 +188,56 @@ export const AgregarPrestacion = () => {
     calcSalLiquido(salDesc, rent);
   };
 
+  //!Guardar datos
+//Navegación del botón luego de validar correctamente
+const Navigate = useNavigate();
+
+
+
+//Función encargada de validar campos
+const handleLoginSession = (e) => {
+  e.preventDefault(); 
+    EnviarDatosServer();
+}; 
+//Conexión a API
+function EnviarDatosServer() {
+  const url = "http://127.0.0.1:8000/empleados/prestaciones/";
+
+  let config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      'Accept': "application/json",
+    },
+  };
+  const setDataFormulario = {
+    salario: salario,
+    isss_laboral: isssLaboral,
+    isss_patronal: isssPatronal,
+    afp_laboral: afpLaboral,
+    afp_patronal: afpPatronal,
+    impuesto_renta: renta,
+    total_descuento: descTotal,
+    sueldo_liquido: salLiquido,
+    empleado: empleado_id,
+    departamento: depto
+  };
+
+  axios
+    .post(url, setDataFormulario, config)
+    .then((response) => 
+    console.log(response.data, "Response--------------")
+    );
+  Swal.fire({
+    icon: "success",
+    title: "Usuario registrado",
+    showConfirmButton: false,
+    timer: 1500,
+  });
+  setTimeout(() => {
+    Navigate("/usuarios");
+  }, 1500);
+}
+
   return (
     <div className="flex">
       <Aside />
@@ -198,7 +253,7 @@ export const AgregarPrestacion = () => {
             </h1>
             <h1></h1>
           </div>
-          <div className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <form onSubmit={handleLoginSession} className="mt-8 mx-4 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="md:col-span-2 lg:col-span-2">
               <div className="h-full py-6 px-6 rounded-xl border border-gray-200 bg-gray-100">
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -210,8 +265,8 @@ export const AgregarPrestacion = () => {
                       Empleado
                     </label>
                     <select
-                      id="empleados"
-                      name="empleados"
+                      id="empleado"
+                      name="empleado"
                       class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5"
                       onClick={handlerCargarDatos}
                     >
@@ -258,13 +313,12 @@ export const AgregarPrestacion = () => {
                   </div>
 
                   <div>
-                    <button
-                      type="submit"
+                    <a
                       onClick={handleCalculosClick}
                       class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                     >
                       Calcular
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -408,13 +462,12 @@ export const AgregarPrestacion = () => {
                     </div>
                     <div className="mt-2">
                       <button
-                        type="submit"
+                      type="submit"
                         class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                       >
                         Guardar
                       </button>
                       <button
-                        type="submit"
                         class="text-gray-900 ml-2 bg-gray-300 border border-teal-800  hover:bg-teal-800  focus:ring-4 focus:outline-none focus:bg-teal-500font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                       >
                         Cancelar
@@ -424,7 +477,7 @@ export const AgregarPrestacion = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

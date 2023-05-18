@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
 export const AgregarIndemnizacion = () => {
+
+  
   const [anios, setAnios] = useState(2);
   const [salario, setSalario] = useState(400);
   const [dias, setDias] = useState(260);
