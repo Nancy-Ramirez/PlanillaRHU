@@ -68,7 +68,8 @@ export const Ausencias = () => {
 
   //Funcion eliminar
   const FuncionEliminar = (id) => {
-    const filteredAus = aus.filter(aus = aus.id !== id);
+
+    const filteredAus = datosServidor.filter(datosServidor = datosServidor.id !== id);
     setDatosServidor(filteredAus);
     Swal.fire({
       title: "¿Estás seguro?",
