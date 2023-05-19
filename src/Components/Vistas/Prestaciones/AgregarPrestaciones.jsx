@@ -170,7 +170,7 @@ export const AgregarPrestacion = () => {
     setAfpLaboral(afpLab.toFixed(2));
 
     // Cálculo del AFP Patronal
-    afpPat = salari * 0.0775;
+    afpPat = salari * 0.0875;
     setAfpPatronal(afpPat.toFixed(2));
 
     // Descuento total

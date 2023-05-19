@@ -3,8 +3,36 @@ import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { FiArrowLeft } from "react-icons/fi";
 import { VscRemove } from "react-icons/vsc";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export const VerEmpleados = () => {
+export const VerEmpleados = (id) => {
+  const [datosEmpleado, setDatosEmpleado] = useState([]);
+
+
+  useEffect(() => {
+    async function getInfoEmp() {
+      const url = "http://127.0.0.1:8000/empleados/empleados/";
+
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': "application/json",
+        },
+      };
+      try {
+        const resp = await axios.get(url, config);
+        console.log(resp.data);
+        setDatosEmpleado(resp.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getInfoEmp();
+  }, []);
+  
+ //Obtener id de empleado
+
   return (
     <div className="flex">
       <Aside />
@@ -24,7 +52,7 @@ export const VerEmpleados = () => {
                 </div>
                 <div className="flex justify-center pr-5 xl:pt-0 lg:pt-0 md:pt-5 sm:pt-5 ">
                     <div className="text-start">
-                        <h3 className="text-sm xl:contents lg:contents md:hidden hidden">Departamento</h3>
+                        <h3 className="text-sm xl:contents lg:contents md:hidden hidden">{datosEmpleado[id].id_departamento}</h3>
                         <h2 className="font-semibold text-xl">
                             Ventas
                         </h2>      

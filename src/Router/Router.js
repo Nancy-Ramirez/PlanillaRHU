@@ -37,8 +37,8 @@ export default function Router() {
         {/*Empleado */}
         <Route path="/empleado" element={<Empleado />} />
         <Route path="/agregar-empleado" element={<AgregarEmpleados/>} />
-        <Route path="/ver-empleado" element={<VerEmpleados/>} />
-        <Route path="/editar-empleado" element={<EditarEmpleado/>} />
+        <Route path="/ver-empleado/:id" element={<VerEmpleados/>} />
+        <Route path="/editar-empleado/:id" element={<EditarEmpleado/>} />
 
         
 
