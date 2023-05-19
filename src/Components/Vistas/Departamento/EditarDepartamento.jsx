@@ -1,7 +1,13 @@
+import { useNavigate, useParams } from "react-router";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
+import { useState } from "react";
 
 export const EditarDepartamento = () => {
+
+  const naigate = useNavigate();
+  const { id } = useParams();
+  const [datosDepto, setDatosDepto] = useState({})
   return (
     <div className="flex">
       <Aside />

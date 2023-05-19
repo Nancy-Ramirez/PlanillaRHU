@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { async } from "q";
+import { post } from "jquery";
 
 export const Ausencias = () => {
   //Paginación
@@ -67,11 +68,15 @@ export const Ausencias = () => {
     setDatosServidor(resultadosBusqueda);
   };
 
-  //Funcion eliminar
-  const FuncionEliminar = (id) => {
+  const FuncionEliminar = async (aus) => {
+    const url = "http://127.0.0.1:8000/empleados/ausencia/"
+   await axios.delete(url + aus.id + aus);
+   setDatosServidor(datosServidor.filter(a=> a.id !== a.id))
 
-    const filteredAus = datosServidor.filter(datosServidor = datosServidor.id !== id);
-    setDatosServidor(filteredAus);
+  }
+  //Funcion eliminar
+  {/*
+   const FuncionEliminar =  async aus => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -80,9 +85,8 @@ export const Ausencias = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, estoy seguro",
-    }).then(result => {
+    }).then( async (result) => {
       if (result.isConfirmed) {
-        async function deleteInfo() {
         try{
           //realizando la solicitud delete al servidor
           const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
@@ -108,11 +112,12 @@ export const Ausencias = () => {
               "error"
             );  
         };
-        deleteInfo();
-      }
+      
       }
     });
   };
+ */}
+ 
 
   return (
     <div className="flex">
@@ -227,7 +232,7 @@ export const Ausencias = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <button className="btn btn-eliminar " onClick={() => FuncionEliminar(aus.id)}>
+                                <button className="btn btn-eliminar " onClick={() => FuncionEliminar(aus)}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
                                   </span>
