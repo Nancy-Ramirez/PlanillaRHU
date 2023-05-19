@@ -95,7 +95,7 @@ export const Indemnizacion = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then(result => {
       if (result.isConfirmed) {
-        eliminarIndemnizacion();
+        eliminarIndemnizacion(id);
         Swal.fire("Eliminado", "La indemnización ha sido removida", "success");
       }
     });

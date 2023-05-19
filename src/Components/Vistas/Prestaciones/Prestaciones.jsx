@@ -107,7 +107,7 @@ export const Prestaciones = () => {
        confirmButtonText: "Si, estoy seguro",
      }).then((result) => {
        if (result.isConfirmed) {
-        eliminarPrestaciones();
+        eliminarPrestaciones(id);
          Swal.fire("Eliminado", "Las prestaciones del empleado han sido removidas", "success");
        }
      });
