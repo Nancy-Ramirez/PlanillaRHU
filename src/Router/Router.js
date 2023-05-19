@@ -61,6 +61,7 @@ export default function Router() {
         {/*Indeminizacion*/}
         <Route path="/indemnizaciones" element={<Indemnizacion />} />
         <Route path="/agregar-indemnizacion" element={<AgregarIndemnizacion/>}/>
+        <Route path="/ver-indemnizacion/:id" element={<AgregarIndemnizacion/>}/>
 
         {/*Prestaciones*/}
         <Route path="/prestaciones" element={<Prestaciones />} />
