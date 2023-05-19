@@ -177,7 +177,7 @@ export const Ausencias = () => {
                               <td className="px-6 py-4">{aus.cantidad_dias}</td>
                               <td className="px-6 py-8 text-center flex justify-evenly content-center">
                                 <Link
-                                  to="/inicio"
+                                  to={`/ver-ausencia/${aus.id}`}
                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                 >
                                   <button className="btn btn-ver">
@@ -186,8 +186,8 @@ export const Ausencias = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <a
-                                  href="/inicio"
+                                <Link
+                                  to={`/editar-ausencia/${aus.id}`}
                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                 >
                                   <button className="btn btn-editar ">
@@ -195,7 +195,7 @@ export const Ausencias = () => {
                                       <FaRegEdit />
                                     </span>
                                   </button>
-                                </a>
+                                </Link>
                                 <button className="btn btn-eliminar " onClick={FuncionEliminar}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />

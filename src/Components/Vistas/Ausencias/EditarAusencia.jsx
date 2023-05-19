@@ -178,6 +178,7 @@ export const EditarAusencia = () => {
                           value={datosAusencia.id_empleado}
                           class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           onChange={ManejarEventoDeInputs}
+                          disabled
                         />
                       </div>
                       {/*Departamento */}
@@ -190,10 +191,11 @@ export const EditarAusencia = () => {
                         </label>
                         <input
                           type="text"
-                          id="editDepto"
-                          name="editDepto"
+                          id="departamento"
+                          name="departamento"
                           class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           value={datosAusencia.departamento}
+                          disabled
                         />
                       </div>
                       {/*Dias */}
