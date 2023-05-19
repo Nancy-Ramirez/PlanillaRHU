@@ -71,7 +71,7 @@ export const Ausencias = () => {
   const FuncionEliminar = async (aus) => {
     const url = "http://127.0.0.1:8000/empleados/ausencia/"
    await axios.delete(url + aus.id + aus);
-   setDatosServidor(datosServidor.filter(a=> a.id !== a.id))
+   setDatosServidor(datosServidor.filter(a=> a.id !== aus.id))
 
   }
   //Funcion eliminar
