@@ -1,240 +1,19 @@
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export const EditarIncapacidad = () => {
-    const [datosEmpleado, setDatosEmpleado] = useState([]);
-    const [depto, setDepto] = useState(0);
-    const [emplead, setEmpleado] = useState();
-    const [fecha_ingreso, setFecha_ingreso] = useState();
-    const [fechafinal, setFechaFin] = useState();
-  
-  
-    //Llamar empleado
-  useEffect(() => {
-    async function getInfoEmp() {
-      const url = "http://127.0.0.1:8000/empleados/empleados/";
-  
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-          'Accept': "application/json",
-        },
-      };
-      try {
-        const resp = await axios.get(url, config);
-        console.log(resp.data);
-        setDatosEmpleado(resp.data);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    getInfoEmp();
-  }, []);
-  
-  //Obtener id de empleado
-  
-  const handlerCargarDatos = function (e) {
-    const op = e.target.value;
-    console.log(op);
-    const depart = datosEmpleado[op - 1].id_departamento;
-    setDepto(depart);
-    const empp =datosEmpleado[op-1].id;
-    setEmpleado(empp);
-    const fech = datosEmpleado[op-1].fecha_contratacion;
-    setFecha_ingreso(fech);
-  };
-  
-    //!Validaciones de datos
-    //Navegación del botón luego de validar correctamente
-    const Navigate = useNavigate();
-  
-    //Estado inicial del formulario
-    const datosIncapacidad = {
-  cantidad_dias: "",
-  motivo: "",
-  fecha_inicio: "",
-  fecha_final: "",
-    };
-  
-    //Estado inicial de la alerta
-    const initialStateInput = {
-      valorInput: "",
-      mensaje: "",
-      estado: false,
-    };
-  
-    //Estado para manejar los valores del formulario
-    const [formulario, setformulario] = useState(datosEmpleado);
-  
-    //Estado para manejar las alertas de validación
-    const [alerta, setAlerta] = useState([initialStateInput]);
-  
-    //Funcion para obtener la información a los inputs
-    const ManejarEventoDeInputs = (event) => {
-      //La propiedad target del event nos permitirá obtener los valores
-      const name = event.target.name;
-      const value = event.target.value;
-  
-      //Actualizamos los valores capturados a nuestro estado de formulario
-      setformulario({ ...formulario, [name]: value });
-    };
-  
-    //Función encargada de validar campos
-    const handleLoginSession = (e) => {
-      e.preventDefault();
-  
-      //Ordenamos los datos para enviarlos a la validación
-      let verificarInputs = [
-        { nombre: "cantidad_dias", value: formulario.cantidad_dias},
-        { nombre: "motivo", value: formulario.motivo},      
-        { nombre: "fecha_inicio", value: formulario.fecha_inicio},    
-        { nombre: "fecha_final", value: formulario.fecha_final},    
-      ];
-  
-      //Enviamos los datos a la función de validación y recibimos las validaciones
-      const datosValidados = ValidarInputs(verificarInputs);
-  
-      //Enviamos las validaciones al estado que se va a encargar de mostrarlas en el formulario
-      setAlerta(datosValidados);
-  
-      //Obtener el total de validación
-      const totalValidaciones = datosValidados
-        .filter((input) => input.estado === false)
-        .map((estado) => {
-          return false;
-        });
-  
-      console.log("Total de validaciones", totalValidaciones.length);
-  
-      //Validación para enviar los datos al servidor
-      if (totalValidaciones.length >= 4) {
-        console.log("Enviar al servidor");
-        EnviarDatosServer();
-      }
-    }; //Conexión a API
-    function EnviarDatosServer() {
-      const url = "http://127.0.0.1:8000/empleados/incapacidad/";
-  
-      let config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          'Accept': "application/json",
-        },
-      };
-      setFechaFin(formulario.fecha_fin);
-      const setDataFormulario = {
-        id_empleado: emplead,
-        cantidad_dias: formulario.cantidad_dias,
-        motivo: formulario.motivo,
-        fecha_inicio: formulario.fecha_inicio,
-        fecha_final: formulario.fecha_final,
-        departamento: depto,
-      };
-      console.log("datos",setDataFormulario);
-  
-      axios
-        .post(url, setDataFormulario, config)
-        .then((response) => console.log(response.data, "Response--------------"));
-      Swal.fire({
-        icon: "success",
-        title: "Incapacidad registrada",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-        Navigate("/incapacidad");
-      }, 1500);
-    }
-  
-    const ValidarInputs = (data) => {
-      console.log(data);
-  
-      //Declaramos un arreglo el cual se va a encargar de guardar las validaciones
-      let errors = [];
-  
-      //Recibidos los datos a validar
-      const datosDelFormulario = data;
-  
-      //Proceso de validación
-      datosDelFormulario.map((valorInput) => {
-        //eslint-disable-next-line default-case
-        switch (valorInput.nombre) {
-          case "cantidad_dias": {
-            if (valorInput.value === "" || valorInput.value === null) {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "Ingrese un numero valido",
-                estado: true,
-              });
-            } else {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "",
-                estado: false,
-              });
-            }
-            break;
-          }
-          case "motivo": {
-            if (valorInput.value === "" || valorInput.value === null) {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "Ingrese un motivo valido",
-                estado: true,
-              });
-            } else {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "",
-                estado: false,
-              });
-            }
-            break;
-          }
-          case "fecha_inicio": {
-            if (valorInput.value === "" || valorInput.value === null) {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "Ingrese una fecha valida",
-                estado: true,
-              });
-            } else {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "",
-                estado: false,
-              });
-            }
-            break;
-          }
-          case "fecha_final": {
-            if (valorInput.value === "" || valorInput.value === null) {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "Ingrese una fecha valida",
-                estado: true,
-              });
-            } else {
-              errors.push({
-                valorInput: valorInput.nombre,
-                mensaje: "",
-                estado: false,
-              });
-            }
-            break;
-          }
-        }
-      });
-      //retornamos el total de validaciones
-      return errors;
-    };
-    console.log(formulario);
-  
+    const navigate = useNavigate();  
+    const { id } = useParams();
+    const [datosIncapacidad, setDatosIncapacidad] = useState({});
+    const [motivoIncapacidad, setMotivoIncapacidad] = useState("");
+    const [cantDias, setCantDias] = useState(0);
+    const [fechaInicio, setFechaInicio] = useState(0);
+    const [fechaFinal, setFechaFinal] = useState(0);
     return (
       <div className="flex">
         <Aside />
@@ -254,46 +33,41 @@ export const EditarIncapacidad = () => {
               <div className="md:col-span-2 lg:col-span-3">
                 <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200">
                   <div className="mt-4 pt-4">
-                    <form onSubmit={handleLoginSession}>
+                    <form>
                       <div className="grid gap-6 mb-6 ">
                         {/*Empleado */}
                         <div>
-                          <label
-                            for="first_name"
-                            class="block mb-2 text-sm font-medium text-gray-900 "
-                          >
-                         Empleado
-                          </label>
-                          <select
-                            id="default"
-                            class="bg-gray-50 border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-col2 focus:border-col2 block w-full p-2.5 "
-                            onClick={handlerCargarDatos}
-                          >
-                            {datosEmpleado.map((empl, index) => {
-                          return (
-                            <option key={index} id={empl.id} value={empl.id}>
-                              {empl.nombres} {empl.apellidos}
-                            </option>
-                          );
-                        })}
-                          </select>
-                        </div>
+                        <label
+                          htmlFor="id_empleado"
+                          className="leading-7 text-sm text-gray-600"
+                        >
+                          Empleado
+                        </label>
+                        <input
+                          type="text"
+                          id="id_empleado"
+                          name="id_empleado"
+                          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          disabled
+                        />
+                      </div>
                         {/*Departamento */}
                         <div>
-                      <label
-                        for="first_name"
-                        class="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Departamento
-                      </label>
-                      <input
-                        type="text"
-                        id="departamento"
-                        value={depto}
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5"
-                        disabled
-                      />
-                    </div>
+                        <label
+                          htmlFor="departamento"
+                          className="leading-7 text-sm text-gray-600"
+                        >
+                          Departamento
+                        </label>
+                        <input
+                          type="text"
+                          id="departamento"
+                          name="departamento"
+                          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          
+                          disabled
+                        />
+                      </div>
                         {/*Motivo*/}
                         <div>
                           <label
@@ -307,22 +81,9 @@ export const EditarIncapacidad = () => {
                             id="motivo"
                             name="motivo"
                             className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                            value={formulario.motivo}
-                          onChange={ManejarEventoDeInputs}
+                           
                           />
-                           {alerta
-                          .filter(
-                            input =>
-                              input.valorInput === "motivo" &&
-                              input.estado === true
-                          )
-                          .map(message => (
-                            <div className="py-2">
-                              <span className="text-red-500 mt-2">
-                                {message.mensaje}
-                              </span>
-                            </div>
-                          ))}
+                          
                         </div>
                         {/*Días */}
                         <div>
@@ -337,22 +98,8 @@ export const EditarIncapacidad = () => {
                             id="cantidad_dias"
                             name="cantidad_dias"
                             className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                            value={formulario.cantidad_dias}
-                          onChange={ManejarEventoDeInputs}
+                           
                           />
-                          {alerta
-                          .filter(
-                            input =>
-                              input.valorInput === "cantidad_dias" &&
-                              input.estado === true
-                          )
-                          .map(message => (
-                            <div className="py-2">
-                              <span className="text-red-500 mt-2">
-                                {message.mensaje}
-                              </span>
-                            </div>
-                          ))}
                         </div>
                         {/*Fecha inicio */}
                         <div>
@@ -367,22 +114,9 @@ export const EditarIncapacidad = () => {
                             type="date"
                             id="fecha_inicio"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            value={formulario.fecha_inicio}
-                          onChange={ManejarEventoDeInputs}
                           />
-                          {alerta
-                          .filter(
-                            input =>
-                              input.valorInput === "fecha_inicio" &&
-                              input.estado === true
-                          )
-                          .map(message => (
-                            <div className="py-2">
-                              <span className="text-red-500 mt-2">
-                                {message.mensaje}
-                              </span>
-                            </div>
-                          ))}
+                        
+                        
                         </div>
                         {/*Fecha final */}
                         <div>
@@ -397,22 +131,8 @@ export const EditarIncapacidad = () => {
                             type="date"
                             id="fecha_final"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                            value={formulario.fecha_final}
-                          onChange={ManejarEventoDeInputs}
+                           
                           />
-                          {alerta
-                          .filter(
-                            input =>
-                              input.valorInput === "fecha_final" &&
-                              input.estado === true
-                          )
-                          .map(message => (
-                            <div className="py-2">
-                              <span className="text-red-500 mt-2">
-                                {message.mensaje}
-                              </span>
-                            </div>
-                          ))}
                         </div>
                       </div>
                       <div className="mt-6">

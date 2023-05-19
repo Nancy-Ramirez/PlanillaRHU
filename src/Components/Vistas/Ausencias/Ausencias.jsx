@@ -23,7 +23,7 @@ export const Ausencias = () => {
   let [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);
-  useEffect(() => {
+  
     async function getInfo() {
       const url = "http://127.0.0.1:8000/empleados/ausencia/"; //AQUI METE LA URL
 
@@ -41,9 +41,9 @@ export const Ausencias = () => {
         console.error(err);
       }
     }
-    getInfo();
-  }, []);
-
+    useEffect(() => {
+      getInfo();
+    }, []);
   //Busqueda
 
   const handleChange = e => {
@@ -68,15 +68,26 @@ export const Ausencias = () => {
     setDatosServidor(resultadosBusqueda);
   };
 
-  const FuncionEliminar = async (aus) => {
-    const url = "http://127.0.0.1:8000/empleados/ausencia/"
-   await axios.delete(url + aus.id + aus);
-   setDatosServidor(datosServidor.filter(a=> a.id !== aus.id))
+  const eliminarRegistro = async (id) => {
+    
+    try{
+      const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
+      await axios.delete(url);
+      getInfo();
+    }catch (err) {
+      console.error(err);
+      Swal.fire(
+        "Error",
+        "Ocurrió un error al eliminar la ausencia del empleado",
+        "error"
+      );  
+  };
+  
 
   }
   //Funcion eliminar
-  {/*
-   const FuncionEliminar =  async aus => {
+  
+   const FuncionEliminar =  async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -87,36 +98,16 @@ export const Ausencias = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then( async (result) => {
       if (result.isConfirmed) {
-        try{
           //realizando la solicitud delete al servidor
-          const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
-          let config = {
-            headers: {
-              "Content-type": "application/json",
-              Accept: "application/json",
-            },
-          };
-          
-            await axios.delete(url, config);
-
-         
-          const filteredAus = datosServidor.filter((datos) => datos.id !== id);
-          setDatosServidor(filteredAus);
+          eliminarRegistro(id);    
 
           Swal.fire("Eliminado", "El registro de la ausencia del empleado ha sido removido", "success");
-        } catch (err) {
-            console.error(err);
-            Swal.fire(
-              "Error",
-              "Ocurrió un error al eliminar la ausencia del empleado",
-              "error"
-            );  
-        };
+        
       
       }
     });
   };
- */}
+ 
  
 
   return (
