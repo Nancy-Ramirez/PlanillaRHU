@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
-import { event } from "jquery";
+import axios from "axios";
 
 
 export const EditarAusencia = () => {
+  const [datosAusencia, setDatosAusencia] = useState([]);
+  const {id} = useParams();
+ //editar ausencia
+ useEffect(() => {
+  async function getInfoAusencia() {
+    const url = "http://127.0.0.1:8000/empleados/ausencia/"+id;
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      console.log(resp.data);
+      setDatosAusencia(resp.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getInfoAusencia();
+}, []);
+
+
 
   //!Validaciones de datos
   const Navigate = useNavigate();
@@ -150,9 +175,9 @@ export const EditarAusencia = () => {
                           type="text"
                           id="editEmpleado"
                           name="editEmpleado"
+                          value={datosAusencia.id_empleado}
                           class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                          value={formulario.editCantidad_dias}
-                      onChange={ManejarEventoDeInputs}
+                          onChange={ManejarEventoDeInputs}
                         />
                       </div>
                       {/*Departamento */}
@@ -168,6 +193,7 @@ export const EditarAusencia = () => {
                           id="editDepto"
                           name="editDepto"
                           class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          value={datosAusencia.departamento}
                         />
                       </div>
                       {/*Dias */}
@@ -182,6 +208,7 @@ export const EditarAusencia = () => {
                           type="number"
                           id="editCantidad_dias"
                           name="editCantidad_dias"
+                          value={datosAusencia.cantidad_dias}
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         />
                         {alerta
@@ -210,8 +237,9 @@ export const EditarAusencia = () => {
                           name="editFecha_inicio"
                           type="date"
                           id="editFecha_inicio"
+                          value={datosAusencia.fecha_inicio}
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                          value={formulario.editFecha_inicio}
+                          
                       onChange={ManejarEventoDeInputs}
                         />
                          {alerta
@@ -240,8 +268,9 @@ export const EditarAusencia = () => {
                           name="editFecha_final"
                           type="date"
                           id="editFecha_final"
+                          value={datosAusencia.fecha_final}
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                          value={formulario.editFecha_final}
+                       
                           onChange={ManejarEventoDeInputs}
                         />
                         {alerta
