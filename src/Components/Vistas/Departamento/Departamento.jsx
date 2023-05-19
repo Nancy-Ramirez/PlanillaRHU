@@ -23,26 +23,27 @@ export const Departamento = () => {
   const [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);
-  useEffect(() => {
-    async function getInfo() {
-      const url = "http://127.0.0.1:8000/empleados/departamento"; //AQUI METE LA URL
-
-      let config = {
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-        },
-      };
-      try {
-        const resp = await axios.get(url, config);
-        setDatosServidor(resp.data);
-        setTablaData(resp.data);
-      } catch (err) {
-        console.error(err);
-      }
+  const getInfo = async () => {
+    const url = "http://127.0.0.1:8000/empleados/departamento"; // AQUÍ METE LA URL
+  
+    let config = {
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      setDatosServidor(resp.data);
+      setTablaData(resp.data);
+    } catch (err) {
+      console.error(err);
     }
+  };
+  
+  useEffect(() => {
     getInfo();
-  },[]);
+  }, []);
 
   //Busqueda
 
@@ -65,7 +66,18 @@ export const Departamento = () => {
   }
 
   //Funcion eliminar
-  const FuncionEliminar = () => {
+
+   // Función para eliminar un registro
+   const eliminarRegistro = async (id) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/empleados/departamento/${id}`);
+      getInfo();
+      // Actualizar la lista después de eliminar el registro
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const FuncionEliminar = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -76,6 +88,7 @@ export const Departamento = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then((result) => {
       if (result.isConfirmed) {
+        eliminarRegistro(id)
         Swal.fire("Eliminado", "El departamento ha sido removido", "success");
       }
     });
@@ -168,7 +181,7 @@ export const Departamento = () => {
                               </span>
                             </button>
                           </a>
-                          <button className="btn btn-eliminar" onClick={FuncionEliminar}>
+                          <button className="btn btn-eliminar" onClick={()=>FuncionEliminar(dep.id)}>
                             <span className="text-rojo-eliminar text-xl">
                               <FaTrashAlt />
                             </span>
