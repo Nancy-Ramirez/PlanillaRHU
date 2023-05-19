@@ -50,7 +50,7 @@ export default function Router() {
         {/*Ausencias*/}
         <Route path="/ausencia" element={<Ausencias />} />
         <Route path="/agregar-ausencia" element={<AgregarAusencia/>} />
-        <Route path="/editar-ausencia" element={<EditarAusencia/>} />
+        <Route path="/editar-ausencia/:id" element={<EditarAusencia/>} />
         <Route path="/ver-ausencia" element={<VerAusencia/>} />
 
         {/*Usuarios */}
