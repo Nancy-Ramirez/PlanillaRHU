@@ -45,18 +45,18 @@ export default function Router() {
         {/*Incapacidades */}
         <Route path="/incapacidad" element={<Incapacidades />} />
         <Route path="/agregar-incapacidad" element={<AgregarIncapacidades/>} />
-        <Route path="/editar-incapacidad" element={<EditarIncapacidad/>} />
+        <Route path="/editar-incapacidad/:id" element={<EditarIncapacidad/>} />
 
         {/*Ausencias*/}
         <Route path="/ausencia" element={<Ausencias />} />
         <Route path="/agregar-ausencia" element={<AgregarAusencia/>} />
         <Route path="/editar-ausencia/:id" element={<EditarAusencia/>} />
-        <Route path="/ver-ausencia" element={<VerAusencia/>} />
+        <Route path="/ver-ausencia/:id" element={<VerAusencia/>} />
 
         {/*Usuarios */}
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/agregar-usuarios" element={<AgregarUsuario/>} />
-        <Route path="/editar-usuarios" element={<EditarUsuarios/>} />
+        <Route path="/editar-usuarios/:id" element={<EditarUsuarios/>} />
 
         {/*Indeminizacion*/}
         <Route path="/indemnizaciones" element={<Indemnizacion />} />
@@ -65,13 +65,12 @@ export default function Router() {
         {/*Prestaciones*/}
         <Route path="/prestaciones" element={<Prestaciones />} />
         <Route path="/agregar-prestaciones" element={<AgregarPrestacion />} />
-        <Route path="/ver-prestaciones" element={<VerPrestaciones />} />
         <Route path="/PDF-Prestaciones" element={<PDFViewerComponent />} />
 
         {/*Departamentos*/}
         <Route path="/departamento" element={<Departamento />} />
         <Route path="/agregar-departamento" element={<AgregarDepartamento />} />
-        <Route path="/editar-departamento" element={<EditarDepartamento/>} />
+        <Route path="/editar-departamento/:id" element={<EditarDepartamento/>} />
       </Routes>
     </BrowserRouter>
   );
