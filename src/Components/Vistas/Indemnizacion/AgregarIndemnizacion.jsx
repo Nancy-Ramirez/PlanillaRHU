@@ -8,8 +8,8 @@ import Swal from "sweetalert2";
 
 export const AgregarIndemnizacion = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
-  const [depto, setDepto] = useState(0);
-  const [salari, setSalario] = useState(0);
+  const [depto, setDepto] = useState();
+  const [salari, setSalario] = useState();
   const [emplead, setEmpleado] = useState();
   const [fechaInicial, setFechaInicial] = useState();
   const [fechaFinal, setFechaFinal] = useState();

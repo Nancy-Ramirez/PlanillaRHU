@@ -171,13 +171,13 @@ export const Incapacidades = () => {
                         >
                           <div className="pl-3 text-start">
                             <div className="text-base font-semibold text-black">
-                              {inca.empleado}
+                              {inca.id_empleado}
                             </div>
                           </div>
                         </th>
                         <td className="px-6 py-4">{inca.cantidad_dias}</td>
                         <td className="px-6 py-4">{inca.fecha_inicio}</td>
-                        <td className="px-6 py-4">{inca.fecha_fin}</td>
+                        <td className="px-6 py-4">{inca.fecha_final}</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
                           <Link
                             to="/inicio"

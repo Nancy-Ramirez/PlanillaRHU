@@ -160,7 +160,7 @@ export const Usuarios = () => {
                                 <td className="px-6 py-4">{usu.email}</td>
                                 <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">
                                   <a
-                                    href="/editar-departamento"
+                                    href="/editar-usuarios"
                                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                   >
                                     <button className="btn btn-editar ">
