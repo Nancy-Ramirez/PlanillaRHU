@@ -201,16 +201,6 @@ export const Prestaciones = () => {
                         <td className="px-6 py-4">$ {pres.salario}</td>
                         <td className="px-6 py-4">$ {pres.sueldo_liquido}</td>
                         <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <Link
-                            to="/ver-prestaciones"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-ver">
-                              <span className="text-azul-ver text-2xl">
-                                <FaRegEye/>
-                              </span>
-                            </button>
-                          </Link>
                           <a
                             href="/inicio"
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

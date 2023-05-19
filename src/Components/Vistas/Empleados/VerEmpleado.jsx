@@ -9,6 +9,7 @@ import axios from "axios";
 export const VerEmpleados = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
   const [sexo, setSexo] = useState();
+  const [estadoCivil, setEstadoCivil] = useState();
   const { id } = useParams();
 
   useEffect(() => {
@@ -32,13 +33,31 @@ export const VerEmpleados = () => {
     getInfoEmp();
   }, []);
 
-  if(datosEmpleado.sexo == "F"){
+
+  useEffect(()=>{
+    if(datosEmpleado.sexo == "F"){
     const sex = "Femenino";
     setSexo(sex);
   } else if(datosEmpleado.sexo == "M"){
     const sex = "Masculino";
     setSexo(sex);
   }
+
+  if(datosEmpleado.estado_civil === "casado"){
+    const est = "Casado";
+    setEstadoCivil(est);
+  } else if(datosEmpleado.estado_civil === "soltero"){
+    const est = "Soltero";
+    setEstadoCivil(est);
+  } else if(datosEmpleado.estado_civil === "viudo"){
+    const est = "Viudo";
+    setEstadoCivil(est);
+  } else if(datosEmpleado.estado_civil === "divorciado"){
+    const est = "Divorciado";
+    setEstadoCivil(est);
+  }
+  })
+  
   
  //Obtener id de empleado
 console.log(datosEmpleado);
@@ -130,7 +149,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Estado civil: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>{datosEmpleado.estado_civil}</h3>
+                      <h3>{estadoCivil}</h3>
                     </div>
                   </div>
 
@@ -140,7 +159,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Sexo: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>{datosEmpleado.sexo}</h3>
+                      <h3>{sexo}</h3>
                     </div>
                   </div>
 
@@ -150,7 +169,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Dirección: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>Urb. Las Delicias 1, pasaje 25 poligono H #54, San Tecla</h3>
+                      <h3>{datosEmpleado.direccion}</h3>
                     </div>
                   </div>
 
@@ -166,7 +185,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Salario: </h3>
                     </div>
                     <div className="w-3/3">
-                      <h3>$ 580.90</h3>
+                      <h3>$ {datosEmpleado.salario}</h3>
                     </div>
                   </div>
 
@@ -186,7 +205,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Tipo de contrato: </h3>
                     </div>
                     <div className="w-3/3">
-                      <h3>Servicios profesionales</h3>
+                      <h3>{datosEmpleado.tipo_contrato}</h3>
                     </div>
                   </div>
 
@@ -196,19 +215,10 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">Fecha de inicio: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>25 / febrero / 2022</h3>
+                      <h3>{datosEmpleado.fecha_contratacion}</h3>
                     </div>
                   </div>
 
-                  {/*NIT */}
-                  <div className="flex justify-start pt-5">
-                    <div className="w-1/3">
-                      <h3 className="font-bold">NIT: </h3>
-                    </div>
-                    <div className="w-3/3">
-                      <h3>1106-101895-101-7</h3>
-                    </div>
-                  </div>
 
                   {/*ISSS */}
                   <div className="flex justify-start pt-5">
@@ -216,7 +226,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">ISSS: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>015425784</h3>
+                      <h3>{datosEmpleado.no_isss}</h3>
                     </div>
                   </div>
 
@@ -226,7 +236,7 @@ console.log(datosEmpleado);
                       <h3 className="font-bold">AFP: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>021548756387</h3>
+                      <h3>{datosEmpleado.no_afp}</h3>
                     </div>
                   </div>
 
