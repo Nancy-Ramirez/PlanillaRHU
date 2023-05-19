@@ -101,7 +101,12 @@ export const Ausencias = () => {
 
           Swal.fire("Eliminado", "El registro de la ausencia del empleado ha sido removido", "success");
         } catch (err) {
-
+            console.error(err);
+            Swal.fire(
+              "Error",
+              "Ocurrió un error al eliminar la ausencia del empleado",
+              "error"
+            );  
         };
         deleteInfo();
       }
