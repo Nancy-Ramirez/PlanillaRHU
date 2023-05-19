@@ -6,6 +6,7 @@ import { Paginacion } from "../../Componentes/Paginacion";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { async } from "q";
 
 export const Ausencias = () => {
   //Paginación
@@ -81,7 +82,29 @@ export const Ausencias = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then(result => {
       if (result.isConfirmed) {
-        Swal.fire("Eliminado", "El registro de la ausencia del empleado ha sido removido", "success");
+        async function deleteInfo() {
+        try{
+          //realizando la solicitud delete al servidor
+          const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
+          let config = {
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+            },
+          };
+          
+            await axios.delete(url, config);
+
+         
+          const filteredAus = datosServidor.filter((datos) => datos.id !== id);
+          setDatosServidor(filteredAus);
+
+          Swal.fire("Eliminado", "El registro de la ausencia del empleado ha sido removido", "success");
+        } catch (err) {
+
+        };
+        deleteInfo();
+      }
       }
     });
   };
