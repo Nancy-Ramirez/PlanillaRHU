@@ -20,7 +20,7 @@ export const Ausencias = () => {
   const primerIndex = sigIndex - dataPage;
 
   //Llamar API
-  const [datosServidor, setDatosServidor] = useState([]);
+  let [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);
   useEffect(() => {
