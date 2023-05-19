@@ -232,7 +232,7 @@ export const Ausencias = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <button className="btn btn-eliminar " onClick={() => FuncionEliminar(aus)}>
+                                <button className="btn btn-eliminar " onClick={() => FuncionEliminar(aus.id)}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
                                   </span>
