@@ -21,7 +21,7 @@ export const Indemnizacion = () => {
   const [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);
-  useEffect(() => {
+ 
     async function getInfo() {
       const url = "http://127.0.0.1:8000/empleados/indemnizacion/"; //AQUI METE LA URL
 
@@ -39,8 +39,9 @@ export const Indemnizacion = () => {
         console.error(err);
       }
     }
-    getInfo();
-  }, []);
+    useEffect(() => {
+      getInfo();
+    }, []);
 
   //Busqueda
 
@@ -65,9 +66,25 @@ export const Indemnizacion = () => {
     });
     setDatosServidor(resultadosBusqueda);
   };
+  const eliminarIndemnizacion = async (id) => {
+    
+    try{
+      const url = `http://127.0.0.1:8000/empleados/indemnizacion/${id}`;
+      await axios.delete(url);
+      getInfo();
+    }catch (err) {
+      console.error(err);
+      Swal.fire(
+        "Error",
+        "Ocurrió un error al eliminar indemnizacion del empleado",
+        "error"
+      );  
+  };
+  
 
+  }
   //Funcion eliminar
-  const FuncionEliminar = () => {
+  const FuncionEliminar = (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -78,6 +95,7 @@ export const Indemnizacion = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then(result => {
       if (result.isConfirmed) {
+        eliminarIndemnizacion();
         Swal.fire("Eliminado", "La indemnización ha sido removida", "success");
       }
     });
@@ -202,7 +220,7 @@ export const Indemnizacion = () => {
                                     </span>
                                   </button>
                                 </a>
-                                <button className="btn btn-eliminar" onClick={FuncionEliminar}>
+                                <button className="btn btn-eliminar" onClick={ ()=> FuncionEliminar(indem.id)}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
                                   </span>

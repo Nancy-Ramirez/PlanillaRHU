@@ -9,6 +9,7 @@ import { Paginacion } from "../../Componentes/Paginacion";
 import { PDFViewer } from '@react-pdf/renderer';
 import PDFReport from '../../Componentes/PDFReport';
 import PDFViewerComponent from "../../Componentes/PDFViewerComponent";
+import { async } from "q";
 
 export const Prestaciones = () => {
   //PDF 
@@ -32,7 +33,7 @@ export const Prestaciones = () => {
    const [Prestaciones, setDatosServidor] = useState([]);
    const totalData = Prestaciones.length;
    console.log("Listar datos", Prestaciones);
-   useEffect(() => {
+  
      async function getInfo() {
        const url = "http://127.0.0.1:8000/empleados/prestaciones"; //AQUI METE LA URL
  
@@ -50,9 +51,10 @@ export const Prestaciones = () => {
          console.error(err);
        }
      }
-     getInfo();
-   },[]);
- 
+     useEffect(() => {
+      getInfo();
+    },[]);
+  
    //Busqueda
  
    const handleChange = (e) => {
@@ -76,9 +78,25 @@ export const Prestaciones = () => {
      });
      setDatosServidor(resultadosBusqueda);
    }
- 
+   const eliminarPrestaciones = async (id) => {
+    
+    try{
+      const url = `http://127.0.0.1:8000/empleados/prestaciones/${id}`;
+      await axios.delete(url);
+      getInfo();
+    }catch (err) {
+      console.error(err);
+      Swal.fire(
+        "Error",
+        "Ocurrió un error al eliminar prestaciones del empleado",
+        "error"
+      );  
+  };
+  
+
+  }
    //Funcion eliminar
-   const FuncionEliminar = () => {
+   const FuncionEliminar = async (id) => {
      Swal.fire({
        title: "¿Estás seguro?",
        text: "Esta acción no se puede revertir",
@@ -89,6 +107,7 @@ export const Prestaciones = () => {
        confirmButtonText: "Si, estoy seguro",
      }).then((result) => {
        if (result.isConfirmed) {
+        eliminarPrestaciones();
          Swal.fire("Eliminado", "Las prestaciones del empleado han sido removidas", "success");
        }
      });
@@ -212,7 +231,7 @@ export const Prestaciones = () => {
                               
                             </button>
                           </a>
-                          <button className="btn btn-eliminar" onClick={FuncionEliminar}>
+                          <button className="btn btn-eliminar" onClick={() => FuncionEliminar(pres.id)}>
                             <span className="text-rojo-eliminar text-xl">
                               <FaTrashAlt/>
                             </span>

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Paginacion } from "../../Componentes/Paginacion";
+import { async } from "q";
 
 export const Incapacidades = () => {
 
@@ -22,7 +23,7 @@ export const Incapacidades = () => {
   const [datosServidor, setDatosServidor] = useState([]);
   const totalData = datosServidor.length;
   console.log("Listar datos", datosServidor);
-  useEffect(() => {
+ 
     async function getInfo() {
       const url = "http://127.0.0.1:8000/empleados/incapacidad/"; //AQUI METE LA URL
 
@@ -40,8 +41,9 @@ export const Incapacidades = () => {
         console.error(err);
       }
     }
-    getInfo();
-  },[]);
+    useEffect(() => {
+      getInfo();
+    },[]);
 
   //Busqueda
 
@@ -67,8 +69,22 @@ export const Incapacidades = () => {
     setDatosServidor(resultadosBusqueda);
   }
 
+  const eliminarIncapacidad = async (id) => {
+    try {
+      const url = `http://127.0.0.1:8000/empleados/incapacidad/${id}`;
+      await axios.delete(url);
+      getInfo();
+    }catch (err) {
+      console.error(err);
+      Swal.fire(
+        "Error",
+        "Ocurrió un error al eliminar la incapacidad del empleado",
+        "error"
+      );  
+  };
+  }
   //Funcion eliminar
-  const FuncionEliminar = () => {
+  const FuncionEliminar = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -79,6 +95,7 @@ export const Incapacidades = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then((result) => {
       if (result.isConfirmed) {
+        eliminarIncapacidad(id);
         Swal.fire("Eliminado", "El registro de incapacidad del empleado ha sido removido", "success");
       }
     });
@@ -200,7 +217,7 @@ export const Incapacidades = () => {
                               
                             </button>
                           </a>
-                          <button className="btn btn-eliminar" onClick={FuncionEliminar}>
+                          <button className="btn btn-eliminar" onClick={() => FuncionEliminar(inca.id)}>
                             <span className="text-rojo-eliminar text-xl">
                               <FaTrashAlt/>
                             </span>
