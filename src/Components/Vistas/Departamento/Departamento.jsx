@@ -181,11 +181,6 @@ export const Departamento = () => {
                               </span>
                             </button>
                           </a>
-                          <button className="btn btn-eliminar" onClick={()=>FuncionEliminar(dep.id)}>
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt />
-                            </span>
-                          </button>
                         </td>
                       </tr>
                         )

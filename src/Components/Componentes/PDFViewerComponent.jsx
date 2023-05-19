@@ -5,6 +5,7 @@ import { PDFViewer } from "@react-pdf/renderer";
 import PDFReport from "./PDFReport";
 import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+import { FiArrowLeft } from "react-icons/fi";
 
 const PDFViewerContainer = () => {
   {
@@ -29,45 +30,51 @@ const PDFViewerContainer = () => {
 
     return (
       <React.Fragment>
-        <div className="px-5">
+        <div className="px-5 pr-128">
           <div className="">
-            <div className="" ref={conponentPDF} style={{ width: "50%" }}>
-              <div className="text-start pl-24">
-                <h5 className="mt-10 text-2xl underline pb-8">PRESTACIONES</h5>
+          <Link
+                  to="/prestaciones"
+                  className="pl-5 text-3xl text-gray-500"
+                >
+                  <FiArrowLeft />
+                </Link>
+            <div className="" ref={conponentPDF} style={{ width: "100%" }}>
+              <div className="text-center w-full">
+                <h5 className="mt-5 text-2xl underline pb-8">PRESTACIONES</h5>
               </div>
-              <div className="px-5">
+              <div className="px-5 pr-10">
                 <table className="w-full text-sm text-left text-black  pt-10 ">
                   <thead className="text-xs text-black bg-gray-400 uppercase text-center">
                     <tr className="w-auto space-x-5">
                       <th scope="col" className="px-2 py-3"></th>
-                      <th scope="col" className="px-24 py-3">
+                      <th scope="col" className="px-18 mx-5 py-3">
                         Nombre
                       </th>
-                      <th scope="col" className="px-8 py-3">
+                      <th scope="col" className="px-7 py-3">
                         Departamento
                       </th>
-                      <th scope="col" className="px-8 py-3">
+                      <th scope="col" className="px-7 py-3">
                         Salario
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="px-5 py-3">
                         ISSS Laboral
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="px-5 py-3">
                         ISSS Patronal
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="px-5 py-3">
                         AFP Laboral
                       </th>
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="px-5 py-3">
                         AFP Patronal
                       </th>
-                      <th scope="col" className="px-8 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Total descuento
                       </th>
-                      <th scope="col" className="px-8 py-3">
+                      <th scope="col" className="px-7 py-3">
                         Renta
                       </th>
-                      <th scope="col" className="px-8 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Salario liquido
                       </th>
                     </tr>
@@ -115,9 +122,9 @@ const PDFViewerContainer = () => {
               </div>
             </div>
           </div>
-          <div className="d-grid d-md-flex justify-content-md-end mb-3">
-            <button className="" onClick={generatePDF}>
-              PDF
+          <div className="pt-5 pb-3 ">
+            <button className="flex justify-start text-white bg-col4 border-0 py-2 px-8" onClick={generatePDF}>
+              GUARDAR PDF
             </button>
           </div>
         </div>
