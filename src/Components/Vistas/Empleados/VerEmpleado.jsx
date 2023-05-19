@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
 import { FiArrowLeft } from "react-icons/fi";
@@ -6,13 +6,14 @@ import { VscRemove } from "react-icons/vsc";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const VerEmpleados = (id) => {
+export const VerEmpleados = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
-
+  const [sexo, setSexo] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     async function getInfoEmp() {
-      const url = "http://127.0.0.1:8000/empleados/empleados/";
+      const url = "http://127.0.0.1:8000/empleados/empleados/"+id;
 
       let config = {
         headers: {
@@ -30,9 +31,17 @@ export const VerEmpleados = (id) => {
     }
     getInfoEmp();
   }, []);
+
+  if(datosEmpleado.sexo == "F"){
+    const sex = "Femenino";
+    setSexo(sex);
+  } else if(datosEmpleado.sexo == "M"){
+    const sex = "Masculino";
+    setSexo(sex);
+  }
   
  //Obtener id de empleado
-
+console.log(datosEmpleado);
   return (
     <div className="flex">
       <Aside />
@@ -47,14 +56,14 @@ export const VerEmpleados = (id) => {
                     <FiArrowLeft />
                   </Link>
                   <h1 className=" px-5 text-center text-3xl text-black">
-                  Alejandro Steven Marroquin
+                  {datosEmpleado.nombres} {datosEmpleado.apellidos}
                 </h1>
                 </div>
                 <div className="flex justify-center pr-5 xl:pt-0 lg:pt-0 md:pt-5 sm:pt-5 ">
                     <div className="text-start">
-                        <h3 className="text-sm xl:contents lg:contents md:hidden hidden">{datosEmpleado[id].id_departamento}</h3>
+                        <h3 className="text-sm xl:contents lg:contents md:hidden hidden">Departamento</h3>
                         <h2 className="font-semibold text-xl">
-                            Ventas
+                            {datosEmpleado.id_departamento}
                         </h2>      
                     </div>
                     <div className="xl:text-3xl lg:text-3xl text-2xl rotate-90 -mt-1">
@@ -63,7 +72,7 @@ export const VerEmpleados = (id) => {
                     <div className="xl:pl-8 lg:pl-8 md:pl-3 pl-3 text-start">
                         <h3 className=" text-sm xl:contents lg:contents md:hidden hidden">Cargo</h3>
                         <h2 className="font-semibold text-xl">
-                            Asesor
+                            {datosEmpleado.cargo}
                         </h2>      
                     </div>
                 </div>
@@ -81,7 +90,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">Nombre completo: </h3>
                     </div>
                     <div className="w-3/3">
-                      <h3>Alejandro Steven Marroquin</h3>
+                      <h3>{datosEmpleado.nombres} {datosEmpleado.apellidos}</h3>
                     </div>
                   </div>
 
@@ -91,7 +100,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">DUI: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>05614585-2</h3>
+                      <h3>{datosEmpleado.documento_identidad}</h3>
                     </div>
                   </div>
 
@@ -101,7 +110,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">Teléfono: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>6058-1254</h3>
+                      <h3>{datosEmpleado.telefono}</h3>
                     </div>
                   </div>
 
@@ -111,7 +120,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">Email: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>Alejandro@gmail.com</h3>
+                      <h3>{datosEmpleado.correo}</h3>
                     </div>
                   </div>
 
@@ -121,7 +130,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">Estado civil: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>Casado</h3>
+                      <h3>{datosEmpleado.estado_civil}</h3>
                     </div>
                   </div>
 
@@ -131,7 +140,7 @@ export const VerEmpleados = (id) => {
                       <h3 className="font-bold">Sexo: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>Masculino</h3>
+                      <h3>{datosEmpleado.sexo}</h3>
                     </div>
                   </div>
 
