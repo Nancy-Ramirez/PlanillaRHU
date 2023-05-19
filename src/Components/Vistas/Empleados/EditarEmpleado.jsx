@@ -26,6 +26,9 @@ export const EditarEmpleado = () => {
             $("#salario").mask("0000000.00", {reverse: true});
         });
     });
+
+    //para editar
+    
   return (
     <div className="flex">
       <Aside />

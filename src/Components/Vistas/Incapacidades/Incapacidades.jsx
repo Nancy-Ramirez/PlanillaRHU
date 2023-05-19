@@ -206,8 +206,8 @@ export const Incapacidades = () => {
                               </span>
                             </button>
                           </Link>
-                          <a
-                            href="/inicio"
+                          <Link
+                            to={`/editar-incapacidad/${inca.id}`}
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                           >
                             <button className="btn btn-editar ">
@@ -216,7 +216,7 @@ export const Incapacidades = () => {
                               </span>
                               
                             </button>
-                          </a>
+                          </Link>
                           <button className="btn btn-eliminar" onClick={() => FuncionEliminar(inca.id)}>
                             <span className="text-rojo-eliminar text-xl">
                               <FaTrashAlt/>
