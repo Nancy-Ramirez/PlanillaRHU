@@ -35,33 +35,41 @@ const PDFViewerContainer = () => {
               <div className="text-center">
                 <h5 className="mt-2">PRESTACIONES</h5>
               </div>
-              <div ref={conponentPDF} style={{ width: "100%" }}>
-              <table class="table-fixed">
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Artist</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-      <td>Malcolm Lockyer</td>
-      <td>1961</td>
-    </tr>
-    <tr>
-      <td>Witchy Woman</td>
-      <td>The Eagles</td>
-      <td>1972</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-    </tr>
-  </tbody>
-</table>
+              <div className="px-5" ref={conponentPDF} style={{ width: "50%" }}>
+                <table className="w-full text-sm text-left text-black  dark:text-gray-400 pt-10 ">
+                  <thead className="text-xs text-black uppercase text-center">
+                    <tr className="w-auto space-x-5">
+                      <th></th>
+                      <th scope="col" className="px-6 py-3">Nombre</th>
+                      <th scope="col" className="px-6 py-3">Departamento</th>
+                      <th scope="col" className="px-6 py-3">Salario</th>
+                      <th scope="col" className="px-6 py-3">ISSS Laboral</th>
+                      <th scope="col" className="px-6 py-3">ISSS Patronal</th>
+                      <th scope="col" className="px-6 py-3">AFP Laboral</th>
+                      <th scope="col" className="px-6 py-3">AFP Patronal</th>
+                      <th scope="col" className="px-6 py-3">Total descuento</th>
+                      <th scope="col" className="px-6 py-3">Renta</th>
+                      <th scope="col" className="px-6 py-3">Salario liquido</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userData.map((uData, index) => (
+                      <tr key={index}>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{index + 1}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.empleado}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.departamento}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.salario}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.isss_laboral}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.isss_patronal}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.afp_laboral}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.afp_patronal}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.total_descuento}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.impuesto_renta}</td>
+                        <td className="px-6 py-8 text-center flex justify-center space-x-11 content-center">{uData.sueldo_liquido}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
               <div className="d-grid d-md-flex justify-content-md-end mb-3">
                 <button className="" onClick={generatePDF}>
