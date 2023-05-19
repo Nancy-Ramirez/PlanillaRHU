@@ -1,71 +1,64 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import axios from "axios";
-import { async } from "q";
 import Swal from "sweetalert2";
 
-
 export const EditarAusencia = () => {
-  const Navigate = useNavigate();
-  const [datosAusencia, setDatosAusencia] = useState([]);
-  const {id} = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [datosAusencia, setDatosAusencia] = useState({});
   const [cantidadDias, setCantidadDias] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFinal, setFechaFinal] = useState("");
- //editar ausencia
- useEffect(() => {
-  async function getInfoAusencia() {
-    const url = "http://127.0.0.1:8000/empleados/ausencia/"+id;
 
-    let config = {
-      headers: {
-        "Content-Type": "application/json",
-        'Accept': "application/json",
-      },
-    };
+  // Obtener datos de la ausencia al cargar el componente
+  useEffect(() => {
+    async function getInfoAusencia() {
+      const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
+
+      try {
+        const resp = await axios.get(url);
+        setDatosAusencia(resp.data);
+        setCantidadDias(resp.data.cantidad_dias);
+        setFechaInicio(resp.data.fecha_inicio);
+        setFechaFinal(resp.data.fecha_final);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getInfoAusencia();
+  }, [id]);
+
+  const handleEditar = async (e) => {
+    e.preventDefault();
+
+    const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
+
     try {
-      const resp = await axios.get(url, config);
-      console.log(resp.data);
-      setDatosAusencia(resp.data);
-      setCantidadDias(resp.data.cantidad_dias);
-      setFechaInicio(resp.data.fecha_inicio);
-      setFechaFinal(resp.data.fecha_final);
+      const resp = await axios.put(url, {
+        cantidad_dias: cantidadDias,
+        fecha_inicio: fechaInicio,
+        fecha_final: fechaFinal,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Ausencia Modificada",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      setTimeout(() => {
+        navigate("/ausencia");
+      }, 1500);
     } catch (err) {
       console.error(err);
     }
-  }
-  getInfoAusencia();
-}, [id]);
+  };
 
-const handleEditar = async(e) => {
-  e.preventDefault();
-  const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
-
-  try {
-    const resp = await axios.put(url, {
-      cantidad_dias: cantidadDias,
-      fecha_inicio: fechaInicio,
-      fecha_final: fechaFinal,
-    });
-    console.log(resp.data);
-    Swal.fire({
-      icon: "success",
-      title: "Ausencia Modificada",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    setTimeout(() => {
-      Navigate("/ausencia");
-    }, 1500);
-    
-}
-catch (err) {
-  console.error(err);
-}
-};
   return (
     <div className="flex">
       <Aside />
@@ -84,13 +77,13 @@ catch (err) {
             <div className="md:col-span-2 lg:col-span-3">
               <div className="bg-gray-100 h-full py-6 px-6 rounded-xl border border-gray-200">
                 <div className="mt-4 pt-4">
-                  <form action="" >
-                    <div className="grid gap-6 mb-6 ">
+                  <form onSubmit={handleEditar}>
+                    <div className="grid gap-6 mb-6">
                       {/*empleado */}
                       <div>
                         <label
-                          for="text"
-                          class="leading-7 text-sm text-gray-600"
+                          htmlFor="id_empleado"
+                          className="leading-7 text-sm text-gray-600"
                         >
                           Empleado
                         </label>
@@ -99,15 +92,15 @@ catch (err) {
                           id="id_empleado"
                           name="id_empleado"
                           value={datosAusencia.id_empleado}
-                          class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           disabled
                         />
                       </div>
                       {/*Departamento */}
                       <div>
                         <label
-                          for="text"
-                          class="leading-7 text-sm text-gray-600"
+                          htmlFor="departamento"
+                          className="leading-7 text-sm text-gray-600"
                         >
                           Departamento
                         </label>
@@ -115,7 +108,7 @@ catch (err) {
                           type="text"
                           id="departamento"
                           name="departamento"
-                          class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           value={datosAusencia.departamento}
                           disabled
                         />
@@ -123,8 +116,8 @@ catch (err) {
                       {/*Dias */}
                       <div>
                         <label
-                          for="cantidad_dias"
-                          class="flex mb-2 w-32 text-sm font-medium text-gray-900 "
+                          htmlFor="cantidad_dias"
+                          className="flex mb-2 w-32 text-sm font-medium text-gray-900"
                         >
                           Numero de Dias:
                         </label>
@@ -132,15 +125,16 @@ catch (err) {
                           type="number"
                           id="cantidad_dias"
                           name="cantidad_dias"
-                          value={datosAusencia.cantidad_dias}
+                          value={cantidadDias}
+                          onChange={(e) => setCantidadDias(e.target.value)}
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         />
                       </div>
                       {/*Fecha inicio */}
                       <div>
                         <label
-                          for="fecha_inicio"
-                          class="block mb-2 w-32 text-sm font-medium text-gray-900 "
+                          htmlFor="fecha_inicio"
+                          className="block mb-2 w-32 text-sm font-medium text-gray-900"
                         >
                           Fecha Inicio:
                         </label>
@@ -148,18 +142,16 @@ catch (err) {
                           name="fecha_inicio"
                           type="date"
                           id="fecha_inicio"
-                          value={datosAusencia.fecha_inicio}
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                          
-               
+                          value={fechaInicio}
+                          onChange={(e) => setFechaInicio(e.target.value)}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         />
-                      
                       </div>
                       {/*Fecha final */}
                       <div>
                         <label
-                          for="fecha_final"
-                          class="block mb-2 w-32 text-sm font-medium text-gray-900 "
+                          htmlFor="fecha_final"
+                          className="block mb-2 w-32 text-sm font-medium text-gray-900"
                         >
                           Fecha Fin:
                         </label>
@@ -167,19 +159,16 @@ catch (err) {
                           name="fecha_final"
                           type="date"
                           id="fecha_final"
-                          value={datosAusencia.fecha_final}
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                       
-                          
+                          value={fechaFinal}
+                          onChange={(e) => setFechaFinal(e.target.value)}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         />
-                        
-                      
                       </div>
                     </div>
                     <div className="mt-6">
                       <button
                         type="submit"
-                        class="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                        className="text-white  align-middle bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:bg-teal-500 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                       >
                         Guardar Cambios
                       </button>

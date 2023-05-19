@@ -13,7 +13,7 @@ export const AgregarIndemnizacion = () => {
 
   useEffect(() => {
     async function getInfoEmp() {
-      const url = "http://127.0.0.1:8000/empleados/empleados/"+id;
+      const url = "http://127.0.0.1:8000/empleados/indemnizacion/"+id;
 
       let config = {
         headers: {
@@ -52,16 +52,13 @@ export const AgregarIndemnizacion = () => {
           </div>
           <div className="xl:flex lg:flex xl:justify-between lg:justify-between ">
                 <div className="px-10 pt-10 w-full xl:w-1/2 lg:w-1/2 pb-5  ">
-                    <h2 className="text-gray-500 text-2xl pb-5 ">
-                        Datos personales
-                    </h2>
                   {/*Nombre completo*/}
                   <div className="flex justify-start">
                     <div className="w-1/3">
                       <h3 className="font-bold">Nombre completo: </h3>
                     </div>
                     <div className="w-3/3">
-                      <h3>{datosEmpleado.nombres} {datosEmpleado.apellidos}</h3>
+                      <h3>{datosEmpleado.nombres} </h3>
                     </div>
                   </div>
 
