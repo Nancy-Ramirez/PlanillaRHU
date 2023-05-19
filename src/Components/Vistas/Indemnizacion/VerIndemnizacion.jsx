@@ -6,7 +6,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export const AgregarIndemnizacion = () => {
+export const VerIndemnizacion = () => {
   const [datosEmpleado, setDatosEmpleado] = useState([]);
 
   const { id } = useParams();

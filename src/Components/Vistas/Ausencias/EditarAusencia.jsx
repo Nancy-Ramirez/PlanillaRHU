@@ -38,12 +38,12 @@ export const EditarAusencia = () => {
     const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
 
     try {
-      const resp = await axios.put(url, {
+      const resp = await axios.post(url, {
         cantidad_dias: cantidadDias,
         fecha_inicio: fechaInicio,
         fecha_final: fechaFinal,
       });
-      setDatosAusencia(resp.data);
+      console.log(resp.data);
 
       Swal.fire({
         icon: "success",
