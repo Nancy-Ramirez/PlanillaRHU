@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Paginacion } from "../../Componentes/Paginacion";
-import { PDFViewer } from '@react-pdf/renderer';
-import PDFReport from '../../Componentes/PDFReport';
+import { PDFViewer } from "@react-pdf/renderer";
+import PDFReport from "../../Componentes/PDFReport";
 import PDFViewerComponent from "../../Componentes/PDFViewerComponent";
 import { async } from "q";
 
 export const Prestaciones = () => {
-  //PDF 
+  //PDF
   const [showPDFViewer, setShowPDFViewer] = useState(false);
   const pdfViewerRef = useRef(null);
 
@@ -20,99 +20,100 @@ export const Prestaciones = () => {
     setShowPDFViewer(true);
   };
 
-   //Paginación
-   const [dataPage, setDataPage] = useState(4);
-   const [currentPage, setCurrentPage] = useState(1);
-   const [tablaData, setTablaData] = useState([]);
-   const [busqueda, setBusqueda] = useState("");
- 
-   const sigIndex = currentPage * dataPage;
-   const primerIndex = sigIndex - dataPage;
- 
-   //Llamar API
-   const [Prestaciones, setDatosServidor] = useState([]);
-   const totalData = Prestaciones.length;
-   console.log("Listar datos", Prestaciones);
-  
-     async function getInfo() {
-       const url = "http://127.0.0.1:8000/empleados/prestaciones"; //AQUI METE LA URL
- 
-       let config = {
-         headers: {
-           "Content-type": "application/json",
-           Accept: "application/json",
-         },
-       };
-       try {
-         const resp = await axios.get(url, config);
-         setDatosServidor(resp.data);
-         setTablaData(resp.data);
-       } catch (err) {
-         console.error(err);
-       }
-     }
-     useEffect(() => {
-      getInfo();
-    },[]);
-  
-   //Busqueda
- 
-   const handleChange = (e) => {
-     setBusqueda(e.target.value);
-     filtrar(e.target.value);
-   }
-   const filtrar = (terminoBusqueda) => {
-     var resultadosBusqueda = tablaData.filter((elemento) => {
-       if (
-         elemento.empleado
-           .toString()
-           .toLowerCase()
-           .includes(terminoBusqueda.toLowerCase()) ||
-         elemento.id_departamento
-           .toString()
-           .toLowerCase()
-           .includes(terminoBusqueda.toLowerCase())
-       ) {
-         return elemento;
-       }
-     });
-     setDatosServidor(resultadosBusqueda);
-   }
-   const eliminarPrestaciones = async (id) => {
-    
-    try{
+  //Paginación
+  const [dataPage, setDataPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [tablaData, setTablaData] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
+
+  const sigIndex = currentPage * dataPage;
+  const primerIndex = sigIndex - dataPage;
+
+  //Llamar API
+  const [Prestaciones, setDatosServidor] = useState([]);
+  const totalData = Prestaciones.length;
+  console.log("Listar datos", Prestaciones);
+
+  async function getInfo() {
+    const url = "http://127.0.0.1:8000/empleados/prestaciones"; //AQUI METE LA URL
+
+    let config = {
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    try {
+      const resp = await axios.get(url, config);
+      setDatosServidor(resp.data);
+      setTablaData(resp.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  useEffect(() => {
+    getInfo();
+  }, []);
+
+  //Busqueda
+
+  const handleChange = e => {
+    setBusqueda(e.target.value);
+    filtrar(e.target.value);
+  };
+  const filtrar = terminoBusqueda => {
+    var resultadosBusqueda = tablaData.filter(elemento => {
+      if (
+        elemento.empleado
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase()) ||
+        elemento.id_departamento
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setDatosServidor(resultadosBusqueda);
+  };
+  const eliminarPrestaciones = async id => {
+    try {
       const url = `http://127.0.0.1:8000/empleados/prestaciones/${id}`;
       await axios.delete(url);
       getInfo();
-    }catch (err) {
+    } catch (err) {
       console.error(err);
       Swal.fire(
         "Error",
         "Ocurrió un error al eliminar prestaciones del empleado",
         "error"
-      );  
+      );
+    }
   };
-  
+  //Funcion eliminar
+  const FuncionEliminar = async id => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede revertir",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, estoy seguro",
+    }).then(result => {
+      if (result.isConfirmed) {
+        eliminarPrestaciones();
+        Swal.fire(
+          "Eliminado",
+          "Las prestaciones del empleado han sido removidas",
+          "success"
+        );
+      }
+    });
+  };
 
-  }
-   //Funcion eliminar
-   const FuncionEliminar = async (id) => {
-     Swal.fire({
-       title: "¿Estás seguro?",
-       text: "Esta acción no se puede revertir",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#3085d6",
-       cancelButtonColor: "#d33",
-       confirmButtonText: "Si, estoy seguro",
-     }).then((result) => {
-       if (result.isConfirmed) {
-        eliminarPrestaciones(id);
-         Swal.fire("Eliminado", "Las prestaciones del empleado han sido removidas", "success");
-       }
-     });
-   };
- 
   return (
     <div className="flex">
       <Aside />
@@ -123,7 +124,9 @@ export const Prestaciones = () => {
             <section className=" w-full relative overflow-x-auto shadow-md sm:rounded-lg">
               <div className="flex justify-between pt-5">
                 <div></div>
-                <h1 className=" text-center text-3xl text-black">PRESTACIONES</h1>
+                <h1 className=" text-center text-3xl text-black">
+                  PRESTACIONES
+                </h1>
                 <div className="">
                   <div className="flex items-center md:justify-end px-5 m-2">
                     <a
@@ -131,26 +134,25 @@ export const Prestaciones = () => {
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       <button className="btn btn-agregar rounded-full">
-                        <span className="text-col4 text-4xl" > 
-                        <FaPlusCircle /></span>
+                        <span className="text-col4 text-4xl">
+                          <FaPlusCircle />
+                        </span>
                       </button>
                     </a>
                   </div>
                 </div>
               </div>
               <div>
-      <div>
-      
-      
-    </div>
-    <button>
-        <Link to="/PDF-Prestaciones">
-          Ver PDF
-        </Link>
-      </button>
+                <div className="mx-5 flex justify-between">
+              <div >
+                  <button className="flex justify-start text-white bg-col4 border-0 py-2 px-8 rounded-lg">
+                    <Link to="/PDF-Prestaciones">Generar Boleta</Link>
+                  </button>
+                </div>
+                <div>
+                  <div className="mx-5"></div>
 
-    </div>
-              <div className="mx-5">
+                </div>
                 <div className="flex items-center md:justify-end pb-3 m-2">
                   <label htmlFor="table-search" className="sr-only">
                     Buscar
@@ -181,6 +183,7 @@ export const Prestaciones = () => {
                     />
                   </div>
                 </div>
+                </div>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                   <table className="w-full text-sm text-left text-black  dark:text-gray-400 ">
                     <thead className="text-xs text-black uppercase text-center bg-col2">
@@ -203,47 +206,57 @@ export const Prestaciones = () => {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {Prestaciones && Prestaciones.map(pres =>{
-                        return(
-                          <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
-                        <th
-                          scope="row"
-                          className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
-                        >
-                          <div className="pl-3 text-start">
-                            <div className="text-base font-semibold text-black">
-                              {pres.empleado}
-                            </div>
-                          </div>
-                        </th>
-                        <td className="px-6 py-4">{pres.departamento}</td>
-                        <td className="px-6 py-4">$ {pres.salario}</td>
-                        <td className="px-6 py-4">$ {pres.sueldo_liquido}</td>
-                        <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                          <a
-                            href="/inicio"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <button className="btn btn-editar ">
-                              <span  className="text-amarillo-editar text-2xl"> 
-                              <FaRegEdit/>
-                              </span>
-                              
-                            </button>
-                          </a>
-                          <button className="btn btn-eliminar" onClick={() => FuncionEliminar(pres.id)}>
-                            <span className="text-rojo-eliminar text-xl">
-                              <FaTrashAlt/>
-                            </span>
-                          </button>
-                        </td>
-                      </tr>
-                        )
-                      }).slice(primerIndex, sigIndex)}
+                      {Prestaciones &&
+                        Prestaciones.map(pres => {
+                          return (
+                            <tr className="bg-gray-100 border-black  text-black text-center hover:bg-gray-200 hover:text-dark">
+                              <th
+                                scope="row"
+                                className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                              >
+                                <div className="pl-3 text-start">
+                                  <div className="text-base font-semibold text-black">
+                                    {pres.empleado}
+                                  </div>
+                                </div>
+                              </th>
+                              <td className="px-6 py-4">{pres.departamento}</td>
+                              <td className="px-6 py-4">$ {pres.salario}</td>
+                              <td className="px-6 py-4">
+                                $ {pres.sueldo_liquido}
+                              </td>
+                              <td className="px-6 py-8 text-center flex justify-evenly content-center">
+                                <a
+                                  href="/inicio"
+                                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                >
+                                  <button className="btn btn-editar ">
+                                    <span className="text-amarillo-editar text-2xl">
+                                      <FaRegEdit />
+                                    </span>
+                                  </button>
+                                </a>
+                                <button
+                                  className="btn btn-eliminar"
+                                  onClick={() => FuncionEliminar(pres.id)}
+                                >
+                                  <span className="text-rojo-eliminar text-xl">
+                                    <FaTrashAlt />
+                                  </span>
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        }).slice(primerIndex, sigIndex)}
                     </tbody>
                   </table>
                 </div>
-                <Paginacion dataPage={dataPage} currentPage={currentPage} setCurrentPage={setCurrentPage} totalData={totalData}/>
+                <Paginacion
+                  dataPage={dataPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalData={totalData}
+                />
               </div>
             </section>
           </main>
