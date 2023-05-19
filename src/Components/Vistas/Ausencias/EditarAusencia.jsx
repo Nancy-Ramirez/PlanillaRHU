@@ -43,7 +43,7 @@ export const EditarAusencia = () => {
         fecha_inicio: fechaInicio,
         fecha_final: fechaFinal,
       });
-      setDatosAusencia(resp.data);
+      
 
       Swal.fire({
         icon: "success",

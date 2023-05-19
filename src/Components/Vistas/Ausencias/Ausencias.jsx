@@ -67,7 +67,9 @@ export const Ausencias = () => {
   };
 
   //Funcion eliminar
-  const FuncionEliminar = () => {
+  const FuncionEliminar = (id) => {
+    const filteredAus = aus.filter(aus = aus.id !== id);
+    setDatosServidor(filteredAus);
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -196,7 +198,7 @@ export const Ausencias = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <button className="btn btn-eliminar " onClick={FuncionEliminar}>
+                                <button className="btn btn-eliminar " onClick={() => FuncionEliminar(aus.id)}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
                                   </span>
