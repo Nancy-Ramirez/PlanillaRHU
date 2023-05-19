@@ -146,7 +146,7 @@ export const Prestaciones = () => {
                 <div className="mx-5 flex justify-between">
               <div >
                   <button className="flex justify-start text-white bg-col4 border-0 py-2 px-8 rounded-lg">
-                    <Link to="/PDF-Prestaciones">Generar PDF</Link>
+                    <Link to="/PDF-Prestaciones">Generar Boleta</Link>
                   </button>
                 </div>
                 <div>
