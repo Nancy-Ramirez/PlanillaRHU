@@ -173,8 +173,8 @@ export const EditarAusencia = () => {
                         </label>
                         <input
                           type="text"
-                          id="editEmpleado"
-                          name="editEmpleado"
+                          id="id_empleado"
+                          name="id_empleado"
                           value={datosAusencia.id_empleado}
                           class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           onChange={ManejarEventoDeInputs}
@@ -208,8 +208,8 @@ export const EditarAusencia = () => {
                         </label>
                         <input
                           type="number"
-                          id="editCantidad_dias"
-                          name="editCantidad_dias"
+                          id="cantidad_dias"
+                          name="cantidad_dias"
                           value={datosAusencia.cantidad_dias}
                           className="block p-2 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                         />
@@ -236,9 +236,9 @@ export const EditarAusencia = () => {
                           Fecha Inicio:
                         </label>
                         <input
-                          name="editFecha_inicio"
+                          name="fecha_inicio"
                           type="date"
-                          id="editFecha_inicio"
+                          id="fecha_inicio"
                           value={datosAusencia.fecha_inicio}
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                           
@@ -267,9 +267,9 @@ export const EditarAusencia = () => {
                           Fecha Fin:
                         </label>
                         <input
-                          name="editFecha_final"
+                          name="fecha_final"
                           type="date"
-                          id="editFecha_final"
+                          id="fecha_final"
                           value={datosAusencia.fecha_final}
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                        
