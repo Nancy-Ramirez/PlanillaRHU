@@ -1,14 +1,20 @@
 import React, {useEffect, useState } from "react";
 import { Aside } from "../../Componentes/Aside";
 import { Navbar } from "../../Componentes/NavBar";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import axios from "axios";
+import { async } from "q";
+import Swal from "sweetalert2";
 
 
 export const EditarAusencia = () => {
+  const Navigate = useNavigate();
   const [datosAusencia, setDatosAusencia] = useState([]);
   const {id} = useParams();
+  const [cantidadDias, setCantidadDias] = useState("");
+  const [fechaInicio, setFechaInicio] = useState("");
+  const [fechaFinal, setFechaFinal] = useState("");
  //editar ausencia
  useEffect(() => {
   async function getInfoAusencia() {
@@ -24,17 +30,42 @@ export const EditarAusencia = () => {
       const resp = await axios.get(url, config);
       console.log(resp.data);
       setDatosAusencia(resp.data);
+      setCantidadDias(resp.data.cantidad_dias);
+      setFechaInicio(resp.data.fecha_inicio);
+      setFechaFinal(resp.data.fecha_final);
     } catch (err) {
       console.error(err);
     }
   }
   getInfoAusencia();
-}, []);
+}, [id]);
 
+const handleEditar = async(e) => {
+  e.preventDefault();
+  const url = `http://127.0.0.1:8000/empleados/ausencia/${id}`;
 
-
-
- 
+  try {
+    const resp = await axios.put(url, {
+      cantidad_dias: cantidadDias,
+      fecha_inicio: fechaInicio,
+      fecha_final: fechaFinal,
+    });
+    console.log(resp.data);
+    Swal.fire({
+      icon: "success",
+      title: "Ausencia Modificada",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    setTimeout(() => {
+      Navigate("/ausencia");
+    }, 1500);
+    
+}
+catch (err) {
+  console.error(err);
+}
+};
   return (
     <div className="flex">
       <Aside />
