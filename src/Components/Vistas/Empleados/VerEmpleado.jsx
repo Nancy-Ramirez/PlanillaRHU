@@ -139,7 +139,7 @@ export const VerEmpleados = () => {
                       <h3 className="font-bold">Tipo de pago: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>Quincenal</h3>
+                      <h3>Mensual</h3>
                     </div>
                   </div>
 
@@ -179,7 +179,7 @@ export const VerEmpleados = () => {
                       <h3 className="font-bold">ISSS: </h3>
                     </div>
                     <div className="w-2/3">
-                      <h3>No aplica</h3>
+                      <h3>015425784</h3>
                     </div>
                   </div>
 
@@ -189,7 +189,7 @@ export const VerEmpleados = () => {
                       <h3 className="font-bold">AFP: </h3>
                     </div>
                     <div className="w-1/3">
-                      <h3>No aplica</h3>
+                      <h3>021548756387</h3>
                     </div>
                   </div>
 

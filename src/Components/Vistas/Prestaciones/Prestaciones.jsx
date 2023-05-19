@@ -19,9 +19,6 @@ export const Prestaciones = () => {
     setShowPDFViewer(true);
   };
 
-
-
-
    //Paginación
    const [dataPage, setDataPage] = useState(4);
    const [currentPage, setCurrentPage] = useState(1);
@@ -124,7 +121,7 @@ export const Prestaciones = () => {
               </div>
               <div>
       <div>
-      <PDFViewerComponent Prestaciones={Prestaciones} />
+      
       
     </div>
     <button>

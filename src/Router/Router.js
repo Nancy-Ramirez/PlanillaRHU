@@ -21,6 +21,9 @@ import { AgregarAusencia } from "../Components/Vistas/Ausencias/AgregarAusencia"
 import { EditarEmpleado } from "../Components/Vistas/Empleados/EditarEmpleado";
 import {Prueba} from "../Components/Vistas/Prestaciones/Pruebas";
 import PDFViewerComponent from "../Components/Componentes/PDFViewerComponent";
+import { EditarAusencia } from "../Components/Vistas/Ausencias/EditarAusencia";
+import { EditarIncapacidad } from "../Components/Vistas/Incapacidades/EditarIncapaciad";
+import { EditarUsuarios } from "../Components/Vistas/Usuarios/EditarUsuarios";
 
 
 export default function Router() {
@@ -41,14 +44,17 @@ export default function Router() {
         {/*Incapacidades */}
         <Route path="/incapacidad" element={<Incapacidades />} />
         <Route path="/agregar-incapacidad" element={<AgregarIncapacidades/>} />
+        <Route path="/editar-incapacidad" element={<EditarIncapacidad/>} />
 
         {/*Ausencias*/}
         <Route path="/ausencia" element={<Ausencias />} />
         <Route path="/agregar-ausencia" element={<AgregarAusencia/>} />
+        <Route path="/editar-ausencia" element={<EditarAusencia/>} />
 
         {/*Usuarios */}
         <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/agregar-usuarios" element={<AgregarUsuario />} />
+        <Route path="/agregar-usuarios" element={<AgregarUsuario/>} />
+        <Route path="/editar-usuarios" element={<EditarUsuarios/>} />
 
         {/*Indeminizacion*/}
         <Route path="/indemnizaciones" element={<Indemnizacion />} />
