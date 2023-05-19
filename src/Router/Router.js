@@ -24,6 +24,7 @@ import PDFViewerComponent from "../Components/Componentes/PDFViewerComponent";
 import { EditarAusencia } from "../Components/Vistas/Ausencias/EditarAusencia";
 import { EditarIncapacidad } from "../Components/Vistas/Incapacidades/EditarIncapaciad";
 import { EditarUsuarios } from "../Components/Vistas/Usuarios/EditarUsuarios";
+import { VerAusencia } from "../Components/Vistas/Ausencias/VerAusencia";
 
 
 export default function Router() {
@@ -50,6 +51,7 @@ export default function Router() {
         <Route path="/ausencia" element={<Ausencias />} />
         <Route path="/agregar-ausencia" element={<AgregarAusencia/>} />
         <Route path="/editar-ausencia" element={<EditarAusencia/>} />
+        <Route path="/ver-ausencia" element={<VerAusencia/>} />
 
         {/*Usuarios */}
         <Route path="/usuarios" element={<Usuarios />} />
