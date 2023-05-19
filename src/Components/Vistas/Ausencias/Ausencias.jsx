@@ -108,8 +108,6 @@ export const Ausencias = () => {
     });
   };
  
- 
-
   return (
     <div className="flex">
       <Aside />
