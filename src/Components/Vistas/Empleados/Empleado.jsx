@@ -211,8 +211,8 @@ export const Empleado = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <a
-                                  href="/inicio"
+                                <Link
+                                   to={`/editar-empleado/${empl.id}`}
                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                 >
                                   <button className="btn btn-editar ">
@@ -220,7 +220,7 @@ export const Empleado = () => {
                                       <FaRegEdit />
                                     </span>
                                   </button>
-                                </a>
+                                </Link>
                                 <button className="btn btn-eliminar " onClick={()=> FuncionEliminar(empl.id)}>
                                   <span className="text-rojo-eliminar text-xl">
                                     <FaTrashAlt />
