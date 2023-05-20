@@ -210,21 +210,6 @@ export const Indemnizacion = () => {
                                     </span>
                                   </button>
                                 </Link>
-                                <a
-                                  href="/inicio"
-                                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                >
-                                  <button className="btn btn-editar ">
-                                    <span className="text-amarillo-editar text-2xl">
-                                      <FaRegEdit />
-                                    </span>
-                                  </button>
-                                </a>
-                                <button className="btn btn-eliminar" onClick={ ()=> FuncionEliminar(indem.id)}>
-                                  <span className="text-rojo-eliminar text-xl">
-                                    <FaTrashAlt />
-                                  </span>
-                                </button>
                               </td>
                             </tr>
                           );

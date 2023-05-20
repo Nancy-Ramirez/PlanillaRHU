@@ -93,7 +93,7 @@ export const Prestaciones = () => {
     }
   };
   //Funcion eliminar
-  const FuncionEliminar = async id => {
+  const FuncionEliminar = async (id) => {
     Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede revertir",
@@ -104,7 +104,7 @@ export const Prestaciones = () => {
       confirmButtonText: "Si, estoy seguro",
     }).then(result => {
       if (result.isConfirmed) {
-        eliminarPrestaciones();
+        eliminarPrestaciones(id);
         Swal.fire(
           "Eliminado",
           "Las prestaciones del empleado han sido removidas",
@@ -226,24 +226,16 @@ export const Prestaciones = () => {
                                 $ {pres.sueldo_liquido}
                               </td>
                               <td className="px-6 py-8 text-center flex justify-evenly content-center">
-                                <a
-                                  href="/inicio"
+                              <Link
+                                  to={`/ver-prestacion/${pres.id}`}
                                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                 >
-                                  <button className="btn btn-editar ">
-                                    <span className="text-amarillo-editar text-2xl">
-                                      <FaRegEdit />
+                                  <button className="btn btn-ver">
+                                    <span className="text-azul-ver text-2xl">
+                                      <FaRegEye />
                                     </span>
                                   </button>
-                                </a>
-                                <button
-                                  className="btn btn-eliminar"
-                                  onClick={() => FuncionEliminar(pres.id)}
-                                >
-                                  <span className="text-rojo-eliminar text-xl">
-                                    <FaTrashAlt />
-                                  </span>
-                                </button>
+                                </Link>
                               </td>
                             </tr>
                           );
